@@ -59,6 +59,10 @@
 	.hero__photo img { object-position: center 20%; }
 }
 
+@media (min-width: 640px) and (max-width: 1023.98px) {
+	.hero__photo { aspect-ratio: 2 / 1; }
+}
+
 @media (max-width: 639.98px) {
 	.hero { padding-top: 24px; }
 	.hero__kicker { font-size: 0.875rem; }

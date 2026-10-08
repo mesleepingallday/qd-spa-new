@@ -170,8 +170,13 @@
 			var target = document.getElementById(a.getAttribute('href').slice(1));
 			if (target) map[target.id] = a;
 		});
+		var firstId = links.length ? links[0].getAttribute('href').slice(1) : '';
 		var io = new IntersectionObserver(function (entries) {
 			entries.forEach(function (entry) {
+				// Scrolled back above the first section: nothing is current.
+				if (!entry.isIntersecting && entry.target.id === firstId && entry.boundingClientRect.top > 0) {
+					Array.prototype.forEach.call(links, function (a) { a.removeAttribute('aria-current'); });
+				}
 				if (!entry.isIntersecting) return;
 				Array.prototype.forEach.call(links, function (a) { a.removeAttribute('aria-current'); });
 				var link = map[entry.target.id];

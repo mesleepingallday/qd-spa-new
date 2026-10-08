@@ -1226,7 +1226,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	display: grid;
 	grid-template-columns: 1fr 1fr 2fr;
 	gap: 8px;
-	padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+	padding: 8px max(12px, calc((100% - 560px) / 2)) calc(8px + env(safe-area-inset-bottom));
 	background: #fff;
 	border-top: 1px solid var(--c-line);
 	box-shadow: 0 -8px 24px -12px rgba(10, 54, 57, 0.18);

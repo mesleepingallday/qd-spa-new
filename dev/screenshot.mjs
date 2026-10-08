@@ -14,23 +14,27 @@ const opt = (name, def) => {
 };
 const base = opt('--base', 'http://localhost:8080');
 const out = opt('--out', 'dev/screenshots');
+const vpArg = opt('--vp', '');
 const full = args.includes('--full');
 const paths = args.filter((a) => a !== '--full');
 if (!paths.length) paths.push('/');
 mkdirSync(out, { recursive: true });
 
-const viewports = [
-	{ name: 'phone', width: 375, height: 812 },
-	{ name: 'desktop', width: 1440, height: 900 },
-];
+// Default: phone + desktop. --vp 768x1024,1024x768 adds custom sizes instead.
+const viewports = vpArg
+	? vpArg.split(',').map((v) => { const [w, h] = v.split('x').map(Number); return { name: `${w}`, width: w, height: h || 900 }; })
+	: [
+		{ name: 'phone', width: 375, height: 812 },
+		{ name: 'desktop', width: 1440, height: 900 },
+	];
 
 const browser = await chromium.launch();
 const slug = (p) => (p.replace(/^\/|\/$/g, '').replace(/[^a-z0-9]+/gi, '-') || 'home');
 
 for (const target of paths) {
 	for (const vp of viewports) {
-		if (target === 'mega' && vp.name === 'phone') continue;
-		if (target === 'drawer' && vp.name === 'desktop') continue;
+		if (target === 'mega' && vp.width < 1024) continue;
+		if (target === 'drawer' && vp.width >= 1024) continue;
 		const page = await browser.newPage({ viewport: { width: vp.width, height: vp.height }, deviceScaleFactor: 1 });
 		const url = base + (['mega', 'drawer'].includes(target) ? '/' : target);
 		await page.goto(url, { waitUntil: 'networkidle' });
