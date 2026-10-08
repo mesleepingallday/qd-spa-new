@@ -25,7 +25,7 @@ docs/                           plan, this guide, image prompts
 
 1. **Reuse before you build.** Use the existing components first:
    - Buttons: `qd_button()`, with variants primary, outline, ghost and light.
-   - Building blocks: `.chip`, `.badge`, `.card`, `.frame`, `.section`, `.section-head` (`qd_section_head()`), `.accordion` (`<details>`), `.checklist`, `.steps`, `.notice`, `.field`/`.input`/`.select`, `.breadcrumb` (`qd_breadcrumbs()`), `.page-hero`, `.with-aside`, `.scroller`, `.prose`.
+   - Building blocks: `.chip`, `.badge`, `.card`, `.frame`, `.section`, `.section-head` (`qd_section_head()`), `.accordion` (`<details>`), `.checklist`, `.steps`, `.notice`, `.field`/`.input`/`.select`, `.breadcrumb` (`qd_breadcrumbs()`), `.page-hero`, `.with-aside`, `.scroller`, `.prose`, `.facts` (icon + label + value row), `.doctor-card`, `.section--flush-top`.
    - Images: `qd_thumb()` and `qd_asset_img()`. Icons: `qd_icon()` (see `inc/icons.php` for names).
    - The reference screen is `template-parts/service/detail.php` with `assets/css/pages/service.css`. Copy its patterns.
 2. **One filled teal button per view** ("Đặt lịch…"). Everything else is outline, ghost or a text link.

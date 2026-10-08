@@ -7,28 +7,7 @@
 	color: var(--c-brand-600);
 }
 
-/* Facts row (same look as the service page) */
-.facts {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 16px;
-	margin: 24px 0 0;
-	padding: 18px;
-	border: 1px solid var(--c-line);
-	border-radius: var(--r-lg);
-	background: #fff;
-}
 
-.facts__item { display: flex; gap: 12px; align-items: flex-start; }
-.facts dt { font-size: 0.8125rem; color: var(--c-muted); }
-.facts dd { margin: 2px 0 0; font-weight: 600; font-size: 0.9375rem; line-height: 1.4; overflow-wrap: anywhere; }
-
-@media (max-width: 639.98px) {
-	.facts { gap: 14px 10px; padding: 14px; }
-	.facts__item { gap: 10px; }
-	.facts .icon-tile { width: 32px; height: 32px; border-radius: 10px; }
-	.facts .icon-tile svg { width: 17px; height: 17px; }
-}
 
 /* List ------------------------------------------------------------------------------ */
 .training-hero { padding-bottom: 32px; }
@@ -118,28 +97,6 @@
 	.outcomes { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; }
 }
 
-/* Instructor card (same pattern as the service page) */
-.doctor-card {
-	display: grid;
-	grid-template-columns: auto minmax(0, 1fr);
-	gap: 16px;
-	align-items: center;
-	margin-top: 32px;
-	padding: 18px;
-	border-radius: var(--r-lg);
-	border: 1px solid var(--c-line);
-}
-
-.doctor-card .link-more { grid-column: 2; }
-.doctor-card__label { font-size: 0.8125rem; color: var(--c-muted); }
-.doctor-card__name { font-weight: 600; font-size: 1.0625rem; }
-.doctor-card__title { font-size: 0.875rem; color: var(--c-muted); }
-.avatar--lg { width: 64px; height: 64px; }
-
-@media (min-width: 640px) {
-	.doctor-card { grid-template-columns: auto minmax(0, 1fr) auto; }
-	.doctor-card .link-more { grid-column: auto; }
-}
 
 /* Registration card */
 .register-card {
