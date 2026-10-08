@@ -1248,6 +1248,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 .action-bar__btn:hover { background: var(--c-brand-50); }
+.action-bar--contact { grid-template-columns: 1fr 1fr; }
 .action-bar .btn { min-height: 52px; }
 
 @media (min-width: 1024px) {

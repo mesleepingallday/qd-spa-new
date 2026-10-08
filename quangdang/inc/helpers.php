@@ -191,7 +191,8 @@ function qd_reading_time( $post = null ) {
 function qd_booking_url( $service = null ) {
 	$url     = home_url( '/dat-lich/' );
 	$service = $service ? get_post( $service ) : null;
-	return $service ? add_query_arg( 'dich-vu', $service->post_name, $url ) : $url;
+	// "dv", not "dich-vu": that name is the services post type's query var and would 404 the page.
+	return $service ? add_query_arg( 'dv', $service->post_name, $url ) : $url;
 }
 
 /**

@@ -506,21 +506,6 @@ add_action(
 	}
 );
 
-/*
- * `?dich-vu=slug` (from qd_booking_url) collides with the dich-vu post type's own query var,
- * which turns /dat-lich/?dich-vu=x into a 404. Drop it from the main query on the booking page;
- * page-dat-lich.php reads it from $_GET.
- */
-add_filter(
-	'request',
-	function ( $vars ) {
-		if ( isset( $vars['dich-vu'], $vars['pagename'] ) && 'dat-lich' === $vars['pagename'] ) {
-			unset( $vars['dich-vu'], $vars['post_type'], $vars['name'] );
-		}
-		return $vars;
-	}
-);
-
 // Tiny site-wide styles for the strip's thank-you/error states (the strip itself is styled in main.css).
 add_action(
 	'wp_enqueue_scripts',

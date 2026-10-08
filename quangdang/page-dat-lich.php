@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 // phpcs:disable WordPress.Security.NonceVerification.Recommended -- read-only query args.
 $qd_sent = isset( $_GET['da-gui'] );
 
-// Values to show: errors + earlier input from a failed no-JS post, else ?dich-vu=slug.
+// Values to show: errors + earlier input from a failed no-JS post, else ?dv=slug (qd_booking_url).
 $qd_old    = array();
 $qd_errors = array();
 if ( ! empty( $_GET['loi'] ) ) {
@@ -24,8 +24,8 @@ if ( ! empty( $_GET['loi'] ) ) {
 		$qd_errors = $qd_saved['errors'];
 	}
 }
-$qd_pick = $qd_old['service'] ?? ( isset( $_GET['dich-vu'] ) ? sanitize_title( wp_unslash( $_GET['dich-vu'] ) ) : '' );
-$qd_has_pick = isset( $_GET['dich-vu'] ) || isset( $qd_old['service'] );
+$qd_pick = $qd_old['service'] ?? ( isset( $_GET['dv'] ) ? sanitize_title( wp_unslash( $_GET['dv'] ) ) : '' );
+$qd_has_pick = isset( $_GET['dv'] ) || isset( $qd_old['service'] );
 // phpcs:enable
 
 $qd_now    = current_datetime();

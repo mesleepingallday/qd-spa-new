@@ -91,10 +91,13 @@ if ( ! $qd_service_links ) {
 	</div>
 </footer>
 
-<nav class="action-bar" aria-label="Liên hệ nhanh">
+<?php $qd_on_booking = is_page( 'dat-lich' ); // The booking page has its own submit button. ?>
+<nav class="action-bar<?php echo $qd_on_booking ? ' action-bar--contact' : ''; ?>" aria-label="Liên hệ nhanh">
 	<a class="action-bar__btn" href="<?php echo esc_attr( qd_tel_href() ); ?>"><?php qd_the_icon( 'phone', array( 'size' => 22 ) ); ?>Gọi</a>
 	<a class="action-bar__btn" href="<?php echo esc_url( qd_clinic( 'zalo' ) ); ?>" target="_blank" rel="noopener"><?php qd_the_icon( 'message-circle', array( 'size' => 22 ) ); ?>Zalo</a>
-	<?php echo qd_button( 'Đặt lịch khám', qd_booking_url( is_singular( 'dich-vu' ) && ! qd_is_service_category() ? get_the_ID() : null ), array( 'icon' => 'calendar-days' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+	<?php if ( ! $qd_on_booking ) : ?>
+		<?php echo qd_button( 'Đặt lịch khám', qd_booking_url( is_singular( 'dich-vu' ) && ! qd_is_service_category() ? get_the_ID() : null ), array( 'icon' => 'calendar-days' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+	<?php endif; ?>
 </nav>
 
 <a class="float-chat" href="<?php echo esc_url( qd_clinic( 'zalo' ) ); ?>" target="_blank" rel="noopener"><?php qd_the_icon( 'message-circle', array( 'size' => 20 ) ); ?>Chat Zalo</a>
