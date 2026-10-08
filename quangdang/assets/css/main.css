@@ -146,6 +146,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .section { padding-block: var(--section-y); }
 .section--tight { padding-block: calc(var(--section-y) * 0.6); }
+.section--flush-top { padding-top: 0; }
 .section--mint { background: var(--c-brand-50); }
 .section--ivory { background: var(--c-ivory-50); }
 .section--dark { background: var(--c-brand-900); color: rgba(255, 255, 255, 0.82); }

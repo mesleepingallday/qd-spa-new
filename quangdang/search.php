@@ -65,7 +65,7 @@ get_header();
 					)
 				);
 				?>
-				<div class="grid grid--3">
+				<div class="grid grid--3 search-results">
 					<?php foreach ( $qd_services as $qd_hit ) : ?>
 						<?php get_template_part( 'template-parts/components/service-card', null, array( 'post' => $qd_hit, 'kicker' => true ) ); ?>
 					<?php endforeach; ?>
@@ -85,7 +85,7 @@ get_header();
 					)
 				);
 				?>
-				<div class="grid grid--3">
+				<div class="grid grid--3 search-results">
 					<?php foreach ( $qd_articles as $qd_hit ) : ?>
 						<?php get_template_part( 'template-parts/components/post-card', null, array( 'post' => $qd_hit ) ); ?>
 					<?php endforeach; ?>

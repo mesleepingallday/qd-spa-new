@@ -1,6 +1,5 @@
 /* Blog: news list, category/topic archives, article, search ---------------- */
 
-.section--flush-top { padding-top: 0; }
 
 /* List hero: tabs + topic chips ------------------------------------------- */
 .blog-hero { padding-bottom: 28px; }
@@ -508,3 +507,25 @@
 }
 
 .search-more { margin-bottom: 24px; color: var(--c-muted); text-align: center; }
+
+/* Search results on phones: compact rows (thumbnail + title + price/meta) instead of tall cards. */
+@media (max-width: 639.98px) {
+	.search-results { gap: 10px; }
+
+	.search-results .card {
+		display: grid;
+		grid-template-columns: 96px minmax(0, 1fr);
+		align-items: stretch;
+	}
+
+	.search-results .card .frame,
+	.search-results .post-card__media { height: 100%; aspect-ratio: auto; min-height: 96px; }
+	.search-results .post-card__media .frame { height: 100%; }
+	.search-results .post-card__status { display: none; }
+	.search-results .card__body { padding: 12px 14px; gap: 4px; }
+	.search-results .card__title { font-size: 1rem; }
+	.search-results .card__text,
+	.search-results .card__meta { display: none; }
+	.search-results .card__foot { padding-top: 4px; border-top: 0; }
+	.search-results .card__arrow { display: none; }
+}
