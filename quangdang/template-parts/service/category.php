@@ -3,7 +3,7 @@
  * Service CATEGORY page (Điều trị mụn…).
  *
  * Job: "compare the treatments for one problem, then open one".
- * Hero (facts) → service cards → comparison table (desktop) → "Hiểu về…" + help card
+ * Hero (facts) → service cards (they carry the comparison: sessions, duration, price) → "Hiểu về…" + help card
  * → FAQ → related articles → booking strip. Blocks without data are not rendered.
  *
  * @package QuangDang
@@ -18,7 +18,7 @@ $qd_faq      = qd_pipe_rows( (string) get_post_meta( $qd_id, '_qd_faq', true ), 
 $qd_articles = qd_service_related_posts( $qd_id, 3 );
 $qd_has_body = '' !== trim( wp_strip_all_tags( get_the_content() ) );
 $qd_lower    = mb_strtolower( get_the_title() );
-$qd_about    = preg_replace( '/^(điều trị|xóa)\s+/u', '', $qd_lower );
+$qd_about    = preg_replace( '/^điều trị\s+/u', '', $qd_lower ); // "Điều trị mụn" → "mụn"; "Xóa xăm" stays.
 
 qd_schema_add(
 	array(
@@ -88,42 +88,6 @@ $qd_fact_items = array_filter(
 				<?php endforeach; ?>
 			</div>
 
-			<?php if ( count( $qd_services ) > 1 ) : ?>
-				<div class="compare" role="region" aria-label="Bảng so sánh liệu trình <?php echo esc_attr( $qd_lower ); ?>" tabindex="0">
-					<table class="compare__table">
-						<caption class="sr-only">So sánh các liệu trình <?php echo esc_html( $qd_lower ); ?></caption>
-						<thead>
-							<tr>
-								<th scope="col">Liệu trình</th>
-								<th scope="col">Phù hợp với</th>
-								<th scope="col">Số buổi</th>
-								<th scope="col">Mỗi buổi</th>
-								<th scope="col">Giá từ</th>
-								<th scope="col"><span class="sr-only">Chi tiết</span></th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach ( $qd_services as $qd_service ) : ?>
-								<?php $qd_sf = qd_service_facts( $qd_service ); ?>
-								<tr>
-									<th scope="row"><a href="<?php echo esc_url( get_permalink( $qd_service ) ); ?>"><?php echo esc_html( get_the_title( $qd_service ) ); ?></a></th>
-									<td class="compare__fit"><?php echo has_excerpt( $qd_service ) ? esc_html( get_the_excerpt( $qd_service ) ) : '–'; ?></td>
-									<td><?php echo $qd_sf['sessions'] ? esc_html( $qd_sf['sessions'] ) : '–'; ?></td>
-									<td><?php echo $qd_sf['duration'] ? esc_html( $qd_sf['duration'] ) : '–'; ?></td>
-									<td class="compare__price">
-										<?php if ( $qd_sf['price_from'] ) : ?>
-											<span class="price"><?php echo esc_html( qd_price( $qd_sf['price_from'] ) ); ?></span><?php echo $qd_sf['price_unit'] ? '<small>' . esc_html( $qd_sf['price_unit'] ) . '</small>' : ''; // phpcs:ignore WordPress.Security.EscapeOutput ?>
-										<?php else : ?>
-											<span class="price-note">Báo giá khi khám</span>
-										<?php endif; ?>
-									</td>
-									<td><a class="link-more" href="<?php echo esc_url( get_permalink( $qd_service ) ); ?>">Chi tiết<span class="sr-only"> <?php echo esc_html( get_the_title( $qd_service ) ); ?></span><?php qd_the_icon( 'arrow-right', array( 'size' => 16 ) ); ?></a></td>
-								</tr>
-							<?php endforeach; ?>
-						</tbody>
-					</table>
-				</div>
-			<?php endif; ?>
 		</div>
 	</section>
 <?php endif; ?>

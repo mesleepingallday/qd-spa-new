@@ -244,31 +244,7 @@
 .cat-faq .section-head { margin-bottom: 20px; }
 
 /* Comparison table: desktop only, phone cards already show the same facts */
-.compare { display: none; }
 
-@media (min-width: 1024px) {
-	.compare {
-		display: block;
-		margin-top: 48px;
-		border: 1px solid var(--c-line);
-		border-radius: var(--r-lg);
-		overflow-x: auto;
-		background: #fff;
-	}
-
-	.compare__table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
-	.compare__table th, .compare__table td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--c-line); }
-	.compare__table thead th { background: var(--c-brand-50); font-size: 0.8125rem; font-weight: 600; color: var(--c-muted); white-space: nowrap; }
-	.compare__table tbody tr:last-child > * { border-bottom: 0; }
-	.compare__table tbody tr:hover { background: #FAFCFC; }
-	.compare__table tbody th { font-weight: 600; min-width: 200px; }
-	.compare__table tbody th a { color: var(--c-ink); text-decoration: none; }
-	.compare__table tbody th a:hover { color: var(--c-brand-700); text-decoration: underline; }
-	.compare__fit { color: var(--c-muted); min-width: 240px; }
-	.compare__table td:nth-child(3), .compare__table td:nth-child(4), .compare__price { white-space: nowrap; }
-	.compare__price small { display: block; font-weight: 500; color: var(--c-muted); }
-	.compare__table .link-more { white-space: nowrap; }
-}
 
 @media (max-width: 639.98px) {
 	.hub-cat__media .frame { aspect-ratio: 16 / 7; }
