@@ -1,0 +1,14 @@
+{
+  "name": "quangdang-theme-dev",
+  "private": true,
+  "description": "Dev tooling for the Quang Đăng WordPress theme (the theme itself needs no build step).",
+  "scripts": {
+    "setup": "bash dev/setup.sh",
+    "serve": "bash dev/serve.sh",
+    "shots": "node dev/screenshot.mjs",
+    "zip": "cd quangdang && zip -qr ../quangdang.zip . -x '*.DS_Store' && echo quangdang.zip"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}

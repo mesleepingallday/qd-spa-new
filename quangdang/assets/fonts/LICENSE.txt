@@ -1,0 +1,3 @@
+Be Vietnam Pro (Lâm Bảo, Tony Le, ViệtAnh Nguyễn) and Playfair Display (Claus Eggers Sørensen)
+are licensed under the SIL Open Font License 1.1: https://openfontlicense.org
+Files from @fontsource (Vietnamese + Latin subsets).

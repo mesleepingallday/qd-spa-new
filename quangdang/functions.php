@@ -1,0 +1,33 @@
+<?php
+/**
+ * Quang Đăng Clinic theme bootstrap.
+ *
+ * @package QuangDang
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+define( 'QD_VERSION', '0.1.0' );
+define( 'QD_DIR', get_template_directory() );
+define( 'QD_URI', get_template_directory_uri() );
+
+foreach ( array(
+	'icons',          // Inline SVG icon set.
+	'helpers',        // Small rendering/format helpers used everywhere.
+	'customizer',     // Clinic info: hotline, Zalo, address, hours, licence.
+	'setup',          // Theme supports, menus, image sizes.
+	'assets',         // CSS/JS enqueue, font preload.
+	'content-types',  // CPTs: dich-vu, khoa-hoc, bac-si, lich-hen + meta.
+	'services',       // Service helpers + admin meta box.
+	'navigation',     // Menu tree (WP menu or built-in fallback) for mega menu + drawer.
+	'template-tags',  // Breadcrumbs, post meta, section helpers.
+	'schema',         // JSON-LD structured data.
+) as $qd_file ) {
+	require QD_DIR . '/inc/' . $qd_file . '.php';
+}
+
+// Feature modules (one file per area: blog, booking, about…). Each registers its own
+// meta boxes, page styles (qd_page_styles filter) and scripts, so areas stay independent.
+foreach ( glob( QD_DIR . '/inc/features/*.php' ) as $qd_feature ) {
+	require $qd_feature;
+}

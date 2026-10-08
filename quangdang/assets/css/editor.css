@@ -1,0 +1,12 @@
+/* Block editor: match the front-end article typography (.prose in main.css). */
+.editor-styles-wrapper {
+	font-family: "Be Vietnam Pro", system-ui, sans-serif;
+	font-size: 1.125rem;
+	line-height: 1.75;
+	color: #14292B;
+}
+
+.editor-styles-wrapper h2 { font-size: 1.625rem; line-height: 1.35; }
+.editor-styles-wrapper h3 { font-size: 1.3125rem; line-height: 1.4; }
+.editor-styles-wrapper blockquote { padding: 16px 20px; border-left: 3px solid #7CD0CF; background: #FFFBF5; }
+.editor-styles-wrapper .editor-post-title { font-family: "Playfair Display", Georgia, serif; font-weight: 600; }
