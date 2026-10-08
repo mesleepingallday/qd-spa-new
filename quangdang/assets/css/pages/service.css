@@ -185,3 +185,92 @@
 .booking-card__note .icon { color: var(--c-brand-500); }
 
 .section--flush-top { padding-top: 0; }
+
+/* Services hub ------------------------------------------------------------ */
+.hub-jump { margin-top: 24px; }
+.hub-jump ul { list-style: none; padding: 0; }
+.hub-zone, .hub-group, #noi-khoa-tham-my { scroll-margin-top: calc(var(--header-h) + 16px); }
+
+.hub-zone { padding-top: 8px; }
+
+.hub-zone__title {
+	margin-bottom: 28px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid var(--c-line);
+	font-family: var(--f-display);
+	font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2.125rem);
+	font-weight: 600;
+}
+
+.hub-group + .hub-group { margin-top: clamp(40px, 6vw, 64px); }
+
+.hub-cat { position: relative; }
+.hub-cat__media { display: block; text-decoration: none; }
+.hub-cat .card__title a::after { content: none; }
+.hub-cat__meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; font-size: 0.875rem; color: var(--c-muted); }
+
+.hub-cat__list {
+	list-style: none;
+	margin: 6px 0 0;
+	padding: 10px 0 0;
+	border-top: 1px solid var(--c-line);
+	display: grid;
+}
+
+.hub-cat__list a {
+	display: flex;
+	align-items: center;
+	min-height: 44px;
+	color: var(--c-ink);
+	font-size: 0.9375rem;
+	text-decoration: none;
+}
+
+.hub-cat__list li + li { border-top: 1px dashed var(--c-line); }
+.hub-cat__list a:hover { color: var(--c-brand-700); text-decoration: underline; }
+
+.hub-help { max-width: 720px; margin-inline: auto; }
+
+/* Category page ----------------------------------------------------------- */
+.service-hero--category .service-hero__text { max-width: 640px; }
+.facts--compact { grid-template-columns: 1fr; }
+@media (min-width: 640px) {
+	.facts--compact { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.cat-section .section-head { margin-bottom: 24px; }
+.cat-about { min-width: 0; }
+.cat-about .section-title { margin-bottom: 20px; }
+.cat-faq { max-width: 860px; }
+.cat-faq .section-head { margin-bottom: 20px; }
+
+/* Comparison table: desktop only, phone cards already show the same facts */
+.compare { display: none; }
+
+@media (min-width: 1024px) {
+	.compare {
+		display: block;
+		margin-top: 48px;
+		border: 1px solid var(--c-line);
+		border-radius: var(--r-lg);
+		overflow-x: auto;
+		background: #fff;
+	}
+
+	.compare__table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+	.compare__table th, .compare__table td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--c-line); }
+	.compare__table thead th { background: var(--c-brand-50); font-size: 0.8125rem; font-weight: 600; color: var(--c-muted); white-space: nowrap; }
+	.compare__table tbody tr:last-child > * { border-bottom: 0; }
+	.compare__table tbody tr:hover { background: #FAFCFC; }
+	.compare__table tbody th { font-weight: 600; min-width: 200px; }
+	.compare__table tbody th a { color: var(--c-ink); text-decoration: none; }
+	.compare__table tbody th a:hover { color: var(--c-brand-700); text-decoration: underline; }
+	.compare__fit { color: var(--c-muted); min-width: 240px; }
+	.compare__table td:nth-child(3), .compare__table td:nth-child(4), .compare__price { white-space: nowrap; }
+	.compare__price small { display: block; font-weight: 500; color: var(--c-muted); }
+	.compare__table .link-more { white-space: nowrap; }
+}
+
+@media (max-width: 639.98px) {
+	.hub-cat__media .frame { aspect-ratio: 16 / 7; }
+	.service-hero--category .facts--compact { gap: 12px; }
+}
