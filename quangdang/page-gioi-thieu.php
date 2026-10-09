@@ -26,7 +26,6 @@ while ( have_posts() ) :
 			'photo'     => 'about/le-tan',
 			'photo_alt' => 'Quầy lễ tân Phòng khám Da liễu Thẩm mỹ Quang Đăng',
 			'subnav'    => false,
-			'kicker'    => 'Về Quang Đăng',
 		)
 	);
 	?>

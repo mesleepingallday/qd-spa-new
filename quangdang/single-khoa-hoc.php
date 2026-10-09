@@ -89,7 +89,6 @@ while ( have_posts() ) :
 			<?php qd_breadcrumbs(); ?>
 			<div class="course-hero__grid">
 				<div class="course-hero__text">
-					<p class="about-kicker">Khóa học</p>
 					<h1 class="page-title"><?php the_title(); ?></h1>
 					<?php if ( has_excerpt() ) : ?>
 						<p class="lead"><?php echo esc_html( get_the_excerpt() ); ?></p>

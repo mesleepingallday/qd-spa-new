@@ -17,7 +17,6 @@ get_header();
 				<?php echo qd_asset_img( 'misc/not-found', '', array( 'loading' => 'eager' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			</div>
 			<div class="not-found__body">
-				<p class="about-kicker">Lỗi 404</p>
 				<h1 class="page-title" id="nf-title">Rất tiếc, trang này không còn ở đây</h1>
 				<p class="lead">Đường dẫn có thể đã thay đổi hoặc gõ chưa đúng. Bạn thử tìm lại bên dưới, hoặc chọn vấn đề da bạn đang quan tâm nhé.</p>
 

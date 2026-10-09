@@ -68,5 +68,5 @@ Budgets: CSS ≤ 25 KB, fonts ≤ 100 KB, hero image ≤ 180 KB phone. Before th
 | 3 Services: concern tint + tile on category/detail heroes and hub cards, real price table, admin-bar offset contract, no sideways scrolling | done |
 | 4 Editorial: topic chips wrap, concern tiles on empty search and 404 | done |
 | 5 Booking, quiz, contact: request wording, selected = outline + check, teal focus rings, quiz on concern tiles | done; end-to-end checks in `dev/check-forms.mjs` |
-| 6 About/doctors/training/404 | pending |
+| 6 About, doctors, training, 404: eyebrow labels over page titles removed; long button labels wrap instead of widening the page at 320px | done |
 | 7 Cleanup: drop `--c-*` aliases, Be Vietnam Pro + Playfair files and unused CSS; rewrite `docs/DESIGN-PLAN.md` §5–7 to the final composition | pending |

@@ -388,7 +388,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	line-height: 1.2;
 	text-align: center;
 	text-decoration: none;
-	white-space: nowrap;
+	max-width: 100%;
+	white-space: normal; /* a long label wraps inside the button instead of widening the page on a 320px phone */
+	text-wrap: balance;
 	transition: background-color var(--t-press), border-color var(--t-press), color var(--t-press), transform var(--t-press) var(--ease);
 }
 
@@ -1518,7 +1520,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .action-bar__btn:hover { background: var(--mist); }
 .action-bar--contact { grid-template-columns: 1fr 1fr; }
-.action-bar .btn { min-height: 52px; }
+.action-bar .btn { min-height: 52px; padding-inline: 12px; white-space: nowrap; } /* the bar's labels are short and stay on one line */
 
 @media (min-width: 1024px) {
 	.action-bar { display: none; }
