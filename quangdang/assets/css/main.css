@@ -45,6 +45,59 @@
 	--ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
+/* Tokens v2 (redesign). The --c-brand-*, --c-ivory-* and --c-accent-* names above stay as aliases
+   until every page is migrated; new CSS uses these. Hex is the baseline for every browser. */
+:root {
+	--ink: #0E2A2F;
+	--muted: #4B6468;
+	--paper: #FFFFFF;
+	--mist: #F2F7F7;
+	--teal: #087A82;
+	--teal-hover: #066A72;
+	--teal-bright: #19C6BE;
+	--teal-deep: #052E33;
+	--sun: #FFC93C;
+
+	/* Actions and validation never take a concern hue: the booking button stays teal on every page. */
+	--action: var(--teal);
+	--action-hover: var(--teal-hover);
+
+	--f-sans: var(--wp--preset--font-family--sans, "Quang Dang Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+
+	/* Radius by role */
+	--r-stage: 36px;
+	--r-feature: 26px;
+	--r-card: 20px;
+	--r-field: 14px;
+
+	/* 4px spacing scale */
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-5: 24px;
+	--space-6: 32px;
+	--space-7: 48px;
+	--space-8: 64px;
+	--space-9: 80px;
+	--space-10: 112px;
+
+	/* Motion: state changes are immediate; press and disclosure are short and quiet */
+	--t-press: 160ms;
+	--t-disclose: 200ms;
+}
+
+/* Skin concerns. tile = fill behind a white glyph (>= 3:1); ink = text on its own tint (>= 4.5:1);
+   tint = quiet surface. Any element with data-concern picks these up; checked by dev/contrast-check.py. */
+[data-concern="mun"]          { --concern-tile: #FF452C; --concern-ink: #CF1900; --concern-tint: #FFECEA; }
+[data-concern="tham"]         { --concern-tile: #D76F00; --concern-ink: #A45500; --concern-tint: #FBF1E6; }
+[data-concern="nam"]          { --concern-tile: #FF3D74; --concern-ink: #D2003C; --concern-tint: #FFECF1; }
+[data-concern="seo"]          { --concern-tile: #9574F9; --concern-ink: #7145F7; --concern-tint: #F4F1FE; }
+[data-concern="xoa-xam"]      { --concern-tile: #6082FF; --concern-ink: #2957FF; --concern-tint: #EFF2FF; }
+[data-concern="triet-long"]   { --concern-tile: #0A94CB; --concern-ink: #08719A; --concern-tint: #E6F4FA; }
+[data-concern="tre-hoa"]      { --concern-tile: #219E62; --concern-ink: #19794B; --concern-tint: #E9F5EF; }
+[data-concern="filler-botox"] { --concern-tile: #D755D7; --concern-ink: #B22AB2; --concern-tint: #FBEEFB; }
+
 @media (min-width: 640px) {
 	:root { --gutter: 24px; }
 }

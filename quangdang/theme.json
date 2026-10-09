@@ -186,6 +186,22 @@
 					]
 				},
 				{
+					"slug": "sans",
+					"name": "Quang Đăng Sans (Google Sans Flex)",
+					"fontFamily": "\"Quang Dang Sans\", system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+					"fontFace": [
+						{
+							"fontFamily": "Quang Dang Sans",
+							"fontWeight": "400 700",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/qd-sans.woff2"
+							]
+						}
+					]
+				},
+				{
 					"slug": "display",
 					"name": "Playfair Display",
 					"fontFamily": "\"Playfair Display\", Georgia, \"Times New Roman\", serif",

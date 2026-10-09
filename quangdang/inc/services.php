@@ -358,7 +358,10 @@ add_action(
  * The 8 skin concerns used by the home hero shortcuts, the search dialog and the quiz.
  * Quiz illustrations live at assets/images/concerns/{key} (see docs/IMAGE-PROMPTS.md).
  *
- * @return array<string,array{label:string,url:string,image:string}>
+ * `short` is the label used on tiles; `glyph` is the key for qd_concern_glyph(). The concern's colours are
+ * CSS tokens (`[data-concern="{key}"]` in main.css), so the palette lives in one place.
+ *
+ * @return array<string,array{label:string,short:string,glyph:string,url:string}>
  */
 function qd_concerns() {
 	return apply_filters(
@@ -366,34 +369,50 @@ function qd_concerns() {
 		array(
 			'mun'          => array(
 				'label' => 'Mụn',
+				'short' => 'Mụn',
+				'glyph' => 'mun',
 				'url'   => home_url( '/dich-vu/dieu-tri-mun/' ),
 			),
 			'tham'         => array(
 				'label' => 'Thâm',
+				'short' => 'Thâm',
+				'glyph' => 'tham',
 				'url'   => home_url( '/dich-vu/dieu-tri-tham/' ),
 			),
 			'nam'          => array(
 				'label' => 'Nám – tàn nhang',
+				'short' => 'Nám',
+				'glyph' => 'nam',
 				'url'   => home_url( '/dich-vu/dieu-tri-nam/' ),
 			),
 			'seo'          => array(
 				'label' => 'Sẹo',
+				'short' => 'Sẹo',
+				'glyph' => 'seo',
 				'url'   => home_url( '/dich-vu/dieu-tri-seo/' ),
 			),
 			'xoa-xam'      => array(
 				'label' => 'Xóa xăm',
+				'short' => 'Xóa xăm',
+				'glyph' => 'xoa-xam',
 				'url'   => home_url( '/dich-vu/xoa-xam/' ),
 			),
 			'triet-long'   => array(
 				'label' => 'Triệt lông',
+				'short' => 'Triệt lông',
+				'glyph' => 'triet-long',
 				'url'   => home_url( '/dich-vu/cham-soc-da/triet-long/' ),
 			),
 			'tre-hoa'      => array(
 				'label' => 'Trẻ hóa da',
+				'short' => 'Trẻ hóa',
+				'glyph' => 'tre-hoa',
 				'url'   => home_url( '/dich-vu/cham-soc-da/tre-hoa-da-cong-nghe-cao/' ),
 			),
 			'filler-botox' => array(
 				'label' => 'Filler – Botox',
+				'short' => 'Filler / Botox',
+				'glyph' => 'filler-botox',
 				'url'   => home_url( '/dich-vu/noi-khoa-tham-my/' ),
 			),
 		)

@@ -4,6 +4,7 @@ Website for **Phòng khám Da liễu Thẩm mỹ Quang Đăng** (Qbe+ Quang Đă
 
 - `docs/DESIGN-PLAN.md`: the design plan (audience, sitemap, mega menu, flows, screen specs, SEO).
 - `docs/THEME-GUIDE.md`: conventions for building screens.
+- `docs/REDESIGN.md`: status, decisions and gates of the current redesign.
 - `docs/IMAGE-PROMPTS.md`: every image the site uses, with a ready-to-paste GPT prompt and the exact file name.
 
 ## Install on WordPress hosting
@@ -26,4 +27,7 @@ npm run setup               # WordPress + SQLite + demo content → .wp/
 npm run serve               # http://localhost:8080  (admin / admin)
 npm run shots -- --full / /dich-vu/cham-soc-da/triet-long/ mega drawer
 python3 dev/images.py       # regenerate image placeholders + docs/IMAGE-PROMPTS.md
+python3 dev/icons.py        # regenerate inc/icons.php (Phosphor)
+pip install fonttools brotli && python3 dev/fonts.py   # rebuild the web font
+python3 dev/contrast-check.py   # colour-pair gate for the design tokens
 ```
