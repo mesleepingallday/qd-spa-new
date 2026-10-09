@@ -1,9 +1,9 @@
 /* Booking forms: states shared by the strip and the booking page (inlined site-wide). */
-.booking-form__status { font-size: 0.9375rem; text-align: center; color: var(--c-success); }
+.booking-form__status { font-size: 0.9375rem; text-align: center; color: var(--success); }
 .booking-form__status:empty { display: none; }
-.booking-form__status.is-error { color: var(--c-danger); font-weight: 500; }
+.booking-form__status.is-error { color: var(--danger); font-weight: 500; }
 .field__error::before { content: "! "; font-weight: 700; }
 .booking-thanks { display: grid; justify-items: center; gap: 10px; padding: 12px 4px; text-align: center; }
 .booking-thanks:focus { outline: none; }
-.booking-thanks__check { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--c-brand-100); color: var(--c-brand-700); }
+.booking-thanks__check { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--teal-tint); color: var(--teal-hover); }
 .booking-thanks__title { font-weight: 600; font-size: 1.125rem; line-height: 1.4; }

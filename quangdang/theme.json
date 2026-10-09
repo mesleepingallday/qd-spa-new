@@ -16,84 +16,19 @@
 			"defaultDuotone": false,
 			"palette": [
 				{
-					"slug": "brand-900",
-					"name": "Teal đậm (cũ, = teal-deep)",
-					"color": "#052E33"
-				},
-				{
-					"slug": "brand-700",
-					"name": "Teal hover (cũ, = teal-hover)",
-					"color": "#066A72"
-				},
-				{
-					"slug": "brand-600",
-					"name": "Teal thương hiệu (cũ, = teal)",
-					"color": "#087A82"
-				},
-				{
-					"slug": "brand-500",
-					"name": "Teal fanpage",
-					"color": "#178C8B"
-				},
-				{
-					"slug": "brand-300",
-					"name": "Aqua",
-					"color": "#7CD0CF"
-				},
-				{
-					"slug": "brand-100",
-					"name": "Mint nhạt",
-					"color": "#DCF2F1"
-				},
-				{
-					"slug": "brand-50",
-					"name": "Xám nhạt (cũ, = mist)",
-					"color": "#F2F7F7"
-				},
-				{
-					"slug": "ivory-200",
-					"name": "Viền (cũ)",
-					"color": "#E2ECEC"
-				},
-				{
-					"slug": "ivory-50",
-					"name": "Nền phụ (cũ, = mist)",
-					"color": "#F2F7F7"
-				},
-				{
-					"slug": "accent-600",
-					"name": "Nâu hổ phách (chữ ưu đãi)",
-					"color": "#8A5A00"
-				},
-				{
-					"slug": "accent-50",
-					"name": "Vàng nhạt (nền ưu đãi)",
-					"color": "#FFF6DA"
-				},
-				{
 					"slug": "ink",
 					"name": "Chữ chính",
 					"color": "#0E2A2F"
 				},
 				{
-					"slug": "ink-muted",
-					"name": "Chữ phụ (cũ, = muted)",
+					"slug": "muted",
+					"name": "Chữ phụ",
 					"color": "#4B6468"
-				},
-				{
-					"slug": "line",
-					"name": "Đường kẻ",
-					"color": "#E2ECEC"
 				},
 				{
 					"slug": "white",
 					"name": "Trắng (nền)",
 					"color": "#FFFFFF"
-				},
-				{
-					"slug": "muted",
-					"name": "Chữ phụ",
-					"color": "#4B6468"
 				},
 				{
 					"slug": "mist",
@@ -121,9 +56,44 @@
 					"color": "#052E33"
 				},
 				{
+					"slug": "teal-tint",
+					"name": "Teal nhạt (nền biểu tượng)",
+					"color": "#DCF2F1"
+				},
+				{
 					"slug": "sun",
 					"name": "Vàng ưu đãi (chỉ cho ưu đãi)",
 					"color": "#FFC93C"
+				},
+				{
+					"slug": "sun-tint",
+					"name": "Vàng nhạt (nền ưu đãi)",
+					"color": "#FFF6DA"
+				},
+				{
+					"slug": "amber",
+					"name": "Nâu hổ phách (chữ ưu đãi)",
+					"color": "#8A5A00"
+				},
+				{
+					"slug": "line",
+					"name": "Đường kẻ",
+					"color": "#E2ECEC"
+				},
+				{
+					"slug": "line-strong",
+					"name": "Đường kẻ đậm",
+					"color": "#C9D8D8"
+				},
+				{
+					"slug": "danger",
+					"name": "Lỗi",
+					"color": "#B42318"
+				},
+				{
+					"slug": "success",
+					"name": "Thành công",
+					"color": "#067647"
 				}
 			]
 		},

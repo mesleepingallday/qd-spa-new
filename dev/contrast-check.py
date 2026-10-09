@@ -86,8 +86,8 @@ def main():
         ("white on teal-deep", white, t["--teal-deep"], TEXT),
         ("teal-bright on teal-deep", t["--teal-bright"], t["--teal-deep"], TEXT),
         ("ink on sun (offer badge)", t["--ink"], t["--sun"], TEXT),
-        ("amber text on white (promo price, required mark)", t["--c-accent-600"], t["--paper"], TEXT),
-        ("amber text on its tint", t["--c-accent-600"], t["--c-accent-50"], TEXT),
+        ("amber text on white (promo price, required mark)", t["--amber"], t["--paper"], TEXT),
+        ("amber text on its tint", t["--amber"], t["--sun-tint"], TEXT),
         ("white on teal-deep at 80% (process copy)", blend(white, t["--teal-deep"], 0.8), t["--teal-deep"], TEXT),
     ]
     for key in CONCERNS:

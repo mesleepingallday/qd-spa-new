@@ -25,6 +25,11 @@ defined( 'ABSPATH' ) || exit;
 		<button class="site-header__menu-btn" type="button" aria-controls="drawer" aria-expanded="false" data-drawer-open>
 			<?php qd_the_icon( 'menu', array( 'size' => 22 ) ); ?><span>Menu</span>
 		</button>
+		<?php // Without JavaScript the button above does nothing, so a plain link jumps to the footer's full link list. ?>
+		<noscript>
+			<style>.site-header__menu-btn:not(a){display:none}</style>
+			<a class="site-header__menu-btn" href="#site-nav"><?php qd_the_icon( 'menu', array( 'size' => 22 ) ); ?><span>Menu</span></a>
+		</noscript>
 
 		<?php get_template_part( 'template-parts/site/brand' ); ?>
 

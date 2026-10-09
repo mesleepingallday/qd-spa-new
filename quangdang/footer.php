@@ -20,7 +20,7 @@ if ( ! $qd_service_links ) {
 </main>
 
 <footer class="site-footer">
-	<div class="container site-footer__main">
+	<div class="container site-footer__main" id="site-nav">
 		<div>
 			<?php get_template_part( 'template-parts/site/brand' ); ?>
 			<p class="site-footer__about">Phòng khám chuyên khoa Da liễu – Thẩm mỹ. Bác sĩ trực tiếp thăm khám, phác đồ riêng cho từng làn da.</p>

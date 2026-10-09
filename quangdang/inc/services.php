@@ -356,8 +356,6 @@ add_action(
 
 /**
  * The 8 skin concerns used by the home hero shortcuts, the search dialog and the quiz.
- * Quiz illustrations live at assets/images/concerns/{key} (see docs/IMAGE-PROMPTS.md).
- *
  * `short` is the label used on tiles; `glyph` is the key for qd_concern_glyph(). The concern's colours are
  * CSS tokens (`[data-concern="{key}"]` in main.css), so the palette lives in one place.
  *

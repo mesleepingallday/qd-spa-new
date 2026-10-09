@@ -119,8 +119,8 @@ The logo and teal brand are unchanged. Tokens live in `assets/css/main.css` (§1
 ### Mega menu
 
 **Desktop (≥ 1024px)**
-- **Utility bar** (36px, ivory): 📍 Tầng 5, TTTM Đức Tài – Tâm Đạt, Quỳnh Lưu · 🕗 8:00–20:00 hằng ngày · Zalo · Facebook.
-- **Header** (76px, white, sticky; it shrinks to 64px once you scroll): logo, then the nav (Giới thiệu, Dịch vụ, Tin tức, Đào tạo), then search, hotline and **[Đặt lịch]**.
+- No utility bar: the address and hours live in the footer, the contact page, the booking strip and the phone menu sheet.
+- **Header** (72px, solid white with an optional light blur, sticky): logo, then the nav (Giới thiệu, Dịch vụ, Tin tức, Đào tạo), then search, hotline and **[Đặt lịch]**. A parent item is a real link plus a separate disclosure button (the link works without JavaScript).
 - **Dịch vụ** opens a full-width panel:
   ```
   ┌ CHĂM SÓC VÀ ĐIỀU TRỊ DA ─────────────────────────────────────┬ NỘI KHOA THẨM MỸ ─┐
@@ -165,15 +165,15 @@ The logo and teal brand are unchanged. Tokens live in `assets/css/main.css` (§1
 ## 6. Key flows
 
 **A. First visit and onboarding.** There are no pop-ups. A modal on first visit annoys people and hurts Core Web Vitals. Onboarding happens on the page itself:
-1. Home hero: *"Bạn đang quan tâm vấn đề gì?"* followed by 8 concern chips (Mụn, Thâm, Nám – tàn nhang, Sẹo, Xóa xăm, Triệt lông, Trẻ hóa da, Filler – Botox). Each chip goes straight to its category.
-2. A secondary CTA, *"Chưa rõ? Kiểm tra da 1 phút"*, leads to `/tim-lieu-trinh/`.
+1. Home: the concern directory, *"Bạn cần hỗ trợ về vấn đề nào?"*, shows 8 coloured tiles (Mụn, Thâm, Nám – tàn nhang, Sẹo, Xóa xăm, Triệt lông, Trẻ hóa da, Filler – Botox). Each goes straight to its category.
+2. A secondary link, *"Tìm dịch vụ phù hợp"* (hero and under the directory), leads to `/tim-lieu-trinh/`.
 3. **The quiz asks 4 steps, one question per screen, with a progress bar and a back button:**
-   1. Main concern (multi-select icon chips)
+   1. Main concern (multi-select, the same concern tiles as the home directory, on real checkboxes)
    2. Area (face, back, underarm, arms/legs, bikini), shown only when it applies
    3. Skin type (oily, dry, combination, sensitive, "not sure")
    4. Priority (budget, fast results, no downtime)
-4. The result screen shows 1–3 recommended services, each with a reason ("Vì bạn chọn: mụn viêm + da dầu"), its price-from and the number of sessions. It offers **[Đặt lịch tư vấn miễn phí]** (the service is pre-filled) and 2 articles to read. A disclaimer notes that the doctor confirms the plan at the visit.
-5. The answers are saved in `localStorage`, so the booking form is pre-filled and the home hero can say *"Liệu trình gợi ý cho bạn"* on the next visit.
+4. The result screen shows 1–3 recommended services, each with a reason ("Vì bạn chọn: mụn viêm + da dầu"), its price-from and the number of sessions. It is titled *"Dịch vụ bạn có thể quan tâm"* (information, not a prescription: a doctor confirms the plan) and offers **[Đặt lịch tư vấn miễn phí]** (the service is pre-filled) and 2 articles to read. A disclaimer notes that the doctor confirms the plan at the visit.
+5. The answers are saved in `localStorage`, so the booking form is pre-filled and the quiz offers to show the last result again.
 
 **B. Booking** (`/dat-lich/`, and a compact version on service pages):
 1. Service: pre-filled from the page or quiz, or "Chưa biết – cần bác sĩ tư vấn".

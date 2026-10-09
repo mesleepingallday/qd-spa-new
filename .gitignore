@@ -4,3 +4,5 @@ node_modules/
 *.log
 /dev/screenshots/
 .claude/
+/quangdang.zip
+/dist/
