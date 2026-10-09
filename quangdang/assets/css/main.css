@@ -917,6 +917,18 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	.concern-tile:active .concern-tile__icon { transform: scale(0.96); }
 }
 
+/* Concern grid: 3-4 across on small phones, 4 x 2 from 480px, one row of 8 on desktop. */
+.concern-grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(4.75rem, 1fr)); gap: 16px 8px; }
+.concern-grid--narrow { max-width: 560px; }
+
+@media (min-width: 480px) {
+	.concern-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 12px; }
+}
+
+@media (min-width: 1024px) {
+	.concern-grid:not(.concern-grid--narrow) { grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 24px 16px; }
+}
+
 /* Concern mark: the tile + glyph on its own, for heroes and cards that already name the concern in text. */
 .concern-mark {
 	display: inline-grid;

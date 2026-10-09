@@ -28,9 +28,9 @@ get_header();
 				</form>
 
 				<p class="not-found__label" id="nf-concerns">Hoặc chọn vấn đề bạn quan tâm</p>
-				<ul class="chips" aria-labelledby="nf-concerns">
-					<?php foreach ( qd_concerns() as $qd_concern ) : ?>
-						<li><a class="chip" href="<?php echo esc_url( $qd_concern['url'] ); ?>"><?php echo esc_html( $qd_concern['label'] ); ?></a></li>
+				<ul class="concern-grid concern-grid--narrow" aria-labelledby="nf-concerns">
+					<?php foreach ( qd_concerns() as $qd_key => $qd_concern ) : ?>
+						<li><?php get_template_part( 'template-parts/components/concern-tile', null, array( 'key' => $qd_key, 'concern' => $qd_concern ) ); ?></li>
 					<?php endforeach; ?>
 				</ul>
 
