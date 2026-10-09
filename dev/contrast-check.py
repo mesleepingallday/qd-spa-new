@@ -18,14 +18,28 @@ CONCERNS = ["mun", "tham", "nam", "seo", "xoa-xam", "triet-long", "tre-hoa", "fi
 TEXT, GRAPHIC = 4.5, 3.0
 
 
+THEME = os.path.join(os.path.dirname(__file__), "..", "quangdang", "theme.json")
+
+
 def load_tokens(css):
-    tokens = {}
-    for m in re.finditer(r"(--[a-z0-9-]+)\s*:\s*(#[0-9a-fA-F]{6})\s*;", css):
-        tokens.setdefault(m.group(1), m.group(2).upper())  # first definition wins (:root)
+    """Return (tokens, concern, drift). A token is `--name: #HEX;` or `--name: var(--wp--preset--color--slug, #HEX);`.
+    drift lists tokens whose CSS fallback differs from the theme.json palette (editor and front end must agree)."""
+    import json
+    tokens, presets = {}, {}
+    pattern = r"(--[a-z0-9-]+)\s*:\s*(?:var\(--wp--preset--color--([a-z0-9-]+),\s*)?(#[0-9a-fA-F]{6})\)?\s*;"
+    for m in re.finditer(pattern, css):
+        name, slug, hexv = m.group(1), m.group(2), m.group(3).upper()
+        if name in tokens:
+            continue  # first definition wins (:root)
+        tokens[name] = hexv
+        if slug:
+            presets[name] = (slug, hexv)
+    palette = {e["slug"]: e["color"].upper() for e in json.load(open(THEME, encoding="utf-8"))["settings"]["color"]["palette"]}
+    drift = ["%s falls back to %s but theme.json '%s' is %s" % (n, h, s, palette.get(s)) for n, (s, h) in presets.items() if palette.get(s) != h]
     concern = {}
     for m in re.finditer(r'\[data-concern="([a-z-]+)"\]\s*\{([^}]*)\}', css):
         concern[m.group(1)] = {k: v.upper() for k, v in re.findall(r"(--concern-[a-z]+)\s*:\s*(#[0-9a-fA-F]{6})", m.group(2))}
-    return tokens, concern
+    return tokens, concern, drift
 
 
 def rgb(h):
@@ -53,7 +67,11 @@ def blend(fg, bg, alpha):
 
 def main():
     css = open(CSS, encoding="utf-8").read()
-    t, concern = load_tokens(css)
+    t, concern, drift = load_tokens(css)
+    for line in drift:
+        print("FAIL  palette drift:", line)
+    if drift:
+        return 1
     white = "#FFFFFF"
     pairs = [
         ("ink on paper", t["--ink"], t["--paper"], TEXT),

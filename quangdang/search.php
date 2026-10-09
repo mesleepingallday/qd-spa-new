@@ -109,7 +109,7 @@ get_header();
 				</div>
 				<p>Chưa biết nên chọn liệu trình nào?</p>
 				<div class="btn-row">
-					<?php echo qd_button( 'Kiểm tra da 1 phút', home_url( '/tim-lieu-trinh/' ), array( 'icon' => 'sparkles' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+					<?php echo qd_button( 'Tìm dịch vụ phù hợp', home_url( '/tim-lieu-trinh/' ), array( 'icon' => 'sparkles' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 					<?php echo qd_button( 'Hỏi bác sĩ qua Zalo', qd_clinic( 'zalo' ), array( 'variant' => 'ghost', 'icon' => 'message-circle', 'attrs' => array( 'target' => '_blank', 'rel' => 'noopener' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				</div>
 			</div>
@@ -120,7 +120,7 @@ get_header();
 <?php if ( $qd_total ) : ?>
 	<section class="section section--flush-top">
 		<div class="container">
-			<p class="search-more">Không thấy điều bạn cần? <a href="<?php echo esc_url( home_url( '/tim-lieu-trinh/' ) ); ?>">Kiểm tra da 1 phút</a> để được gợi ý liệu trình phù hợp.</p>
+			<p class="search-more">Không thấy điều bạn cần? <a href="<?php echo esc_url( home_url( '/tim-lieu-trinh/' ) ); ?>">Tìm dịch vụ phù hợp</a> bằng vài câu hỏi ngắn.</p>
 			<?php get_template_part( 'template-parts/components/booking-strip', null, array( 'source' => 'search' ) ); ?>
 		</div>
 	</section>

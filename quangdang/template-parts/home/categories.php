@@ -32,7 +32,7 @@ if ( ! $qd_categories ) {
 			<div class="quiz-tile">
 				<span class="help-card__icon"><?php qd_the_icon( 'scan-face', array( 'size' => 22 ) ); ?></span>
 				<h3 class="card__title">Chưa biết bắt đầu từ đâu?</h3>
-				<p class="quiz-tile__text">Trả lời 4 câu hỏi về làn da, nhận gợi ý liệu trình phù hợp trong 1 phút.</p>
+				<p class="quiz-tile__text">Trả lời 4 câu hỏi ngắn về làn da để xem các dịch vụ phù hợp.</p>
 				<?php echo qd_button( 'Kiểm tra da', home_url( '/tim-lieu-trinh/' ), array( 'variant' => 'outline', 'size' => 'sm', 'icon_end' => 'arrow-right' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			</div>
 		</div>

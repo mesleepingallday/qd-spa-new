@@ -6,27 +6,28 @@
 
 /* 1. Tokens --------------------------------------------------------------- */
 :root {
-	--c-brand-900: var(--wp--preset--color--brand-900, #0A3639);
-	--c-brand-700: var(--wp--preset--color--brand-700, #085F66);
-	--c-brand-600: var(--wp--preset--color--brand-600, #0A727A);
+	--c-brand-900: var(--wp--preset--color--brand-900, #052E33);
+	--c-brand-700: var(--wp--preset--color--brand-700, #066A72);
+	--c-brand-600: var(--wp--preset--color--brand-600, #087A82);
 	--c-brand-500: var(--wp--preset--color--brand-500, #178C8B);
 	--c-brand-300: var(--wp--preset--color--brand-300, #7CD0CF);
 	--c-brand-100: var(--wp--preset--color--brand-100, #DCF2F1);
-	--c-brand-50: var(--wp--preset--color--brand-50, #F0FAFA);
-	--c-ivory-200: var(--wp--preset--color--ivory-200, #F1E6D8);
-	--c-ivory-50: var(--wp--preset--color--ivory-50, #FFFBF5);
+	--c-brand-50: var(--wp--preset--color--brand-50, #F2F7F7);
+	--c-ivory-200: var(--wp--preset--color--ivory-200, #E2ECEC);
+	--c-ivory-50: var(--wp--preset--color--ivory-50, #F2F7F7);
 	--c-accent-600: var(--wp--preset--color--accent-600, #B4532A);
 	--c-accent-50: var(--wp--preset--color--accent-50, #FBEFE8);
-	--c-ink: var(--wp--preset--color--ink, #14292B);
-	--c-muted: var(--wp--preset--color--ink-muted, #52666A);
+	--c-ink: var(--wp--preset--color--ink, #0E2A2F);
+	--c-muted: var(--wp--preset--color--ink-muted, #4B6468);
 	--c-line: var(--wp--preset--color--line, #E2ECEC);
 	--c-line-strong: #C9D8D8;
 	--c-surface: #FFFFFF;
 	--c-danger: #B42318;
 	--c-success: #067647;
 
-	--f-body: var(--wp--preset--font-family--body, "Be Vietnam Pro", system-ui, sans-serif);
-	--f-display: var(--wp--preset--font-family--display, "Playfair Display", Georgia, serif);
+	--f-body: var(--f-sans);
+	--f-display: var(--f-sans);
+	--f-logo: var(--wp--preset--font-family--display, "Playfair Display", Georgia, serif); /* the text stand-in for the logo only */
 
 	--r-sm: 10px;
 	--r-md: 14px;
@@ -46,17 +47,18 @@
 }
 
 /* Tokens v2 (redesign). The --c-brand-*, --c-ivory-* and --c-accent-* names above stay as aliases
-   until every page is migrated; new CSS uses these. Hex is the baseline for every browser. */
+   until every page is migrated; new CSS uses these. Each colour reads its theme.json preset with the same hex as
+   fallback (checked by dev/contrast-check.py), so the editor and the front end share one palette. */
 :root {
-	--ink: #0E2A2F;
-	--muted: #4B6468;
-	--paper: #FFFFFF;
-	--mist: #F2F7F7;
-	--teal: #087A82;
-	--teal-hover: #066A72;
-	--teal-bright: #19C6BE;
-	--teal-deep: #052E33;
-	--sun: #FFC93C;
+	--ink: var(--wp--preset--color--ink, #0E2A2F);
+	--muted: var(--wp--preset--color--muted, #4B6468);
+	--paper: var(--wp--preset--color--white, #FFFFFF);
+	--mist: var(--wp--preset--color--mist, #F2F7F7);
+	--teal: var(--wp--preset--color--teal, #087A82);
+	--teal-hover: var(--wp--preset--color--teal-hover, #066A72);
+	--teal-bright: var(--wp--preset--color--teal-bright, #19C6BE);
+	--teal-deep: var(--wp--preset--color--teal-deep, #052E33);
+	--sun: var(--wp--preset--color--sun, #FFC93C);
 
 	/* Actions and validation never take a concern hue: the booking button stays teal on every page. */
 	--action: var(--teal);
@@ -103,11 +105,11 @@
 }
 
 @media (min-width: 1024px) {
-	:root { --gutter: 32px; --header-h: 76px; }
+	:root { --gutter: 32px; --header-h: 72px; }
 }
 
 @media (max-width: 1023.98px) {
-	:root { --actionbar-h: 72px; }
+	:root { --actionbar-h: calc(72px + env(safe-area-inset-bottom, 0px)); }
 }
 
 /* 2. Base ----------------------------------------------------------------- */
@@ -124,7 +126,7 @@ body {
 	margin: 0;
 	font-family: var(--f-body);
 	font-size: 1.0625rem;
-	line-height: 1.65;
+	line-height: 1.6;
 	color: var(--c-ink);
 	background: var(--c-surface);
 	text-rendering: optimizeLegibility;
@@ -138,6 +140,10 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: 1.3;
 	color: var(--c-ink);
 	text-wrap: balance;
+}
+
+@media (min-width: 1024px) {
+	body { font-size: 1.125rem; }
 }
 
 p { margin: 0; }
@@ -156,10 +162,13 @@ a:hover { color: var(--c-brand-700); }
 button { font: inherit; color: inherit; cursor: pointer; }
 
 :focus-visible {
-	outline: 2px solid var(--c-brand-600);
-	outline-offset: 2px;
-	border-radius: 4px;
+	outline: 3px solid var(--teal);
+	outline-offset: 3px;
 }
+
+/* On dark surfaces the ring switches to the bright teal (6.8:1 on teal-deep). */
+.site-footer :focus-visible,
+.section--dark :focus-visible { outline-color: var(--teal-bright); }
 
 ::selection { background: var(--c-brand-100); color: var(--c-ink); }
 
@@ -249,27 +258,35 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* 4. Type ----------------------------------------------------------------- */
 .display,
-.page-title {
+.page-title,
+.section-title {
 	font-family: var(--f-display);
-	font-weight: 600;
-	font-size: clamp(2.125rem, 1.55rem + 2.5vw, 3.25rem);
-	line-height: 1.2;
+	font-weight: 650;
+	text-wrap: balance;
+}
+
+/* Home hero H1: 36-44px on phones, 64-80px on desktop. Line-height stays above 1.12 so stacked
+   Vietnamese marks never touch the line above; headline wrappers must never clip (overflow). */
+.display {
+	font-size: clamp(2.25rem, 1.2rem + 4.8vw, 5rem);
+	line-height: 1.14;
 	letter-spacing: -0.01em;
 }
 
-.display em, .page-title em, .section-title em {
-	font-style: italic;
-	font-weight: 500;
-	color: var(--c-brand-600);
+/* Inner-page H1: long Vietnamese service and article titles need a smaller ceiling. */
+.page-title {
+	font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.5rem);
+	line-height: 1.18;
+	letter-spacing: -0.005em;
 }
 
 .section-title {
-	font-family: var(--f-display);
-	font-weight: 600;
-	font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.375rem);
-	line-height: 1.25;
-	letter-spacing: -0.005em;
+	font-size: clamp(1.75rem, 1.2rem + 1.9vw, 3rem);
+	line-height: 1.2;
 }
+
+/* No accented word inside a headline: <em> keeps its meaning but not a different colour or italic. */
+.display em, .page-title em, .section-title em { font-style: normal; font-weight: inherit; color: inherit; }
 
 .section-lead {
 	margin-top: 12px;
@@ -344,7 +361,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* 5. Components ----------------------------------------------------------- */
 
-/* Buttons: primary (one per view), outline, ghost, light (on dark) */
+/* Buttons: primary (one per view, always teal), outline, ghost, light (on dark) */
 .btn {
 	display: inline-flex;
 	align-items: center;
@@ -355,35 +372,40 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	border: 1.5px solid transparent;
 	border-radius: var(--r-pill);
 	font-family: var(--f-body);
-	font-size: 1rem;
+	font-size: 1.0625rem;
 	font-weight: 600;
 	line-height: 1.2;
 	text-align: center;
 	text-decoration: none;
 	white-space: nowrap;
-	transition: background-color 0.18s, border-color 0.18s, color 0.18s, transform 0.18s var(--ease);
+	transition: background-color var(--t-press), border-color var(--t-press), color var(--t-press), transform var(--t-press) var(--ease);
 }
 
-.btn:active { transform: translateY(1px); }
-.btn--sm { min-height: 40px; padding: 0 18px; font-size: 0.9375rem; }
-.btn--lg { min-height: 56px; padding: 0 30px; font-size: 1.0625rem; }
+@media (prefers-reduced-motion: no-preference) {
+	.btn:active { transform: scale(0.97); }
+}
+
+.btn--sm { min-height: 44px; padding: 0 18px; font-size: 1rem; }
+.btn--lg { min-height: 56px; padding: 0 30px; font-size: 1.125rem; }
 .btn--block { width: 100%; }
 
-.btn--primary { background: var(--c-brand-600); color: #fff; }
-.btn--primary:hover { background: var(--c-brand-700); color: #fff; }
+.btn--primary { background: var(--action); color: #fff; }
+.btn--primary:hover { background: var(--action-hover); color: #fff; }
 
-.btn--outline { background: #fff; border-color: var(--c-brand-600); color: var(--c-brand-600); }
-.btn--outline:hover { background: var(--c-brand-50); color: var(--c-brand-700); }
+.btn--outline { background: var(--paper); border-color: var(--teal); color: var(--teal); }
+.btn--outline:hover { background: var(--mist); color: var(--teal-hover); }
 
-.btn--ghost { background: transparent; color: var(--c-brand-600); padding-inline: 14px; }
-.btn--ghost:hover { background: var(--c-brand-50); }
+.btn--ghost { background: transparent; color: var(--teal); padding-inline: 14px; }
+.btn--ghost:hover { background: var(--mist); }
 
-.btn--light { background: #fff; color: var(--c-brand-900); }
-.btn--light:hover { background: var(--c-brand-50); color: var(--c-brand-900); }
+.btn--light { background: #fff; color: var(--teal-deep); }
+.btn--light:hover { background: var(--mist); color: var(--teal-deep); }
+
+.btn[disabled], .btn[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
 
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
-/* Chips (concern shortcuts, filters) */
+/* Chips (filters, choices). Selected = darker border + tint + check mark, never colour alone. */
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .chip {
@@ -392,18 +414,33 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	gap: 8px;
 	min-height: 44px;
 	padding: 0 16px;
-	border: 1px solid var(--c-line-strong);
+	border: 1.5px solid var(--c-line-strong);
 	border-radius: var(--r-pill);
-	background: #fff;
-	color: var(--c-ink);
-	font-size: 0.9375rem;
+	background: var(--paper);
+	color: var(--ink);
+	font-size: 1rem;
 	font-weight: 500;
 	text-decoration: none;
-	transition: border-color 0.18s, background-color 0.18s, color 0.18s;
+	transition: border-color var(--t-press), background-color var(--t-press), color var(--t-press);
 }
 
-.chip:hover { border-color: var(--c-brand-300); background: var(--c-brand-50); color: var(--c-brand-700); }
-.chip[aria-pressed="true"], .chip.is-active { border-color: var(--c-brand-600); background: var(--c-brand-600); color: #fff; }
+.chip:hover { border-color: var(--teal); background: var(--mist); color: var(--teal-hover); }
+
+.chip[aria-pressed="true"], .chip.is-active {
+	border-color: var(--teal);
+	background: var(--mist);
+	color: var(--teal-hover);
+	font-weight: 600;
+}
+
+.chip[aria-pressed="true"]::before, .chip.is-active::before {
+	content: "";
+	width: 16px;
+	height: 16px;
+	background: currentColor;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
 
 /* Badges */
 .badge {
@@ -845,12 +882,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* 6. Site chrome ---------------------------------------------------------- */
 
-/* Announcement bar */
+/* Announcement bar (optional, dismissible): a quiet strip, not a second header */
 .announce {
 	position: relative;
-	background: var(--c-brand-900);
-	color: #fff;
-	font-size: 0.875rem;
+	background: var(--mist);
+	border-bottom: 1px solid var(--c-line);
+	color: var(--ink);
+	font-size: 0.9375rem;
 }
 
 .announce[hidden] { display: none; }
@@ -860,59 +898,45 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	align-items: center;
 	justify-content: center;
 	gap: 8px;
-	min-height: 40px;
+	min-height: 44px;
 	padding-block: 8px;
 	padding-right: 48px;
 	text-align: center;
 }
 
-.announce a { color: #fff; font-weight: 600; }
-.announce .icon { color: var(--c-brand-300); }
+.announce a { color: var(--teal); font-weight: 600; }
+.announce .icon { color: var(--teal); }
 
 .announce__close {
 	position: absolute;
-	right: 4px;
+	right: 2px;
 	top: 50%;
 	transform: translateY(-50%);
 	display: grid;
 	place-items: center;
-	width: 40px;
-	height: 40px;
+	width: 44px;
+	height: 44px;
 	border: 0;
 	background: none;
-	color: rgba(255, 255, 255, 0.8);
+	color: var(--muted);
 }
 
-/* Utility bar (desktop only) */
-.utility { display: none; }
-
-@media (min-width: 1024px) {
-	.utility {
-		display: block;
-		background: var(--c-ivory-50);
-		border-bottom: 1px solid var(--c-ivory-200);
-		font-size: 0.8125rem;
-		color: var(--c-muted);
-	}
-
-	.utility__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 36px; }
-	.utility__group { display: flex; align-items: center; gap: 20px; }
-	.utility__item { display: inline-flex; align-items: center; gap: 6px; color: var(--c-muted); text-decoration: none; }
-	.utility__item .icon { color: var(--c-brand-500); }
-	a.utility__item:hover { color: var(--c-brand-600); }
-}
-
-/* Header */
+/* Header: slim and solid. The blur is an enhancement over an already near-opaque surface. */
 .site-header {
 	position: sticky;
 	top: 0;
 	z-index: 50;
-	background: rgba(255, 255, 255, 0.97);
-	border-bottom: 1px solid transparent;
-	transition: border-color 0.2s, box-shadow 0.2s;
+	background: var(--paper);
+	border-bottom: 1px solid var(--c-line);
 }
 
-.site-header.is-scrolled { border-bottom-color: var(--c-line); }
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+	.site-header {
+		background: rgb(255 255 255 / 0.88);
+		-webkit-backdrop-filter: saturate(1.5) blur(14px);
+		backdrop-filter: saturate(1.5) blur(14px);
+	}
+}
 
 .site-header__inner {
 	display: flex;
@@ -921,7 +945,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	height: var(--header-h);
 }
 
-.site-header__actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.site-header__actions { display: flex; align-items: center; gap: 4px; margin-left: auto; order: 2; }
 
 .icon-btn {
 	display: grid;
@@ -931,11 +955,39 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	border: 0;
 	border-radius: 50%;
 	background: none;
-	color: var(--c-ink);
+	color: var(--ink);
 	text-decoration: none;
 }
 
-.icon-btn:hover { background: var(--c-brand-50); color: var(--c-brand-700); }
+.icon-btn:hover { background: var(--mist); color: var(--teal-hover); }
+
+/* Phone: logo left; search and a labelled Menu button right */
+.site-header__menu-btn {
+	order: 3;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 44px;
+	padding: 0 14px 0 12px;
+	border: 0;
+	border-radius: var(--r-pill);
+	background: none;
+	color: var(--ink);
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.site-header__menu-btn:hover { background: var(--mist); color: var(--teal-hover); }
+.site-header .brand { order: 1; }
+
+/* Narrow phones: search lives in the menu sheet; the logo's tagline yields before anything overflows. */
+@media (max-width: 479.98px) {
+	.site-header [data-search-open] { display: none; }
+}
+
+@media (max-width: 359.98px) {
+	.site-header .brand__tag { display: none; }
+}
 
 .site-header__hotline { display: none; }
 .site-header__book { display: none; }
@@ -944,6 +996,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	.site-header__menu-btn { display: none; }
 	.site-header__inner { gap: 24px; }
 	.site-header__book { display: inline-flex; }
+	.primary-nav { order: 1; }
 }
 
 @media (min-width: 1200px) {
@@ -951,16 +1004,17 @@ button { font: inherit; color: inherit; cursor: pointer; }
 		display: inline-flex;
 		align-items: center;
 		gap: 8px;
+		min-height: 44px;
 		padding: 0 12px;
-		color: var(--c-ink);
+		color: var(--ink);
 		font-weight: 600;
-		font-size: 0.9375rem;
+		font-size: 1rem;
 		text-decoration: none;
 		white-space: nowrap;
 	}
 
-	.site-header__hotline .icon { color: var(--c-brand-600); }
-	.site-header__hotline:hover { color: var(--c-brand-600); }
+	.site-header__hotline .icon { color: var(--teal); }
+	.site-header__hotline:hover { color: var(--teal); }
 }
 
 /* Brand (text logo until the official logo is uploaded in Customize → Logo) */
@@ -984,7 +1038,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	border-radius: 50%;
 	background: linear-gradient(140deg, var(--c-brand-500), var(--c-brand-700));
 	color: #fff;
-	font-family: var(--f-display);
+	font-family: var(--f-logo);
 	font-size: 1.375rem;
 	font-weight: 600;
 	line-height: 1;
@@ -992,16 +1046,16 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 .brand__text { display: grid; line-height: 1.1; }
-.brand__name { font-family: var(--f-display); font-weight: 600; font-size: 1.1875rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.brand__name { font-family: var(--f-logo); font-weight: 600; font-size: 1.1875rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .brand__tag { font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-muted); margin-top: 3px; }
 
-/* Primary nav (desktop) */
+/* Primary nav (desktop). A parent page is a real link plus a separate disclosure button. */
 .primary-nav { display: none; }
 
 @media (min-width: 1024px) {
 	.primary-nav { display: block; margin-left: 8px; }
 	.primary-nav__list { list-style: none; display: flex; align-items: center; gap: 2px; }
-	.primary-nav__item { position: static; }
+	.primary-nav__item { position: static; display: flex; align-items: center; }
 	.primary-nav__item--dropdown { position: relative; }
 
 	.primary-nav__link {
@@ -1010,35 +1064,62 @@ button { font: inherit; color: inherit; cursor: pointer; }
 		align-items: center;
 		gap: 4px;
 		height: var(--header-h);
-		padding: 0 14px;
+		padding: 0 12px;
 		border: 0;
 		background: none;
-		color: var(--c-ink);
-		font-size: 1rem;
+		color: var(--ink);
+		font: inherit;
+		font-size: 1.0625rem;
 		font-weight: 500;
 		text-decoration: none;
 		white-space: nowrap;
+		cursor: pointer;
 	}
 
-	.primary-nav__link .icon { color: var(--c-muted); transition: transform 0.2s var(--ease); }
-	.primary-nav__link:hover, .primary-nav__link[aria-expanded="true"] { color: var(--c-brand-600); }
-	.primary-nav__link[aria-expanded="true"] .icon { transform: rotate(180deg); color: var(--c-brand-600); }
+	.primary-nav__link--split { padding-right: 4px; }
+
+	.primary-nav__toggle {
+		display: inline-grid;
+		place-items: center;
+		width: 32px;
+		height: 44px;
+		margin-right: 4px;
+		border: 0;
+		border-radius: 10px;
+		background: none;
+		color: var(--muted);
+		cursor: pointer;
+	}
+
+	.primary-nav__toggle:hover { background: var(--mist); color: var(--teal-hover); }
+	.primary-nav__toggle .icon,
+	.primary-nav__link .icon { transition: transform var(--t-disclose) var(--ease); }
+	.primary-nav__link .icon { color: var(--muted); }
+	.primary-nav__toggle[aria-expanded="true"] { color: var(--teal); }
+	.primary-nav__toggle[aria-expanded="true"] .icon,
+	.primary-nav__link[aria-expanded="true"] .icon { transform: rotate(180deg); color: var(--teal); }
+
+	.primary-nav__link:hover,
+	.primary-nav__item.is-open > .primary-nav__link,
+	.primary-nav__link[aria-expanded="true"] { color: var(--teal); }
 
 	.primary-nav__link::after {
 		content: "";
 		position: absolute;
-		left: 14px;
-		right: 14px;
+		left: 12px;
+		right: 12px;
 		bottom: 0;
 		height: 2px;
 		border-radius: 2px;
-		background: var(--c-brand-600);
+		background: var(--teal);
 		transform: scaleX(0);
-		transition: transform 0.2s var(--ease);
+		transition: transform var(--t-disclose) var(--ease);
 	}
 
-	.primary-nav__item.is-ancestor > .primary-nav__link { color: var(--c-brand-600); }
+	.primary-nav__link--split::after { right: 4px; }
+	.primary-nav__item.is-ancestor > .primary-nav__link { color: var(--teal); }
 	.primary-nav__item.is-ancestor > .primary-nav__link::after,
+	.primary-nav__item.is-open > .primary-nav__link::after,
 	.primary-nav__link[aria-expanded="true"]::after { transform: scaleX(1); }
 
 	/* Shared panel behaviour */
@@ -1047,8 +1128,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 		top: 100%;
 		visibility: hidden;
 		opacity: 0;
-		transform: translateY(6px);
-		transition: opacity 0.16s var(--ease), transform 0.16s var(--ease), visibility 0s linear 0.16s;
+		transform: translateY(4px);
+		transition: opacity var(--t-disclose) var(--ease), transform var(--t-disclose) var(--ease), visibility 0s linear var(--t-disclose);
 	}
 
 	.nav-panel.is-open {
@@ -1058,23 +1139,23 @@ button { font: inherit; color: inherit; cursor: pointer; }
 		transition-delay: 0s;
 	}
 
-	/* Mega panel (Dịch vụ) */
+	/* Mega panel (Dịch vụ): an overlay, so it may carry a shadow */
 	.mega {
 		left: 0;
 		right: 0;
-		background: #fff;
+		background: var(--paper);
 		border-top: 1px solid var(--c-line);
 		box-shadow: var(--shadow-float);
 	}
 
-	.mega__inner { padding-block: 28px 32px; }
+	.mega__inner { padding-block: 32px 36px; }
 	.mega__zones { display: grid; gap: 40px; }
 	.mega__zones--split { grid-template-columns: minmax(0, 3fr) minmax(240px, 1fr); }
 	.mega__zone + .mega__zone { padding-left: 32px; border-left: 1px solid var(--c-line); }
 
 	.mega__zone-title a:not(.link-more) { color: inherit; text-decoration: none; }
-	.mega__zone-title a:not(.link-more):hover { color: var(--c-brand-600); }
-	.mega__zone-title .link-more { font-size: 0.875rem; letter-spacing: 0; text-transform: none; }
+	.mega__zone-title a:not(.link-more):hover { color: var(--teal); }
+	.mega__zone-title .link-more { font-size: 0.9375rem; }
 
 	.mega__zone-title {
 		display: flex;
@@ -1082,24 +1163,22 @@ button { font: inherit; color: inherit; cursor: pointer; }
 		justify-content: space-between;
 		gap: 12px;
 		margin-bottom: 18px;
-		font-size: 0.75rem;
-		font-weight: 700;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-		color: var(--c-muted);
+		font-size: 1.0625rem;
+		font-weight: 650;
+		color: var(--ink);
 	}
 
 	.mega__group + .mega__group { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--c-line); }
 
 	.mega__group-title {
 		margin-bottom: 12px;
-		font-size: 0.9375rem;
+		font-size: 1rem;
 		font-weight: 600;
-		color: var(--c-ink);
+		color: var(--ink);
 	}
 
 	.mega__group-title a { color: inherit; text-decoration: none; }
-	.mega__group-title a:hover { color: var(--c-brand-600); }
+	.mega__group-title a:hover { color: var(--teal); }
 
 	.mega__cols { column-count: 4; column-gap: 28px; }
 	.mega__col { break-inside: avoid; padding-bottom: 16px; }
@@ -1110,12 +1189,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
 		gap: 4px;
 		margin-bottom: 4px;
 		font-weight: 600;
-		font-size: 0.9375rem;
-		color: var(--c-brand-700);
+		font-size: 1rem;
+		color: var(--teal-hover);
 		text-decoration: none;
 	}
 
-	.mega__col-title:hover { color: var(--c-brand-600); text-decoration: underline; }
+	.mega__col-title:hover { color: var(--teal); text-decoration: underline; }
 
 	.mega__links { list-style: none; }
 	.mega__links--cols { column-count: 3; column-gap: 28px; }
@@ -1123,14 +1202,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 	.mega__links a {
 		display: block;
-		padding: 5px 0;
-		color: var(--c-muted);
-		font-size: 0.9375rem;
+		padding: 6px 0;
+		color: var(--muted);
+		font-size: 1rem;
 		line-height: 1.45;
 		text-decoration: none;
 	}
 
-	.mega__links a:hover, .mega__links a[aria-current="page"] { color: var(--c-brand-600); }
+	.mega__links a:hover, .mega__links a[aria-current="page"] { color: var(--teal); }
 	.mega__zone .help-card { margin-top: 20px; }
 
 	/* Compact dropdown (Giới thiệu, Tin tức, Đào tạo) */
@@ -1140,8 +1219,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 		margin-left: -170px;
 		padding: 10px;
 		border: 1px solid var(--c-line);
-		border-radius: var(--r-lg);
-		background: #fff;
+		border-radius: var(--r-card);
+		background: var(--paper);
 		box-shadow: var(--shadow-float);
 	}
 
@@ -1152,14 +1231,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	.dropdown li a {
 		display: block;
 		padding: 12px 14px;
-		border-radius: var(--r-md);
-		color: var(--c-ink);
+		border-radius: var(--r-field);
+		color: var(--ink);
 		text-decoration: none;
 	}
 
-	.dropdown li a:hover, .dropdown li a[aria-current="page"] { background: var(--c-brand-50); }
-	.dropdown__title { display: block; font-weight: 600; font-size: 0.9375rem; line-height: 1.4; }
-	.dropdown__desc { display: block; margin-top: 2px; font-size: 0.8125rem; color: var(--c-muted); line-height: 1.45; }
+	.dropdown li a:hover, .dropdown li a[aria-current="page"] { background: var(--mist); }
+	.dropdown__title { display: block; font-weight: 600; font-size: 1rem; line-height: 1.4; }
+	.dropdown__desc { display: block; margin-top: 2px; font-size: 0.875rem; color: var(--muted); line-height: 1.45; }
 	.dropdown__all { margin-top: 6px; padding: 10px 14px 6px; border-top: 1px solid var(--c-line); }
 }
 
@@ -1252,14 +1331,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	justify-content: space-between;
 	gap: 12px;
 	padding: 20px 0 6px;
-	font-size: 0.75rem;
-	font-weight: 700;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	color: var(--c-muted);
+	font-size: 0.9375rem;
+	font-weight: 650;
+	color: var(--muted);
 }
 
-.drawer__section-title a { font-size: 0.875rem; letter-spacing: 0; text-transform: none; font-weight: 600; text-decoration: none; }
+.drawer__section-title a { font-size: 0.9375rem; font-weight: 600; text-decoration: none; }
 .drawer__list { list-style: none; }
 
 .drawer__row {
@@ -1317,7 +1394,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .search-dialog__hints { padding: 4px 20px 20px; }
 .search-dialog__hints p { font-size: 0.8125rem; color: var(--c-muted); margin-bottom: 10px; }
 
-/* Mobile action bar */
+/* Mobile action bar: Gọi, Zalo, Đặt lịch. It hides while a field has focus (keyboard) or the booking form
+   is on screen (main.js); body padding keeps the footer links clear of it. */
 .action-bar {
 	position: fixed;
 	left: 0;
@@ -1327,10 +1405,17 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	display: grid;
 	grid-template-columns: 1fr 1fr 2fr;
 	gap: 8px;
-	padding: 8px max(12px, calc((100% - 560px) / 2)) calc(8px + env(safe-area-inset-bottom));
-	background: #fff;
+	padding: 8px max(12px, calc((100% - 560px) / 2)) calc(8px + env(safe-area-inset-bottom, 0px));
+	background: var(--paper);
 	border-top: 1px solid var(--c-line);
-	box-shadow: 0 -8px 24px -12px rgba(10, 54, 57, 0.18);
+	box-shadow: 0 -8px 24px -12px rgba(5, 46, 51, 0.18);
+	transition: transform var(--t-disclose) var(--ease), visibility 0s linear 0s;
+}
+
+.action-bar.is-hidden {
+	transform: translateY(100%);
+	visibility: hidden;
+	transition: transform var(--t-disclose) var(--ease), visibility 0s linear var(--t-disclose);
 }
 
 .action-bar__btn {
@@ -1340,14 +1425,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	justify-content: center;
 	gap: 2px;
 	min-height: 52px;
-	border-radius: var(--r-md);
-	color: var(--c-brand-700);
-	font-size: 0.75rem;
+	border-radius: var(--r-field);
+	color: var(--teal-hover);
+	font-size: 0.8125rem;
 	font-weight: 600;
 	text-decoration: none;
 }
 
-.action-bar__btn:hover { background: var(--c-brand-50); }
+.action-bar__btn:hover { background: var(--mist); }
 .action-bar--contact { grid-template-columns: 1fr 1fr; }
 .action-bar .btn { min-height: 52px; }
 
@@ -1445,7 +1530,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* Page header band (listing/archive/about pages) */
 .page-hero {
 	padding-block: 28px 40px;
-	background: linear-gradient(180deg, var(--c-brand-50) 0%, #fff 100%);
+	background: var(--mist);
 }
 
 .page-hero .breadcrumb { margin-bottom: 20px; }

@@ -108,7 +108,7 @@ foreach ( $qd_tree as $qd_item ) {
 			<div class="drawer__panel is-active" id="drawer-root" data-drawer-panel>
 				<ul class="drawer__list"><?php echo $qd_root_rows; // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in $qd_row. ?></ul>
 				<ul class="drawer__list">
-					<li><a class="drawer__row" href="<?php echo esc_url( home_url( '/tim-lieu-trinh/' ) ); ?>"><span>Kiểm tra da 1 phút</span><?php qd_the_icon( 'scan-face', array( 'size' => 20 ) ); ?></a></li>
+					<li><a class="drawer__row" href="<?php echo esc_url( home_url( '/tim-lieu-trinh/' ) ); ?>"><span>Tìm dịch vụ phù hợp</span><?php qd_the_icon( 'scan-face', array( 'size' => 20 ) ); ?></a></li>
 					<li><a class="drawer__row" href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>"><span>Liên hệ &amp; chỉ đường</span><?php qd_the_icon( 'map-pin', array( 'size' => 20 ) ); ?></a></li>
 				</ul>
 				<p class="drawer__address"><?php qd_the_icon( 'map-pin', array( 'size' => 15 ) ); ?><span><?php echo esc_html( qd_clinic( 'address' ) ); ?><br><?php echo esc_html( qd_clinic( 'hours' ) ); ?></span></p>

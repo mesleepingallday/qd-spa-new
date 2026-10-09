@@ -19,7 +19,7 @@ $qd_doctor = qd_service_doctor();
 			<div class="btn-row hero__ctas">
 				<?php
 				echo qd_button( 'Đặt lịch khám', qd_booking_url(), array( 'size' => 'lg', 'icon' => 'calendar-days' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
-				echo qd_button( 'Kiểm tra da 1 phút', home_url( '/tim-lieu-trinh/' ), array( 'size' => 'lg', 'variant' => 'outline', 'icon' => 'scan-face' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+				echo qd_button( 'Tìm dịch vụ phù hợp', home_url( '/tim-lieu-trinh/' ), array( 'size' => 'lg', 'variant' => 'outline', 'icon' => 'scan-face' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 				?>
 			</div>
 			<div class="hero__concerns">

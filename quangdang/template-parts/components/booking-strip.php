@@ -19,7 +19,7 @@ $qd_service = ! empty( $args['service'] ) ? get_post( $args['service'] ) : null;
 $qd_source  = $args['source'] ?? 'strip';
 $qd_uid     = wp_unique_id( 'bk-' );
 ?>
-<div class="booking-strip">
+<div class="booking-strip" data-hide-actionbar>
 	<div>
 		<h2 class="section-title"><?php echo esc_html( $args['title'] ?? 'Đặt lịch tư vấn với bác sĩ' ); ?></h2>
 		<p class="section-lead"><?php echo esc_html( $args['desc'] ?? 'Để lại số điện thoại, phòng khám gọi lại trong 15 phút (giờ làm việc). Tư vấn miễn phí, không ràng buộc.' ); ?></p>

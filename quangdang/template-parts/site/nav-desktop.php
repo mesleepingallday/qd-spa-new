@@ -1,8 +1,8 @@
 <?php
 /**
- * Desktop navigation. Items with grandchildren open a full-width mega panel,
- * others a compact dropdown. Triggers are buttons (disclosure pattern); every
- * panel starts with a "Xem tất cả" link so the hub pages stay one click away.
+ * Desktop navigation. Items with grandchildren open a full-width mega panel, others a compact
+ * dropdown. A parent with a real page is a link plus a separate disclosure button (the link works
+ * without JavaScript); every panel also starts with a "Xem tất cả" link.
  *
  * @package QuangDang
  */
@@ -27,9 +27,17 @@ $qd_tree = qd_menu_tree( 'primary' );
 				<?php if ( ! $qd_item['children'] ) : ?>
 					<a class="primary-nav__link" href="<?php echo esc_url( $qd_item['url'] ); ?>"<?php echo $qd_item['current'] ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $qd_item['title'] ); ?></a>
 				<?php else : ?>
-					<button class="primary-nav__link" type="button" aria-expanded="false" aria-controls="<?php echo esc_attr( $qd_panel_id ); ?>" data-nav-trigger>
-						<?php echo esc_html( $qd_item['title'] ); ?><?php qd_the_icon( 'chevron-down', array( 'size' => 16 ) ); ?>
-					</button>
+					<?php if ( qd_menu_is_page_url( $qd_item['url'] ) ) : ?>
+						<?php // A real link to the hub page plus a separate disclosure button: the link works without JavaScript. ?>
+						<a class="primary-nav__link primary-nav__link--split" href="<?php echo esc_url( $qd_item['url'] ); ?>"<?php echo $qd_item['current'] ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $qd_item['title'] ); ?></a>
+						<button class="primary-nav__toggle" type="button" aria-expanded="false" aria-controls="<?php echo esc_attr( $qd_panel_id ); ?>" data-nav-trigger>
+							<?php qd_the_icon( 'chevron-down', array( 'size' => 16 ) ); ?><span class="sr-only">Mở menu <?php echo esc_html( $qd_item['title'] ); ?></span>
+						</button>
+					<?php else : ?>
+						<button class="primary-nav__link" type="button" aria-expanded="false" aria-controls="<?php echo esc_attr( $qd_panel_id ); ?>" data-nav-trigger>
+							<?php echo esc_html( $qd_item['title'] ); ?><?php qd_the_icon( 'chevron-down', array( 'size' => 16 ) ); ?>
+						</button>
+					<?php endif; ?>
 					<?php
 					get_template_part(
 						$qd_is_mega ? 'template-parts/site/mega-panel' : 'template-parts/site/dropdown',

@@ -63,7 +63,7 @@ while ( have_posts() ) :
 		</div>
 	</section>
 
-	<section class="section section--tight bk-section" aria-label="Đặt lịch">
+	<section class="section section--tight bk-section" aria-label="Đặt lịch" data-hide-actionbar>
 		<div class="container">
 
 			<?php // Confirmation: filled and shown by booking.js after a successful submit, or shown as-is after a no-JS post. ?>

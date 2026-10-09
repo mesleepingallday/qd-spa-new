@@ -61,7 +61,7 @@ if ( ! $qd_service_links ) {
 					'Cẩm nang làm đẹp'     => '/tin-tuc/cam-nang-lam-dep/',
 					'Sự kiện – Ưu đãi'     => '/tin-tuc/su-kien-uu-dai/',
 					'Đào tạo'              => '/dao-tao/',
-					'Kiểm tra da 1 phút'   => '/tim-lieu-trinh/',
+					'Tìm dịch vụ phù hợp'   => '/tim-lieu-trinh/',
 				) as $qd_label => $qd_path ) {
 					printf( '<li><a href="%s">%s</a></li>', esc_url( home_url( $qd_path ) ), esc_html( $qd_label ) );
 				}

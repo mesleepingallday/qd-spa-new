@@ -38,7 +38,7 @@ get_header();
 					<?php
 					echo qd_button( 'Về trang chủ', home_url( '/' ), array( 'variant' => 'outline', 'icon' => 'arrow-left' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 					echo qd_button( 'Xem dịch vụ', get_post_type_archive_link( 'dich-vu' ), array( 'variant' => 'ghost' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
-					echo qd_button( 'Kiểm tra da 1 phút', home_url( '/tim-lieu-trinh/' ), array( 'variant' => 'ghost' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+					echo qd_button( 'Tìm dịch vụ phù hợp', home_url( '/tim-lieu-trinh/' ), array( 'variant' => 'ghost' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 					?>
 				</div>
 			</div>

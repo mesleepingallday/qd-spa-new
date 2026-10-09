@@ -17,18 +17,18 @@
 			"palette": [
 				{
 					"slug": "brand-900",
-					"name": "Teal đậm (nền chân trang)",
-					"color": "#0A3639"
+					"name": "Teal đậm (cũ, = teal-deep)",
+					"color": "#052E33"
 				},
 				{
 					"slug": "brand-700",
-					"name": "Teal (hover)",
-					"color": "#085F66"
+					"name": "Teal hover (cũ, = teal-hover)",
+					"color": "#066A72"
 				},
 				{
 					"slug": "brand-600",
-					"name": "Teal thương hiệu",
-					"color": "#0A727A"
+					"name": "Teal thương hiệu (cũ, = teal)",
+					"color": "#087A82"
 				},
 				{
 					"slug": "brand-500",
@@ -47,18 +47,18 @@
 				},
 				{
 					"slug": "brand-50",
-					"name": "Mint nền",
-					"color": "#F0FAFA"
+					"name": "Xám nhạt (cũ, = mist)",
+					"color": "#F2F7F7"
 				},
 				{
 					"slug": "ivory-200",
-					"name": "Be viền",
-					"color": "#F1E6D8"
+					"name": "Viền (cũ)",
+					"color": "#E2ECEC"
 				},
 				{
 					"slug": "ivory-50",
-					"name": "Be nền",
-					"color": "#FFFBF5"
+					"name": "Nền phụ (cũ, = mist)",
+					"color": "#F2F7F7"
 				},
 				{
 					"slug": "accent-600",
@@ -73,12 +73,12 @@
 				{
 					"slug": "ink",
 					"name": "Chữ chính",
-					"color": "#14292B"
+					"color": "#0E2A2F"
 				},
 				{
 					"slug": "ink-muted",
-					"name": "Chữ phụ",
-					"color": "#52666A"
+					"name": "Chữ phụ (cũ, = muted)",
+					"color": "#4B6468"
 				},
 				{
 					"slug": "line",
@@ -87,8 +87,43 @@
 				},
 				{
 					"slug": "white",
-					"name": "Trắng",
+					"name": "Trắng (nền)",
 					"color": "#FFFFFF"
+				},
+				{
+					"slug": "muted",
+					"name": "Chữ phụ",
+					"color": "#4B6468"
+				},
+				{
+					"slug": "mist",
+					"name": "Xám nhạt (nền phụ)",
+					"color": "#F2F7F7"
+				},
+				{
+					"slug": "teal",
+					"name": "Teal (nút, liên kết)",
+					"color": "#087A82"
+				},
+				{
+					"slug": "teal-hover",
+					"name": "Teal hover",
+					"color": "#066A72"
+				},
+				{
+					"slug": "teal-bright",
+					"name": "Teal sáng (một mảng nền mỗi trang)",
+					"color": "#19C6BE"
+				},
+				{
+					"slug": "teal-deep",
+					"name": "Teal đậm (chân trang)",
+					"color": "#052E33"
+				},
+				{
+					"slug": "sun",
+					"name": "Vàng ưu đãi (chỉ cho ưu đãi)",
+					"color": "#FFC93C"
 				}
 			]
 		},

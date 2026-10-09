@@ -78,7 +78,7 @@ while ( have_posts() ) :
 		<div class="container">
 			<?php qd_breadcrumbs(); ?>
 			<h1 class="page-title">Tìm liệu trình hợp với làn da của bạn</h1>
-			<p class="lead">Trả lời vài câu hỏi ngắn, chỉ mất khoảng 1 phút. Không cần đăng ký hay để lại số điện thoại.</p>
+			<p class="lead">Trả lời vài câu hỏi ngắn để xem các dịch vụ phù hợp. Không cần đăng ký hay để lại số điện thoại.</p>
 		</div>
 	</section>
 
