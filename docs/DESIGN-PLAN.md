@@ -185,17 +185,17 @@ The logo and teal brand are unchanged. Tokens live in `assets/css/main.css` (§1
 
 ## 7. Screen specs (section order)
 
-**Home**
-1. Announcement bar (optional and dismissible). It carries a current notice such as *"Làm việc xuyên lễ 2/9"* or this month's offer.
-2. Hero: the H1 *"Làn da khỏe đẹp, điều trị chuẩn y khoa"*, a subtitle, **[Đặt lịch khám]** and [Kiểm tra da 1 phút], the 8 concern chips, and a portrait on the right (it sits above the text on mobile). A trust row underneath lists 4 icon facts.
-3. *Dịch vụ theo vấn đề da*: 7 category cards (image, name, number of services, price-from).
-4. *Vì sao chọn Quang Đăng*: 4 pillars, each linking to its About subpage (doctors, technology, medical process, facility).
-5. *Quy trình 5 bước*: Thăm khám, Soi da, Phác đồ riêng, Điều trị, Tái khám. This lowers first-visit anxiety.
-6. *Bác sĩ*: the doctor card(s), using real photos.
-7. *Kết quả thật*: before/after slider cards (real photos, with consent), plus a note on how results can vary.
-8. *Ưu đãi đang diễn ra*: up to 3 promotion cards with countdown badges.
-9. *Cẩm nang làm đẹp*: 1 featured post and 3 cards.
-10. Booking strip: a mini form (name, phone, concern) alongside the address, hours and a small map link.
+**Home** (each section answers a new question; see `template-parts/home/`)
+1. Announcement (optional, dismissible, quiet strip).
+2. Hero: H1 *"Làn da khỏe đẹp, điều trị chuẩn y khoa"*, one supporting line, **[Đặt lịch khám]** (desktop; on phones the action bar carries it) and *Tìm dịch vụ phù hợp*, and a photograph. On phones: copy first, then the photograph; the phone hero offers *Chọn vấn đề của bạn* (jumps to the directory) instead of a second booking button.
+3. **Concern directory**, *"Bạn cần hỗ trợ về vấn đề nào?"*: 8 labelled links (Mụn, Thâm, Nám, Sẹo, Xóa xăm, Triệt lông, Trẻ hóa, Filler / Botox), each a coloured tile with its own glyph. One row of 8 on desktop, 4 × 2 on phones. The one multicolour moment on the page.
+4. **Service feature**: one category in depth (cover, intro, its first three services with sessions and price-from). Default: the first category with ≥ 3 services; override with the `qd_home_feature_category` filter.
+5. Practitioner: real portrait, name, role, one factual line, link to the profile. Hidden without a doctor.
+6. Process: the 5 first-visit steps (the only numbered list: it is a real sequence). Vertical on phones, the one dark section.
+7. Results (before/after pairs): hidden until real, consented photos exist. Side-by-side, labelled; an optional comparison control is deferred.
+8. Guidance: one featured article plus rows.
+9. Offers: only when a promotion is running (sun badge, ink text).
+10. Appointment: one flat `--teal-bright` panel with the booking form; the action bar hides while it is on screen.
 
 **Service detail.** Breadcrumb, H1 with a one-line promise, then the **facts row** (Giá từ · Số buổi · Thời gian/buổi · Nghỉ dưỡng). In-page tabs follow (Tổng quan · Phù hợp · Quy trình · Bảng giá · Kết quả · Hỏi đáp), sticky under the header. The sections, in order:
 - Overview (editor content)

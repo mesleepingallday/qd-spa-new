@@ -418,3 +418,44 @@ function qd_concerns() {
 		)
 	);
 }
+
+/**
+ * The concern key (a key of qd_concerns()) that a service category or service belongs to, matched by
+ * URL prefix, or '' when it belongs to none. Used to tint pages and cards with the concern's colours.
+ *
+ * @param int|WP_Post|null $post Service or category.
+ */
+function qd_concern_for_post( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post || 'dich-vu' !== $post->post_type ) {
+		return '';
+	}
+	$path = trailingslashit( (string) wp_parse_url( get_permalink( $post ), PHP_URL_PATH ) );
+	foreach ( qd_concerns() as $key => $concern ) {
+		if ( 0 === strpos( $path, trailingslashit( (string) wp_parse_url( $concern['url'], PHP_URL_PATH ) ) ) ) {
+			return $key;
+		}
+	}
+	return '';
+}
+
+/**
+ * The service category featured on the home page, with its first three services.
+ * Default: the first category that has at least three services. Override with the
+ * `qd_home_feature_category` filter (return a category slug).
+ *
+ * @return array{category:WP_Post,services:WP_Post[]}|null
+ */
+function qd_home_feature() {
+	$slug = (string) apply_filters( 'qd_home_feature_category', '' );
+	foreach ( qd_service_categories() as $category ) {
+		$services = qd_service_children( $category->ID );
+		if ( $slug ? $category->post_name === $slug : count( $services ) >= 3 ) {
+			return array(
+				'category' => $category,
+				'services' => array_slice( $services, 0, 3 ),
+			);
+		}
+	}
+	return null;
+}

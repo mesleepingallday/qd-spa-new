@@ -1,7 +1,7 @@
 <?php
 /**
  * Home. Each section is a template part so it can be reordered or removed independently.
- * Order follows docs/DESIGN-PLAN.md §7: problem → trust → how → who → proof → offers → learn → book.
+ * Order: what you can get help with → what is offered → who → what happens → proof → learn → offers → book.
  *
  * @package QuangDang
  */
@@ -11,14 +11,14 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 
 foreach ( array(
-	'hero',        // H1, CTAs, concern shortcuts (onboarding entry), trust facts.
-	'categories',  // Services by skin problem + quiz tile.
-	'why',         // 4 pillars → About subpages.
-	'process',     // 5-step first visit.
-	'doctor',      // Lead doctor (real photo).
-	'results',     // Before/after (real photos, consented).
-	'promos',      // Active / upcoming promotions.
-	'articles',    // Latest beauty handbook posts.
+	'hero',      // H1, the next step, the photograph.
+	'concerns',  // The 8 skin concerns as labelled links (also the way into the quiz).
+	'feature',   // One service in depth: cover, introduction, first three services with price.
+	'doctor',    // Lead doctor (real photo).
+	'process',   // The first visit in 5 ordered steps.
+	'results',   // Before/after pairs (hidden until real, consented photos exist).
+	'articles',  // Latest beauty handbook posts: one feature + rows.
+	'promos'     // Active promotions (hidden when none are running).
 ) as $qd_section ) {
 	get_template_part( 'template-parts/home/' . $qd_section );
 }

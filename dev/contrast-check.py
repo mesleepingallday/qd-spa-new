@@ -86,6 +86,9 @@ def main():
         ("white on teal-deep", white, t["--teal-deep"], TEXT),
         ("teal-bright on teal-deep", t["--teal-bright"], t["--teal-deep"], TEXT),
         ("ink on sun (offer badge)", t["--ink"], t["--sun"], TEXT),
+        ("amber text on white (promo price, required mark)", t["--c-accent-600"], t["--paper"], TEXT),
+        ("amber text on its tint", t["--c-accent-600"], t["--c-accent-50"], TEXT),
+        ("white on teal-deep at 80% (process copy)", blend(white, t["--teal-deep"], 0.8), t["--teal-deep"], TEXT),
     ]
     for key in CONCERNS:
         c = concern.get(key)
@@ -96,6 +99,8 @@ def main():
             ("%s: concern-ink on its tint" % key, c["--concern-ink"], c["--concern-tint"], TEXT),
             ("%s: concern-ink on paper" % key, c["--concern-ink"], t["--paper"], TEXT),
             ("%s: ink (body text) on its tint" % key, t["--ink"], c["--concern-tint"], TEXT),
+            ("%s: muted text on its tint" % key, t["--muted"], c["--concern-tint"], TEXT),
+            ("%s: teal-hover link on its tint" % key, t["--teal-hover"], c["--concern-tint"], TEXT),
             ("%s: white glyph on tile" % key, white, c["--concern-tile"], GRAPHIC),
             ("%s: tile as outline on paper (selected state)" % key, c["--concern-tile"], t["--paper"], GRAPHIC),
         ]

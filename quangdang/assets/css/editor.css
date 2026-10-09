@@ -1,12 +1,13 @@
-/* Block editor: match the front-end article typography (.prose in main.css). */
+/* Block editor: match the front-end article typography (.prose in main.css). Colours and the font
+   come from the same theme.json presets as the front end. */
 .editor-styles-wrapper {
-	font-family: "Be Vietnam Pro", system-ui, sans-serif;
+	font-family: var(--wp--preset--font-family--sans, "Quang Dang Sans", system-ui, sans-serif);
 	font-size: 1.125rem;
 	line-height: 1.75;
-	color: #14292B;
+	color: var(--wp--preset--color--ink, #0E2A2F);
 }
 
 .editor-styles-wrapper h2 { font-size: 1.625rem; line-height: 1.35; }
 .editor-styles-wrapper h3 { font-size: 1.3125rem; line-height: 1.4; }
-.editor-styles-wrapper blockquote { padding: 16px 20px; border-left: 3px solid #7CD0CF; background: #FFFBF5; }
-.editor-styles-wrapper .editor-post-title { font-family: "Playfair Display", Georgia, serif; font-weight: 600; }
+.editor-styles-wrapper blockquote { padding: 16px 20px; border-left: 3px solid var(--wp--preset--color--teal-bright, #19C6BE); background: var(--wp--preset--color--mist, #F2F7F7); }
+.editor-styles-wrapper .editor-post-title { font-weight: 650; }

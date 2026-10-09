@@ -15,8 +15,8 @@
 	--c-brand-50: var(--wp--preset--color--brand-50, #F2F7F7);
 	--c-ivory-200: var(--wp--preset--color--ivory-200, #E2ECEC);
 	--c-ivory-50: var(--wp--preset--color--ivory-50, #F2F7F7);
-	--c-accent-600: var(--wp--preset--color--accent-600, #B4532A);
-	--c-accent-50: var(--wp--preset--color--accent-50, #FBEFE8);
+	--c-accent-600: var(--wp--preset--color--accent-600, #8A5A00);
+	--c-accent-50: var(--wp--preset--color--accent-50, #FFF6DA);
 	--c-ink: var(--wp--preset--color--ink, #0E2A2F);
 	--c-muted: var(--wp--preset--color--ink-muted, #4B6468);
 	--c-line: var(--wp--preset--color--line, #E2ECEC);
@@ -27,7 +27,7 @@
 
 	--f-body: var(--f-sans);
 	--f-display: var(--f-sans);
-	--f-logo: var(--wp--preset--font-family--display, "Playfair Display", Georgia, serif); /* the text stand-in for the logo only */
+	--f-logo: var(--f-sans); /* the text stand-in for the logo; the official logo is an uploaded image */
 
 	--r-sm: 10px;
 	--r-md: 14px;
@@ -38,7 +38,7 @@
 	--shadow-float: 0 18px 48px -16px rgba(10, 54, 57, 0.22), 0 2px 8px rgba(10, 54, 57, 0.06);
 	--ring: 0 0 0 3px rgba(124, 208, 207, 0.55);
 
-	--container: 1200px;
+	--container: 1240px;
 	--gutter: 16px;
 	--section-y: clamp(3.5rem, 2.5rem + 4vw, 5.5rem);
 	--header-h: 64px;
@@ -209,7 +209,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .section { padding-block: var(--section-y); }
 .section--tight { padding-block: calc(var(--section-y) * 0.6); }
 .section--flush-top { padding-top: 0; }
-.section--mint { background: var(--c-brand-50); }
+.section--mint,
+.section--mist { background: var(--mist); }
 .section--ivory { background: var(--c-ivory-50); }
 .section--dark { background: var(--c-brand-900); color: rgba(255, 255, 255, 0.82); }
 .section--dark h2, .section--dark h3 { color: #fff; }
@@ -459,7 +460,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 .badge--accent { background: var(--c-accent-50); color: var(--c-accent-600); }
-.badge--promo { background: var(--c-accent-600); color: #fff; }
+.badge--promo { background: var(--sun); color: var(--ink); }
 .badge--neutral { background: #EEF3F3; color: var(--c-muted); }
 
 /* Fixed-ratio image frame (CLS-safe) */
@@ -467,7 +468,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	position: relative;
 	display: block;
 	overflow: hidden;
-	background: linear-gradient(135deg, var(--c-brand-50), var(--c-ivory-50));
+	background: var(--mist);
 }
 
 .frame--4-3 { aspect-ratio: 4 / 3; }
@@ -622,6 +623,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .steps__item {
 	position: relative;
+	align-content: start; /* a taller sibling must not stretch this item's rows */
 	display: grid;
 	grid-template-columns: 48px minmax(0, 1fr);
 	column-gap: 16px;
@@ -842,17 +844,22 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	display: grid;
 	gap: 28px;
 	padding: 28px 20px;
-	border-radius: var(--r-xl);
-	background: var(--c-brand-900);
-	color: rgba(255, 255, 255, 0.82);
+	border-radius: var(--r-feature);
+	background: var(--teal-bright);
+	color: var(--ink);
 }
 
-.booking-strip h2 { color: #fff; }
-.booking-strip .section-lead { color: rgba(255, 255, 255, 0.78); }
+/* Grid children may shrink below their content width, or one long line widens the page on 320px phones. */
+.booking-strip > * { min-width: 0; }
+.booking-strip__contacts { overflow-wrap: anywhere; }
+.booking-strip h2 { color: var(--ink); }
+.booking-strip .section-lead { color: var(--ink); }
 .booking-strip__contacts { display: grid; gap: 12px; margin-top: 20px; font-size: 0.9375rem; }
-.booking-strip__contacts a { color: #fff; font-weight: 600; text-decoration: none; }
+.booking-strip__contacts a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .booking-strip__contacts li { list-style: none; display: flex; gap: 10px; align-items: flex-start; }
-.booking-strip__contacts .icon { color: var(--c-brand-300); margin-top: 2px; }
+.booking-strip__contacts .icon { color: var(--ink); margin-top: 2px; }
+.booking-strip :focus-visible { outline-color: var(--ink); }
+.booking-strip form :focus-visible { outline-color: var(--teal); }
 .booking-strip form { display: grid; gap: 12px; padding: 20px; border-radius: var(--r-lg); background: #fff; color: var(--c-ink); }
 .booking-strip form .btn { margin-top: 4px; }
 .booking-strip__note { font-size: 0.8125rem; color: var(--c-muted); text-align: center; }
@@ -864,6 +871,42 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 @media (min-width: 1024px) {
 	.booking-strip { grid-template-columns: 1fr 440px; gap: 56px; align-items: center; padding: 56px; }
+}
+
+/* Concern tile: a coloured square with the concern's glyph and its name underneath.
+   Colours come from the [data-concern] tokens at the top of this file. */
+.concern-tile {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	padding: 4px 2px 8px;
+	border-radius: var(--r-card);
+	color: var(--ink);
+	text-align: center;
+	text-decoration: none;
+}
+
+.concern-tile__icon {
+	display: grid;
+	place-items: center;
+	width: 100%;
+	max-width: 88px;
+	aspect-ratio: 1;
+	border-radius: 22%;
+	background: var(--concern-tile);
+	color: #fff;
+	box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.4);
+	transition: transform var(--t-press) var(--ease);
+}
+
+.concern-tile__icon svg { width: 54%; height: 54%; }
+.concern-tile__label { font-size: 0.9375rem; font-weight: 600; line-height: 1.25; text-wrap: balance; }
+.concern-tile:hover .concern-tile__label { text-decoration: underline; text-underline-offset: 3px; }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+	.concern-tile:hover .concern-tile__icon { transform: translateY(-2px); }
+	.concern-tile:active .concern-tile__icon { transform: scale(0.96); }
 }
 
 /* Notice (disclaimers, tips) */
@@ -987,6 +1030,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 @media (max-width: 359.98px) {
 	.site-header .brand__tag { display: none; }
+	.site-header .brand__name { font-size: 1.0625rem; letter-spacing: 0.03em; }
+	.site-header__menu-btn { gap: 6px; padding: 0 10px 0 8px; }
 }
 
 .site-header__hotline { display: none; }
@@ -1046,7 +1091,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 .brand__text { display: grid; line-height: 1.1; }
-.brand__name { font-family: var(--f-logo); font-weight: 600; font-size: 1.1875rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.brand__name { font-family: var(--f-logo); font-weight: 700; font-size: 1.1875rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .brand__tag { font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-muted); margin-top: 3px; }
 
 /* Primary nav (desktop). A parent page is a real link plus a separate disclosure button. */

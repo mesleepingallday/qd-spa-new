@@ -1,44 +1,43 @@
 <?php
 /**
- * Lead doctor + the rest of the team as a compact row. Uses the "bac-si" posts.
+ * Practitioner: one real portrait, name, role, a factual line and a link to the profile.
+ * Content comes from the "bac-si" posts; nothing here is invented, and the section hides without a doctor.
  *
  * @package QuangDang
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$qd_doctors = get_posts(
+$qd_lead = get_posts(
 	array(
 		'post_type'      => 'bac-si',
-		'posts_per_page' => 4,
+		'posts_per_page' => 1,
 		'orderby'        => 'menu_order',
 		'order'          => 'ASC',
 	)
 );
-if ( ! $qd_doctors ) {
+if ( ! $qd_lead ) {
 	return;
 }
-$qd_lead      = array_shift( $qd_doctors );
+$qd_lead      = $qd_lead[0];
 $qd_title     = (string) get_post_meta( $qd_lead->ID, '_qd_doctor_title', true );
 $qd_role      = (string) get_post_meta( $qd_lead->ID, '_qd_doctor_role', true );
-$qd_years     = (int) get_post_meta( $qd_lead->ID, '_qd_doctor_years', true );
 $qd_education = qd_lines( get_post_meta( $qd_lead->ID, '_qd_doctor_education', true ) );
 ?>
-<section class="section section--mint" aria-labelledby="home-doctor">
+<section class="section" aria-labelledby="home-doctor">
 	<div class="container doctor-feature">
 		<div class="doctor-feature__photo">
 			<?php echo qd_thumb( $qd_lead, 'qd-portrait', '4-5' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 		</div>
 		<div class="doctor-feature__body">
-			<p class="doctor-feature__role"><?php echo esc_html( $qd_role ? $qd_role : 'Bác sĩ phụ trách chuyên môn' ); ?></p>
-			<h2 class="section-title" id="home-doctor"><?php echo esc_html( get_the_title( $qd_lead ) ); ?></h2>
-			<p class="doctor-feature__title">
-				<?php echo esc_html( $qd_title ); ?>
-				<?php if ( $qd_years ) : ?>
-					<span class="badge"><?php echo (int) $qd_years; ?>+ năm kinh nghiệm</span>
-				<?php endif; ?>
-			</p>
-			<p class="lead"><?php echo esc_html( get_the_excerpt( $qd_lead ) ); ?></p>
+			<h2 class="section-title" id="home-doctor">Bác sĩ phụ trách chuyên môn</h2>
+			<p class="doctor-feature__name"><?php echo esc_html( get_the_title( $qd_lead ) ); ?></p>
+			<?php if ( $qd_role || $qd_title ) : ?>
+				<p class="doctor-feature__role"><?php echo esc_html( implode( ' · ', array_filter( array( $qd_role, $qd_title ) ) ) ); ?></p>
+			<?php endif; ?>
+			<?php if ( has_excerpt( $qd_lead ) ) : ?>
+				<p class="lead"><?php echo esc_html( get_the_excerpt( $qd_lead ) ); ?></p>
+			<?php endif; ?>
 			<?php if ( $qd_education ) : ?>
 				<ul class="checklist">
 					<?php foreach ( $qd_education as $qd_line ) : ?>
@@ -46,22 +45,7 @@ $qd_education = qd_lines( get_post_meta( $qd_lead->ID, '_qd_doctor_education', t
 					<?php endforeach; ?>
 				</ul>
 			<?php endif; ?>
-			<div class="btn-row">
-				<?php
-				echo qd_button( 'Đặt lịch với bác sĩ', qd_booking_url(), array( 'icon' => 'calendar-days' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
-				echo qd_button( 'Đội ngũ bác sĩ', home_url( '/gioi-thieu/doi-ngu-bac-si/' ), array( 'variant' => 'ghost', 'icon_end' => 'arrow-right' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
-				?>
-			</div>
-			<?php if ( $qd_doctors ) : ?>
-				<ul class="doctor-feature__team">
-					<?php foreach ( $qd_doctors as $qd_doc ) : ?>
-						<li>
-							<span class="avatar"><?php echo get_the_post_thumbnail( $qd_doc, 'thumbnail', array( 'alt' => '' ) ); ?></span>
-							<span><strong><?php echo esc_html( get_the_title( $qd_doc ) ); ?></strong><br><?php echo esc_html( (string) get_post_meta( $qd_doc->ID, '_qd_doctor_title', true ) ); ?></span>
-						</li>
-					<?php endforeach; ?>
-				</ul>
-			<?php endif; ?>
+			<a class="link-more doctor-feature__more" href="<?php echo esc_url( get_permalink( $qd_lead ) ); ?>">Xem hồ sơ bác sĩ<?php qd_the_icon( 'arrow-right', array( 'size' => 16 ) ); ?></a>
 		</div>
 	</div>
 </section>
