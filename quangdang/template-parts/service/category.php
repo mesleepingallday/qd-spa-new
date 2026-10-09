@@ -18,6 +18,7 @@ $qd_faq      = qd_pipe_rows( (string) get_post_meta( $qd_id, '_qd_faq', true ), 
 $qd_articles = qd_service_related_posts( $qd_id, 3 );
 $qd_has_body = '' !== trim( wp_strip_all_tags( get_the_content() ) );
 $qd_lower    = mb_strtolower( get_the_title() );
+$qd_concern  = qd_concern_for_post( $qd_id );
 $qd_about    = preg_replace( '/^điều trị\s+/u', '', $qd_lower ); // "Điều trị mụn" → "mụn"; "Xóa xăm" stays.
 
 qd_schema_add(
@@ -38,19 +39,22 @@ $qd_fact_items = array_filter(
 	)
 );
 ?>
-<section class="service-hero service-hero--category">
+<section class="service-hero service-hero--category"<?php echo $qd_concern ? ' data-concern="' . esc_attr( $qd_concern ) . '"' : ''; ?>>
 	<div class="container">
 		<?php qd_breadcrumbs(); ?>
 		<div class="service-hero__grid">
 			<div class="service-hero__text">
-				<h1 class="page-title"><?php the_title(); ?></h1>
+				<div class="service-hero__title-row">
+					<?php echo qd_concern_mark( $qd_concern, array( 'size' => 'lg' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+					<h1 class="page-title"><?php the_title(); ?></h1>
+				</div>
 				<?php if ( has_excerpt() ) : ?>
 					<p class="lead"><?php echo esc_html( get_the_excerpt() ); ?></p>
 				<?php endif; ?>
 				<dl class="facts facts--compact">
 					<?php foreach ( $qd_fact_items as list( $qd_icon, $qd_label, $qd_value ) ) : ?>
 						<div class="facts__item">
-							<span class="icon-tile icon-tile--sm"><?php qd_the_icon( $qd_icon, array( 'size' => 20 ) ); ?></span>
+							<span class="icon-tile icon-tile--sm"><?php qd_the_icon( $qd_icon, array( 'size' => 22, 'weight' => 'duotone' ) ); ?></span>
 							<div><dt><?php echo esc_html( $qd_label ); ?></dt><dd><?php echo is_array( $qd_value ) ? esc_html( $qd_value[0] ) . ( $qd_value[1] ? '<small>' . esc_html( $qd_value[1] ) . '</small>' : '' ) : esc_html( $qd_value ); ?></dd></div>
 						</div>
 					<?php endforeach; ?>
@@ -82,7 +86,7 @@ $qd_fact_items = array_filter(
 				)
 			);
 			?>
-			<div class="grid grid--3 scroller">
+			<div class="grid grid--3">
 				<?php foreach ( $qd_services as $qd_service ) : ?>
 					<?php get_template_part( 'template-parts/components/service-card', null, array( 'post' => $qd_service ) ); ?>
 				<?php endforeach; ?>
@@ -132,7 +136,7 @@ $qd_fact_items = array_filter(
 	<section class="section<?php echo $qd_faq ? ' section--flush-top' : ''; ?>" aria-labelledby="related-articles">
 		<div class="container">
 			<?php qd_section_head( array( 'id' => 'related-articles', 'title' => 'Bài viết về ' . $qd_about ) ); ?>
-			<div class="grid grid--3 scroller">
+			<div class="grid grid--3">
 				<?php foreach ( $qd_articles as $qd_article ) : ?>
 					<?php get_template_part( 'template-parts/components/post-card', null, array( 'post' => $qd_article ) ); ?>
 				<?php endforeach; ?>

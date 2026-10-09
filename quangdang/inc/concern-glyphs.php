@@ -49,3 +49,26 @@ function qd_concern_glyph( $key, $args = array() ) {
 		$data[ $key ] // Static markup defined above.
 	);
 }
+
+/**
+ * A concern's coloured tile with its glyph, for places that already show the concern's name in text
+ * (page heroes, cards). Decorative: never the only carrier of the meaning.
+ *
+ * @param string $key  Concern key, or '' (returns '').
+ * @param array  $args size: sm|md|lg (default md), class.
+ */
+function qd_concern_mark( $key, $args = array() ) {
+	$concerns = function_exists( 'qd_concerns' ) ? qd_concerns() : array();
+	if ( ! $key || ! isset( $concerns[ $key ] ) ) {
+		return '';
+	}
+	$size = in_array( $args['size'] ?? 'md', array( 'sm', 'md', 'lg' ), true ) ? $args['size'] : 'md';
+
+	return sprintf(
+		'<span class="concern-mark concern-mark--%1$s %2$s" data-concern="%3$s" aria-hidden="true">%4$s</span>',
+		esc_attr( $size ),
+		esc_attr( $args['class'] ?? '' ),
+		esc_attr( $key ),
+		qd_concern_glyph( $concerns[ $key ]['glyph'], array( 'size' => 32 ) )
+	);
+}

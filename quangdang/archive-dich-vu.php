@@ -80,6 +80,7 @@ if ( $qd_medical_services ) {
 							$qd_children = qd_service_children( $qd_cat->ID );
 							?>
 							<article class="card hub-cat">
+								<?php echo qd_concern_mark( qd_concern_for_post( $qd_cat ), array( 'size' => 'sm', 'class' => 'hub-cat__mark' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 								<a class="hub-cat__media" href="<?php echo esc_url( get_permalink( $qd_cat ) ); ?>" tabindex="-1" aria-hidden="true"><?php echo qd_thumb( $qd_cat, 'qd-card', '4-3' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></a>
 								<div class="card__body">
 									<h4 class="card__title"><a href="<?php echo esc_url( get_permalink( $qd_cat ) ); ?>"><?php echo esc_html( get_the_title( $qd_cat ) ); ?></a></h4>
@@ -117,7 +118,7 @@ if ( $qd_medical_services ) {
 						)
 					);
 					?>
-					<div class="grid grid--3 scroller">
+					<div class="grid grid--3">
 						<?php foreach ( $qd_care_services as $qd_service ) : ?>
 							<?php get_template_part( 'template-parts/components/service-card', null, array( 'post' => $qd_service, 'heading' => 'h4' ) ); ?>
 						<?php endforeach; ?>
@@ -146,7 +147,7 @@ if ( $qd_medical_services ) {
 				)
 			);
 			?>
-			<div class="grid grid--3 scroller">
+			<div class="grid grid--3">
 				<?php foreach ( $qd_medical_services as $qd_service ) : ?>
 					<?php get_template_part( 'template-parts/components/service-card', null, array( 'post' => $qd_service ) ); ?>
 				<?php endforeach; ?>

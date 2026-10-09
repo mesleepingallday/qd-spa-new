@@ -330,8 +330,8 @@
 	.article-toc {
 		display: block;
 		position: sticky;
-		top: calc(var(--header-h) + 24px);
-		max-height: calc(100vh - var(--header-h) - 48px);
+		top: calc(var(--header-h) + var(--admin-bar-h) + 24px);
+		max-height: calc(100vh - var(--header-h) - var(--admin-bar-h) - 48px);
 		overflow-y: auto;
 		overscroll-behavior: contain;
 		scrollbar-width: thin;

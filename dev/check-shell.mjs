@@ -79,7 +79,35 @@ const check = (ok, name, extra = '') => {
 	await ctx.close();
 }
 
-/* 5. No horizontal overflow on the shell at common widths */
+/* 5. Logged-in admin bar: sticky header and the service index sit below it (local dev login admin/admin) */
+{
+	const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+	const page = await ctx.newPage();
+	await page.goto(base + '/wp-login.php');
+	await page.fill('#user_login', 'admin');
+	await page.fill('#user_pass', 'admin');
+	await page.click('#wp-submit');
+	await page.goto(base + '/dich-vu/dieu-tri-nam/dieu-tri-nam-chuyen-sau/');
+	if (await page.locator('#wpadminbar').count()) {
+		const bar = await page.locator('#wpadminbar').evaluate((el) => el.getBoundingClientRect().height);
+		await page.evaluate(() => window.scrollTo(0, 1200));
+		await page.waitForTimeout(200);
+		const headerTop = await page.locator('.site-header').evaluate((el) => el.getBoundingClientRect().top);
+		check(Math.abs(headerTop - bar) < 1, 'admin bar: sticky header sits directly below it', `(bar ${bar}px, header top ${headerTop}px)`);
+		const tabsTop = await page.locator('.section-tabs').evaluate((el) => el.getBoundingClientRect().top);
+		const headerH = await page.locator('.site-header').evaluate((el) => el.getBoundingClientRect().height);
+		check(Math.abs(tabsTop - (bar + headerH)) < 2, 'admin bar: service index sticks below the header', `(index top ${tabsTop}px)`);
+		await page.goto(base + '/dich-vu/dieu-tri-nam/dieu-tri-nam-chuyen-sau/#bang-gia');
+		await page.waitForTimeout(400);
+		const target = await page.locator('#bang-gia h2').evaluate((el) => el.getBoundingClientRect().top);
+		check(target > bar + headerH, 'admin bar: a linked section heading is not hidden under the sticky bars', `(heading top ${Math.round(target)}px)`);
+	} else {
+		console.log('skip  admin bar checks (could not log in; local dev only)');
+	}
+	await ctx.close();
+}
+
+/* 6. No horizontal overflow on the shell at common widths */
 for (const w of [320, 375, 390, 768, 1024, 1440]) {
 	const ctx = await browser.newContext({ viewport: { width: w, height: 800 } });
 	const page = await ctx.newPage();

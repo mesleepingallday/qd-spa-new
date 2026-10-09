@@ -25,6 +25,9 @@ Spec: the "Quang Đăng: a bright, confident clinic experience" brief (9 Oct 202
 - **One font, really.** theme.json's global styles, the editor stylesheet and the logo stand-in all use the one sans now; Be Vietnam Pro and Playfair Display are removed (14 files). Leaving the logo stand-in in Playfair alone cost 28 KB on every page. The official logo is an uploaded image and is unaffected.
 - **Home composition.** The old trust row, the four "why" pillars and the 8-tile category grid with the quiz tile are gone: each repeated the menu or made claims the clinic has not verified. The hero's floating doctor chip is gone too (the practitioner has her own section). Results and offers stack on phones instead of scrolling sideways. The results comparison control is deferred: the section only renders with real consented photos.
 - **Links never take a concern hue** (red for Mụn would read as an error): concern colour is for tiles and quiet panel tints only; links on tints are `--teal-hover` (≥ 5.5:1 on every tint, in the gate).
+- **Admin bar.** Sticky things (header, service index, sticky aside) sit below the WordPress admin bar through `--admin-bar-h` (WP's own variable, 0 for visitors and under 601px where the bar scrolls away); `dev/check-shell.mjs` logs in locally to prove it. Before this, logged-in editors would have had the sticky header hidden under the bar.
+- **Concern identity on service pages.** `qd_concern_for_post()` maps a category or service to its concern by URL prefix; the hero takes the concern's quiet tint and shows its tile (beside the H1 on categories, beside the category link on services). Booking buttons and links stay teal.
+- **Price table** is a real `<table>` with a caption, column headers and row headers (it was `div`s with ARIA roles).
 - **No `@layer`, no native nesting.** In a browser without them the whole block is skipped; file order plus low specificity gives the control we need.
 - **Cache safety.** CSS/JS URLs carry `QD_VERSION` + each file's mtime (`qd_asset_ver()`), so a theme upload cannot mix old and new files. Bump `QD_VERSION` at release.
 
@@ -58,5 +61,6 @@ Budgets: CSS ≤ 25 KB, fonts ≤ 100 KB, hero image ≤ 180 KB phone. Before th
 | 0 Foundation: tokens v2, font, icons, glyphs, contrast gate, docs | done (see commit) |
 | 1 Shell: slim header, link + disclosure nav, drawer isolation, action bar states, one font applied, shared type/button/chip/focus | done |
 | 2 Home: hero, concern directory, service feature, practitioner, process, guidance, offers, appointment panel | done; **owner review of screenshots here** |
-| 3 Services · 4 Editorial · 5 Booking/quiz/contact · 6 About/doctors/training/404 | pending |
+| 3 Services: concern tint + tile on category/detail heroes and hub cards, real price table, admin-bar offset contract, no sideways scrolling | done |
+| 4 Editorial · 5 Booking/quiz/contact · 6 About/doctors/training/404 | pending |
 | 7 Cleanup: drop `--c-*` aliases, Be Vietnam Pro + Playfair files and unused CSS; rewrite `docs/DESIGN-PLAN.md` §5–7 to the final composition | pending |

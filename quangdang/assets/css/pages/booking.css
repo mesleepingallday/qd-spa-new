@@ -6,7 +6,7 @@
 
 @media (min-width: 1024px) {
 	.bk__layout { grid-template-columns: minmax(0, 1fr) 360px; gap: 40px; align-items: start; }
-	.bk-summary { position: sticky; top: calc(var(--header-h) + 24px); }
+	.bk-summary { position: sticky; top: calc(var(--header-h) + var(--admin-bar-h) + 24px); }
 }
 
 .bk__steps { display: grid; gap: 16px; }

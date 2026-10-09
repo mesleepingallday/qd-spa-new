@@ -44,6 +44,8 @@
 	--header-h: 64px;
 	--actionbar-h: 0px;
 	--ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+	/* Sticky things sit below the WordPress admin bar when it shows (WP sets this var; 0 for visitors). */
+	--admin-bar-h: var(--wp-admin--admin-bar--height, 0px);
 }
 
 /* Tokens v2 (redesign). The --c-brand-*, --c-ivory-* and --c-accent-* names above stay as aliases
@@ -100,6 +102,11 @@
 [data-concern="tre-hoa"]      { --concern-tile: #219E62; --concern-ink: #19794B; --concern-tint: #E9F5EF; }
 [data-concern="filler-botox"] { --concern-tile: #D755D7; --concern-ink: #B22AB2; --concern-tint: #FBEEFB; }
 
+/* Under 601px WordPress lets the admin bar scroll away, so nothing sticky needs to clear it. */
+@media (max-width: 600px) {
+	:root { --admin-bar-h: 0px; }
+}
+
 @media (min-width: 640px) {
 	:root { --gutter: 24px; }
 }
@@ -119,7 +126,7 @@
 
 html {
 	-webkit-text-size-adjust: 100%;
-	scroll-padding-top: calc(var(--header-h) + 16px);
+	scroll-padding-top: calc(var(--header-h) + var(--admin-bar-h) + 16px);
 }
 
 body {
@@ -254,7 +261,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 @media (min-width: 1024px) {
 	.with-aside { grid-template-columns: minmax(0, 1fr) 360px; gap: 56px; align-items: start; }
-	.with-aside__aside { position: sticky; top: calc(var(--header-h) + 24px); }
+	.with-aside__aside { position: sticky; top: calc(var(--header-h) + var(--admin-bar-h) + 24px); }
 }
 
 /* 4. Type ----------------------------------------------------------------- */
@@ -341,7 +348,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 .prose > * + * { margin-top: 1.1em; }
-.prose h2 { font-size: 1.625rem; margin-top: 2em; line-height: 1.35; scroll-margin-top: calc(var(--header-h) + 72px); }
+.prose h2 { font-size: 1.625rem; margin-top: 2em; line-height: 1.35; scroll-margin-top: calc(var(--header-h) + var(--admin-bar-h) + 72px); }
 .prose h3 { font-size: 1.3125rem; margin-top: 1.6em; line-height: 1.4; }
 .prose ul, .prose ol { padding-left: 1.4em; }
 .prose li + li { margin-top: 0.4em; }
@@ -696,6 +703,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .facts dd small { font-weight: 500; color: var(--c-muted); }
 
 @media (max-width: 639.98px) {
+	.facts dd small { display: block; } /* "/buổi" under the price instead of breaking inside the word */
 	.facts { gap: 14px 10px; padding: 14px; }
 	.facts__item { gap: 10px; }
 	.facts .icon-tile { width: 32px; height: 32px; border-radius: 10px; }
@@ -909,6 +917,22 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	.concern-tile:active .concern-tile__icon { transform: scale(0.96); }
 }
 
+/* Concern mark: the tile + glyph on its own, for heroes and cards that already name the concern in text. */
+.concern-mark {
+	display: inline-grid;
+	place-items: center;
+	flex-shrink: 0;
+	border-radius: 22%;
+	background: var(--concern-tile);
+	color: #fff;
+	box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.4);
+}
+
+.concern-mark svg { width: 58%; height: 58%; }
+.concern-mark--sm { width: 28px; height: 28px; }
+.concern-mark--md { width: 44px; height: 44px; }
+.concern-mark--lg { width: 64px; height: 64px; }
+
 /* Notice (disclaimers, tips) */
 .notice {
 	display: flex;
@@ -967,7 +991,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* Header: slim and solid. The blur is an enhancement over an already near-opaque surface. */
 .site-header {
 	position: sticky;
-	top: 0;
+	top: var(--admin-bar-h);
 	z-index: 50;
 	background: var(--paper);
 	border-bottom: 1px solid var(--c-line);
