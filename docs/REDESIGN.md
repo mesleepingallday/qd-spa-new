@@ -78,7 +78,7 @@ Budgets: CSS ≤ 25 KB, fonts ≤ 100 KB, hero image ≤ 180 KB phone. Before th
 
 ## Rollback
 
-The pre-redesign theme is commit `c481265`. `git archive --format=zip --prefix=quangdang/ c481265 quangdang -o dist/quangdang-before-redesign.zip` rebuilds an installable copy; upload it over the new theme in Appearance → Themes. No database change is involved (the `lich-hen` posts and settings are untouched), so rolling back is just a theme swap.
+The pre-redesign theme is commit `c481265`. `git archive --format=zip --prefix=quangdang/ c481265:quangdang -o dist/quangdang-before-redesign.zip` rebuilds an installable copy; upload it over the new theme in Appearance → Themes. No database change is involved (the `lich-hen` posts and settings are untouched), so rolling back is just a theme swap.
 
 ## Still the owner's to do before launch
 
