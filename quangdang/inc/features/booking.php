@@ -122,7 +122,7 @@ function qd_booking_submit( $in ) {
 	if ( ! empty( $in['website'] ) ) {
 		return array(
 			'ok'      => true,
-			'message' => 'Đã nhận lịch hẹn.',
+			'message' => 'Đã nhận yêu cầu đặt lịch.',
 		);
 	}
 
@@ -231,7 +231,7 @@ function qd_booking_submit( $in ) {
 	if ( is_wp_error( $id ) || ! $id ) {
 		return array(
 			'ok'     => false,
-			'errors' => array( 'form' => 'Rất tiếc, hệ thống chưa lưu được lịch hẹn. Bạn vui lòng gọi hotline ' . qd_clinic( 'hotline' ) . ' giúp phòng khám nhé.' ),
+			'errors' => array( 'form' => 'Rất tiếc, hệ thống chưa lưu được yêu cầu đặt lịch. Bạn vui lòng gọi hotline ' . qd_clinic( 'hotline' ) . ' giúp phòng khám nhé.' ),
 		);
 	}
 
@@ -240,7 +240,7 @@ function qd_booking_submit( $in ) {
 	return array(
 		'ok'      => true,
 		'id'      => (int) $id,
-		'message' => 'Đã nhận lịch hẹn. Phòng khám sẽ gọi xác nhận trong 15 phút (giờ làm việc).',
+		'message' => 'Đã nhận yêu cầu đặt lịch. Phòng khám sẽ gọi xác nhận trong 15 phút (giờ làm việc).',
 	);
 }
 

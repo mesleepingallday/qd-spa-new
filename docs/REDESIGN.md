@@ -28,6 +28,9 @@ Spec: the "Quang Đăng: a bright, confident clinic experience" brief (9 Oct 202
 - **Admin bar.** Sticky things (header, service index, sticky aside) sit below the WordPress admin bar through `--admin-bar-h` (WP's own variable, 0 for visitors and under 601px where the bar scrolls away); `dev/check-shell.mjs` logs in locally to prove it. Before this, logged-in editors would have had the sticky header hidden under the bar.
 - **Concern identity on service pages.** `qd_concern_for_post()` maps a category or service to its concern by URL prefix; the hero takes the concern's quiet tint and shows its tile (beside the H1 on categories, beside the category link on services). Booking buttons and links stay teal.
 - **Price table** is a real `<table>` with a caption, column headers and row headers (it was `div`s with ARIA roles).
+- **Booking is a request, and says so.** Success reads "Đã nhận yêu cầu đặt lịch" (server, JS and page), the summary is "Yêu cầu của bạn", the button "Gửi yêu cầu đặt lịch", the slot group "Buổi bạn muốn đến", the calendar file "Lịch hẹn dự kiến". The existing form logic already had specific linked errors, a duplicate-submit guard, retained entries on failure and a no-JS path; `dev/check-forms.mjs` proves each against the local backend (it clears the 5-per-10-minutes limiter first and refuses non-local URLs).
+- **Focus rings were failing.** The quiz and booking options used the aqua `--c-brand-300` ring (1.9:1 on white). They are now teal (5.1:1). Selected options now carry a check mark (chips, slots) or a heavier outline plus tick (quiz tiles): never colour alone.
+- **Quiz** options are the shared concern tiles on real checkboxes; the result is titled "Dịch vụ bạn có thể quan tâm" and still states that a doctor confirms the plan.
 - **No `@layer`, no native nesting.** In a browser without them the whole block is skipped; file order plus low specificity gives the control we need.
 - **Cache safety.** CSS/JS URLs carry `QD_VERSION` + each file's mtime (`qd_asset_ver()`), so a theme upload cannot mix old and new files. Bump `QD_VERSION` at release.
 
@@ -40,6 +43,7 @@ bash dev/setup.sh 8081 && bash dev/serve.sh 8081 &   # local site
 node dev/screenshot.mjs --base http://localhost:8081 --full / /dich-vu/ ...   # 375 and 1440, then 320/390/768/1024
 node dev/check-shell.mjs                             # no-JS nav, disclosure keys, drawer focus/inert, action bar states, overflow
 node dev/perf-check.mjs / /dich-vu/ /tin-tuc/        # lab LCP/CLS + gzip CSS/JS + fonts, 4x CPU, slow 4G, phone
+node dev/check-forms.mjs                             # booking validation/success/failure/double submit/no-JS + quiz run (local only)
 ```
 
 Also: longest Vietnamese titles in H1 and navigation; JS off; blur off; font failure; reduced motion; forced colours; logged-in admin bar. Budgets: home CSS ≤ 25 KB gzip, initial fonts ≤ 100 KB, new JS ≤ 3 KB gzip, hero image ≤ 180 KB phone / ≤ 300 KB desktop. **Outstanding for the owner:** one real Android Chrome journey and one Zalo in-app journey on the staging URL (an older embedded engine cannot be emulated here).
@@ -62,5 +66,7 @@ Budgets: CSS ≤ 25 KB, fonts ≤ 100 KB, hero image ≤ 180 KB phone. Before th
 | 1 Shell: slim header, link + disclosure nav, drawer isolation, action bar states, one font applied, shared type/button/chip/focus | done |
 | 2 Home: hero, concern directory, service feature, practitioner, process, guidance, offers, appointment panel | done; **owner review of screenshots here** |
 | 3 Services: concern tint + tile on category/detail heroes and hub cards, real price table, admin-bar offset contract, no sideways scrolling | done |
-| 4 Editorial · 5 Booking/quiz/contact · 6 About/doctors/training/404 | pending |
+| 4 Editorial: topic chips wrap, concern tiles on empty search and 404 | done |
+| 5 Booking, quiz, contact: request wording, selected = outline + check, teal focus rings, quiz on concern tiles | done; end-to-end checks in `dev/check-forms.mjs` |
+| 6 About/doctors/training/404 | pending |
 | 7 Cleanup: drop `--c-*` aliases, Be Vietnam Pro + Playfair files and unused CSS; rewrite `docs/DESIGN-PLAN.md` §5–7 to the final composition | pending |

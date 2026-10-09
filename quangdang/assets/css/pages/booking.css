@@ -111,9 +111,19 @@
 	transition: border-color 0.15s, background-color 0.15s, color 0.15s;
 }
 
-.bk-opt:hover .bk-opt__box { border-color: var(--c-brand-300); background: var(--c-brand-50); }
-.bk-opt input:checked + .bk-opt__box { border-color: var(--c-brand-600); background: var(--c-brand-600); color: #fff; }
-.bk-opt input:focus-visible + .bk-opt__box { outline: 3px solid var(--c-brand-300); outline-offset: 2px; }
+.bk-opt:hover .bk-opt__box { border-color: var(--teal); background: var(--mist); }
+.bk-opt input:checked + .bk-opt__box { border-color: var(--teal); background: var(--teal); color: #fff; }
+.bk-opt:not(.bk-opt--wide) input:checked + .bk-opt__box::before {
+	content: "";
+	flex-shrink: 0;
+	width: 16px;
+	height: 16px;
+	margin-right: 8px;
+	background: currentColor;
+	-webkit-mask: var(--icon-check) center / contain no-repeat;
+	mask: var(--icon-check) center / contain no-repeat;
+}
+.bk-opt input:focus-visible + .bk-opt__box { outline: 3px solid var(--teal); outline-offset: 3px; }
 .bk-opt input:disabled { cursor: not-allowed; }
 .bk-opt input:disabled + .bk-opt__box { opacity: 0.45; background: #F4F7F7; text-decoration: line-through; }
 .bk-opt.is-off:hover .bk-opt__box { border-color: var(--c-line-strong); background: #F4F7F7; }
@@ -137,7 +147,7 @@
 .bk-opt--wide input:checked + .bk-opt__box small { color: var(--c-muted); }
 
 .bk-group { margin-top: 22px; }
-.bk-group__title { margin-bottom: 10px; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-muted); }
+.bk-group__title { margin-bottom: 10px; font-size: 1rem; font-weight: 600; color: var(--muted); }
 
 /* Day + slot chips */
 .bk-label { margin-bottom: 8px; font-weight: 600; }

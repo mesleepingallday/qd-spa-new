@@ -327,8 +327,7 @@
 		const articlesSource = document.querySelector(`[data-articles="${top.category}"]`);
 
 		resultEl.replaceChildren(
-			el('p', { class: 'quiz-result__kicker' }, 'Gợi ý dành cho bạn'),
-			el('h2', { class: 'quiz-result__title', id: 'quiz-result-title', tabindex: '-1' }, recs.length > 1 ? `${recs.length} liệu trình phù hợp với bạn` : 'Liệu trình phù hợp với bạn'),
+			el('h2', { class: 'quiz-result__title', id: 'quiz-result-title', tabindex: '-1' }, recs.length > 1 ? `${recs.length} dịch vụ bạn có thể quan tâm` : 'Dịch vụ bạn có thể quan tâm'),
 			el('p', { class: 'quiz-result__summary' }, 'Dựa trên lựa chọn của bạn: ', el('strong', null, summary.join(' · '))),
 			el('ol', { class: 'quiz-recs' }, recs.map((r, i) => card(r, a, i === 0))),
 			el(
