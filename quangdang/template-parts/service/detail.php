@@ -15,6 +15,7 @@ defined( 'ABSPATH' ) || exit;
 $qd_id       = get_the_ID();
 $qd_facts    = qd_service_facts();
 $qd_category = qd_service_category();
+$qd_concern  = qd_concern_for_post( $qd_id );
 $qd_meta     = fn( $k ) => (string) get_post_meta( $qd_id, '_qd_' . $k, true );
 $qd_suits    = qd_lines( $qd_meta( 'suits' ) );
 $qd_not      = qd_lines( $qd_meta( 'not_suits' ) );
@@ -67,13 +68,13 @@ $qd_fact_items = array_filter(
 	)
 );
 ?>
-<section class="service-hero">
+<section class="service-hero"<?php echo $qd_concern ? ' data-concern="' . esc_attr( $qd_concern ) . '"' : ''; ?>>
 	<div class="container">
 		<?php qd_breadcrumbs(); ?>
 		<div class="service-hero__grid">
 			<div class="service-hero__text">
 				<?php if ( $qd_category ) : ?>
-					<a class="service-hero__cat" href="<?php echo esc_url( get_permalink( $qd_category ) ); ?>"><?php echo esc_html( $qd_category->post_title ); ?></a>
+					<a class="service-hero__cat" href="<?php echo esc_url( get_permalink( $qd_category ) ); ?>"><?php echo qd_concern_mark( $qd_concern, array( 'size' => 'sm' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?><?php echo esc_html( $qd_category->post_title ); ?></a>
 				<?php endif; ?>
 				<h1 class="page-title"><?php the_title(); ?></h1>
 				<?php if ( has_excerpt() ) : ?>
@@ -82,7 +83,7 @@ $qd_fact_items = array_filter(
 				<dl class="facts">
 					<?php foreach ( $qd_fact_items as list( $qd_icon, $qd_label, $qd_value ) ) : ?>
 						<div class="facts__item">
-							<span class="icon-tile icon-tile--sm"><?php qd_the_icon( $qd_icon, array( 'size' => 20 ) ); ?></span>
+							<span class="icon-tile icon-tile--sm"><?php qd_the_icon( $qd_icon, array( 'size' => 22, 'weight' => 'duotone' ) ); ?></span>
 							<div><dt><?php echo esc_html( $qd_label ); ?></dt><dd><?php echo is_array( $qd_value ) ? esc_html( $qd_value[0] ) . '<small>' . esc_html( $qd_value[1] ) . '</small>' : esc_html( $qd_value ); ?></dd></div>
 						</div>
 					<?php endforeach; ?>
@@ -174,26 +175,35 @@ $qd_fact_items = array_filter(
 			<section id="bang-gia" class="service-section">
 				<h2 class="service-section__title">Bảng giá tham khảo</h2>
 				<?php if ( $qd_prices ) : ?>
-					<div class="price-table" role="table" aria-label="Bảng giá <?php the_title_attribute(); ?>">
-						<?php foreach ( $qd_prices as list( $qd_name, $qd_amount, $qd_note ) ) : ?>
-							<div class="price-table__row" role="row">
-								<div role="cell">
-									<p class="price-table__name"><?php echo esc_html( $qd_name ); ?></p>
-									<?php if ( $qd_note ) : ?>
-										<p class="price-note"><?php echo esc_html( $qd_note ); ?></p>
-									<?php endif; ?>
-								</div>
-								<div role="cell" class="price"><?php echo esc_html( is_numeric( $qd_amount ) ? qd_price( $qd_amount ) : $qd_amount ); ?></div>
-							</div>
-						<?php endforeach; ?>
-					</div>
+					<table class="price-table">
+						<caption class="sr-only">Bảng giá <?php the_title_attribute(); ?></caption>
+						<thead>
+							<tr><th scope="col">Gói</th><th scope="col" class="price-table__amount">Giá tham khảo</th></tr>
+						</thead>
+						<tbody>
+							<?php foreach ( $qd_prices as list( $qd_name, $qd_amount, $qd_note ) ) : ?>
+								<tr>
+									<th scope="row">
+										<span class="price-table__name"><?php echo esc_html( $qd_name ); ?></span>
+										<?php if ( $qd_note ) : ?>
+											<span class="price-note"><?php echo esc_html( $qd_note ); ?></span>
+										<?php endif; ?>
+									</th>
+									<td class="price price-table__amount"><?php echo esc_html( is_numeric( $qd_amount ) ? qd_price( $qd_amount ) : $qd_amount ); ?></td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
 				<?php elseif ( $qd_facts['price_from'] ) : ?>
-					<div class="price-table">
-						<div class="price-table__row">
-							<p class="price-table__name"><?php the_title(); ?></p>
-							<p class="price"><small>Từ</small> <?php echo esc_html( qd_price( $qd_facts['price_from'] ) ); ?><small><?php echo esc_html( $qd_facts['price_unit'] ); ?></small></p>
-						</div>
-					</div>
+					<table class="price-table">
+						<caption class="sr-only">Giá <?php the_title_attribute(); ?></caption>
+						<tbody>
+							<tr>
+								<th scope="row"><span class="price-table__name"><?php the_title(); ?></span></th>
+								<td class="price price-table__amount"><small>Từ</small> <?php echo esc_html( qd_price( $qd_facts['price_from'] ) ); ?><small><?php echo esc_html( $qd_facts['price_unit'] ); ?></small></td>
+							</tr>
+						</tbody>
+					</table>
 				<?php endif; ?>
 				<p class="notice">
 					<?php qd_the_icon( 'info', array( 'size' => 18 ) ); ?>
@@ -276,7 +286,7 @@ $qd_fact_items = array_filter(
 				)
 			);
 			?>
-			<div class="grid grid--3 scroller">
+			<div class="grid grid--3">
 				<?php foreach ( array_slice( $qd_siblings, 0, 3 ) as $qd_sibling ) : ?>
 					<?php get_template_part( 'template-parts/components/service-card', null, array( 'post' => $qd_sibling ) ); ?>
 				<?php endforeach; ?>
@@ -296,7 +306,7 @@ $qd_fact_items = array_filter(
 				)
 			);
 			?>
-			<div class="grid grid--3 scroller">
+			<div class="grid grid--3">
 				<?php foreach ( $qd_articles as $qd_article ) : ?>
 					<?php get_template_part( 'template-parts/components/post-card', null, array( 'post' => $qd_article ) ); ?>
 				<?php endforeach; ?>

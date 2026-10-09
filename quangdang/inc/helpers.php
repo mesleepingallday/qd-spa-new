@@ -8,14 +8,24 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Inline SVG icon.
+ * Inline SVG icon (Phosphor, see inc/icons.php).
  *
- * @param string $name Lucide icon name (see inc/icons.php).
- * @param array  $args size (px), class, label (makes it non-decorative).
+ * @param string $name Icon name: a Phosphor name, or one of the older names templates use (qd_icon_alias()).
+ * @param array  $args size (px), weight (bold|duotone), class, label (makes it non-decorative).
  */
 function qd_icon( $name, $args = array() ) {
-	$paths = qd_icon_paths();
-	if ( ! isset( $paths[ $name ] ) ) {
+	$alias  = qd_icon_alias();
+	$data   = qd_icon_data();
+	$key    = $alias[ $name ] ?? $name;
+	$weight = 'duotone' === ( $args['weight'] ?? 'bold' ) ? 'duotone' : 'bold';
+	if ( ! isset( $data[ $key ][ $weight ] ) ) {
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG && function_exists( 'error_log' ) ) {
+			static $reported = array();
+			if ( ! isset( $reported[ $name ] ) ) {
+				$reported[ $name ] = true;
+				error_log( 'qd_icon: unknown icon "' . $name . '" (add it to ALIASES/EXTRA in dev/icons.py)' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+			}
+		}
 		return '';
 	}
 	$size  = (int) ( $args['size'] ?? 20 );
@@ -25,11 +35,11 @@ function qd_icon( $name, $args = array() ) {
 		: 'role="img" aria-label="' . esc_attr( $args['label'] ) . '"';
 
 	return sprintf(
-		'<svg class="%1$s" width="%2$d" height="%2$d" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" %3$s>%4$s</svg>',
+		'<svg class="%1$s" width="%2$d" height="%2$d" viewBox="0 0 256 256" fill="currentColor" %3$s>%4$s</svg>',
 		esc_attr( $class ),
 		$size,
 		$a11y,
-		$paths[ $name ] // Static markup from inc/icons.php.
+		$data[ $key ][ $weight ] // Static markup from inc/icons.php.
 	);
 }
 

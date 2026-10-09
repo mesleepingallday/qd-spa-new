@@ -1,3 +1,2 @@
-Be Vietnam Pro (Lâm Bảo, Tony Le, ViệtAnh Nguyễn) and Playfair Display (Claus Eggers Sørensen)
-are licensed under the SIL Open Font License 1.1: https://openfontlicense.org
-Files from @fontsource (Vietnamese + Latin subsets).
+Google Sans Flex (The Google Sans Flex Authors) is licensed under the SIL Open Font License 1.1 (see OFL-GoogleSansFlex.txt).
+qd-sans.woff2 is a Vietnamese + Latin subset of it, built by dev/fonts.py (source pinned by commit and SHA-256).

@@ -172,7 +172,7 @@
 				}
 			} catch (err) {
 				const tel = clinic.hotline ? ` hoặc gọi ${clinic.hotline}` : '';
-				setStatus(form, `Chưa gửi được lịch hẹn. Bạn kiểm tra kết nối mạng rồi thử lại${tel} nhé.`, true);
+				setStatus(form, `Chưa gửi được yêu cầu. Thông tin bạn đã nhập vẫn còn nguyên. Bạn kiểm tra kết nối mạng rồi thử lại${tel} nhé.`, true);
 			}
 			button.disabled = false;
 			if (buttonLabel) buttonLabel.textContent = idleLabel;
@@ -266,7 +266,7 @@
 			`DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '')}`,
 			`DTSTART:${stamp(slot.start)}`,
 			`DTEND:${stamp(slot.end)}`,
-			`SUMMARY:${esc('Lịch hẹn tại ' + (clinic.name || 'phòng khám'))}`,
+			`SUMMARY:${esc('Lịch hẹn dự kiến tại ' + (clinic.name || 'phòng khám'))}`,
 			`LOCATION:${esc(clinic.address || '')}`,
 			`DESCRIPTION:${esc((serviceLabel ? 'Dịch vụ: ' + serviceLabel + '. ' : '') + 'Giờ dự kiến, phòng khám sẽ gọi xác nhận.')}`,
 			'BEGIN:VALARM',

@@ -356,9 +356,10 @@ add_action(
 
 /**
  * The 8 skin concerns used by the home hero shortcuts, the search dialog and the quiz.
- * Quiz illustrations live at assets/images/concerns/{key} (see docs/IMAGE-PROMPTS.md).
+ * `short` is the label used on tiles; `glyph` is the key for qd_concern_glyph(). The concern's colours are
+ * CSS tokens (`[data-concern="{key}"]` in main.css), so the palette lives in one place.
  *
- * @return array<string,array{label:string,url:string,image:string}>
+ * @return array<string,array{label:string,short:string,glyph:string,url:string}>
  */
 function qd_concerns() {
 	return apply_filters(
@@ -366,36 +367,93 @@ function qd_concerns() {
 		array(
 			'mun'          => array(
 				'label' => 'Mụn',
+				'short' => 'Mụn',
+				'glyph' => 'mun',
 				'url'   => home_url( '/dich-vu/dieu-tri-mun/' ),
 			),
 			'tham'         => array(
 				'label' => 'Thâm',
+				'short' => 'Thâm',
+				'glyph' => 'tham',
 				'url'   => home_url( '/dich-vu/dieu-tri-tham/' ),
 			),
 			'nam'          => array(
 				'label' => 'Nám – tàn nhang',
+				'short' => 'Nám',
+				'glyph' => 'nam',
 				'url'   => home_url( '/dich-vu/dieu-tri-nam/' ),
 			),
 			'seo'          => array(
 				'label' => 'Sẹo',
+				'short' => 'Sẹo',
+				'glyph' => 'seo',
 				'url'   => home_url( '/dich-vu/dieu-tri-seo/' ),
 			),
 			'xoa-xam'      => array(
 				'label' => 'Xóa xăm',
+				'short' => 'Xóa xăm',
+				'glyph' => 'xoa-xam',
 				'url'   => home_url( '/dich-vu/xoa-xam/' ),
 			),
 			'triet-long'   => array(
 				'label' => 'Triệt lông',
+				'short' => 'Triệt lông',
+				'glyph' => 'triet-long',
 				'url'   => home_url( '/dich-vu/cham-soc-da/triet-long/' ),
 			),
 			'tre-hoa'      => array(
 				'label' => 'Trẻ hóa da',
+				'short' => 'Trẻ hóa',
+				'glyph' => 'tre-hoa',
 				'url'   => home_url( '/dich-vu/cham-soc-da/tre-hoa-da-cong-nghe-cao/' ),
 			),
 			'filler-botox' => array(
 				'label' => 'Filler – Botox',
+				'short' => 'Filler / Botox',
+				'glyph' => 'filler-botox',
 				'url'   => home_url( '/dich-vu/noi-khoa-tham-my/' ),
 			),
 		)
 	);
+}
+
+/**
+ * The concern key (a key of qd_concerns()) that a service category or service belongs to, matched by
+ * URL prefix, or '' when it belongs to none. Used to tint pages and cards with the concern's colours.
+ *
+ * @param int|WP_Post|null $post Service or category.
+ */
+function qd_concern_for_post( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post || 'dich-vu' !== $post->post_type ) {
+		return '';
+	}
+	$path = trailingslashit( (string) wp_parse_url( get_permalink( $post ), PHP_URL_PATH ) );
+	foreach ( qd_concerns() as $key => $concern ) {
+		if ( 0 === strpos( $path, trailingslashit( (string) wp_parse_url( $concern['url'], PHP_URL_PATH ) ) ) ) {
+			return $key;
+		}
+	}
+	return '';
+}
+
+/**
+ * The service category featured on the home page, with its first three services.
+ * Default: the first category that has at least three services. Override with the
+ * `qd_home_feature_category` filter (return a category slug).
+ *
+ * @return array{category:WP_Post,services:WP_Post[]}|null
+ */
+function qd_home_feature() {
+	$slug = (string) apply_filters( 'qd_home_feature_category', '' );
+	foreach ( qd_service_categories() as $category ) {
+		$services = qd_service_children( $category->ID );
+		if ( $slug ? $category->post_name === $slug : count( $services ) >= 3 ) {
+			return array(
+				'category' => $category,
+				'services' => array_slice( $services, 0, 3 ),
+			);
+		}
+	}
+	return null;
 }

@@ -60,16 +60,14 @@ add_action(
 	}
 );
 
-// Preload the two font files every page needs first (body text, Vietnamese + Latin).
+// Preload the one font file every page needs (Vietnamese + Latin, variable weight and optical size).
 add_action(
 	'wp_head',
 	function () {
-		foreach ( array( 'be-vietnam-pro-vietnamese-400-normal', 'be-vietnam-pro-latin-400-normal' ) as $font ) {
-			printf(
-				'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
-				esc_url( QD_URI . '/assets/fonts/' . $font . '.woff2' )
-			);
-		}
+		printf(
+			'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( QD_URI . '/assets/fonts/qd-sans.woff2' )
+		);
 	},
 	2
 );

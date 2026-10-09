@@ -208,7 +208,7 @@ while ( have_posts() ) :
 					)
 				);
 				?>
-				<div class="grid grid--3 scroller">
+				<div class="grid grid--3">
 					<?php foreach ( $qd_related as $qd_rel ) : ?>
 						<?php get_template_part( 'template-parts/components/post-card', null, array( 'post' => $qd_rel ) ); ?>
 					<?php endforeach; ?>

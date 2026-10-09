@@ -78,7 +78,7 @@ while ( have_posts() ) :
 		<div class="container">
 			<?php qd_breadcrumbs(); ?>
 			<h1 class="page-title">Tìm liệu trình hợp với làn da của bạn</h1>
-			<p class="lead">Trả lời vài câu hỏi ngắn, chỉ mất khoảng 1 phút. Không cần đăng ký hay để lại số điện thoại.</p>
+			<p class="lead">Trả lời vài câu hỏi ngắn để xem các dịch vụ phù hợp. Không cần đăng ký hay để lại số điện thoại.</p>
 		</div>
 	</section>
 
@@ -89,14 +89,9 @@ while ( have_posts() ) :
 				<div class="quiz-fallback">
 					<h2 class="section-title">Chọn vấn đề bạn đang quan tâm</h2>
 					<p class="section-lead">Mỗi vấn đề dẫn tới các liệu trình phù hợp, kèm giá và số buổi.</p>
-					<ul class="quiz-fallback__list">
+					<ul class="concern-grid concern-grid--narrow">
 						<?php foreach ( qd_concerns() as $qd_key => $qd_c ) : ?>
-							<li>
-								<a class="quiz-fallback__item" href="<?php echo esc_url( $qd_c['url'] ); ?>">
-									<span class="quiz-fallback__img"><?php echo qd_asset_img( 'concerns/' . $qd_key, '' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
-									<span><?php echo esc_html( $qd_c['label'] ); ?></span>
-								</a>
-							</li>
+							<li><?php get_template_part( 'template-parts/components/concern-tile', null, array( 'key' => $qd_key, 'concern' => $qd_c ) ); ?></li>
 						<?php endforeach; ?>
 					</ul>
 					<div class="btn-row">
@@ -124,8 +119,8 @@ while ( have_posts() ) :
 							<?php foreach ( qd_concerns() as $qd_key => $qd_c ) : ?>
 								<label class="qopt qopt--pic">
 									<input type="checkbox" name="concern" value="<?php echo esc_attr( $qd_key ); ?>" data-label="<?php echo esc_attr( $qd_c['label'] ); ?>">
-									<span class="qopt__card">
-										<span class="qopt__img"><?php echo qd_asset_img( 'concerns/' . $qd_key, '' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
+									<span class="qopt__card" data-concern="<?php echo esc_attr( $qd_key ); ?>">
+										<?php echo qd_concern_mark( $qd_key, array( 'size' => 'lg', 'class' => 'qopt__mark' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 										<span class="qopt__label"><?php echo esc_html( $qd_c['label'] ); ?></span>
 										<span class="qopt__tick" aria-hidden="true"><?php qd_the_icon( 'check', array( 'size' => 16 ) ); ?></span>
 									</span>

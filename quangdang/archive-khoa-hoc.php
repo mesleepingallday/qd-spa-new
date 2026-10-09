@@ -21,7 +21,6 @@ get_header();
 <section class="page-hero training-hero">
 	<div class="container">
 		<?php qd_breadcrumbs(); ?>
-		<p class="about-kicker">Đào tạo tại Quang Đăng</p>
 		<h1 class="page-title">Học nghề chăm sóc da cùng bác sĩ</h1>
 		<p class="lead">Các khóa học ngắn, thực hành nhiều, dành cho người mới bắt đầu và kỹ thuật viên muốn nâng tay nghề.</p>
 	</div>

@@ -21,12 +21,12 @@ FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 
 PHOTO = (
     "Photorealistic editorial photo, soft natural window daylight, calm clinical-luxury mood. "
-    "Color palette: teal #0A727A, aqua #7CD0CF, mint white #F0FAFA, warm ivory #FFFBF5. "
+    "Color palette: teal #087A82, bright aqua #19C6BE, mist white #F2F7F7, clean white. "
     "Realistic Vietnamese / East Asian skin with natural texture, no plastic retouching. "
     "Clean minimal background, shallow depth of field, 50mm lens. No text, no logos, no watermark."
 )
 ILLUS = (
-    "Minimal line illustration, single 2px-equivalent stroke, teal #0A727A lines with a soft aqua #7CD0CF "
+    "Minimal line illustration, single 2px-equivalent stroke, teal #087A82 lines with a soft aqua #19C6BE "
     "fill accent, rounded line caps, centered with generous empty padding, TRANSPARENT background "
     "(PNG with alpha), no text, no shadows. Part of a matching set of 8 icons — keep identical style."
 )
@@ -43,23 +43,11 @@ def add(group, path, w, h, label, prompt=None, note=""):
 T = "theme"
 add(T, "hero/home-portrait", 1200, 1500, "Ảnh hero trang chủ",
     "Portrait of a Vietnamese woman in her early 30s with clear, healthy, softly glowing skin and a gentle "
-    "natural smile, hair neatly tied back, wearing a soft ivory knit top, one hand lightly touching her cheek. "
-    "Background: softly blurred bright clinic interior in mint and ivory tones with a hint of teal. "
-    "Keep the lower-left area calm (an info card is overlaid there). Vertical 4:5. " + PHOTO)
-for key, label, subject in [
-    ("mun", "Mụn", "a simple face outline with a few small dots on the cheek and forehead (acne)"),
-    ("tham", "Thâm", "a raised arm and shoulder outline with a soft shaded patch in the underarm (dark spots)"),
-    ("nam", "Nám – tàn nhang", "a face outline with a soft blotchy patch on the cheekbone and tiny freckle dots"),
-    ("seo", "Sẹo", "a small square of skin surface seen from the side with a few small dents (acne scars)"),
-    ("xoa-xam", "Xóa xăm", "an eyebrow shape fading into dotted lines with a tiny laser spark"),
-    ("triet-long", "Triệt lông", "a smooth arm outline with a small laser handpiece and a few short hair strokes fading"),
-    ("tre-hoa", "Trẻ hóa da", "a face outline with three small sparkles and a gentle upward arrow at the cheek"),
-    ("filler-botox", "Filler – Botox", "a face outline in three-quarter view with a small syringe near the lips"),
-]:
-    add(T, f"concerns/{key}", 512, 512, f"Icon: {label}", f"Square icon showing {subject}. " + ILLUS,
-        "Dùng ở bài kiểm tra da. Tạo cả 8 icon trong CÙNG một cuộc trò chuyện để giữ đồng bộ nét vẽ.")
+    "natural smile, hair neatly tied back, wearing a soft white knit top, one hand lightly touching her cheek. "
+    "Background: softly blurred bright clinic interior in mint and white tones with a hint of teal. "
+    "Keep the face in the upper-right two thirds so both the 5:6 desktop crop and the 4:3 phone crop keep it; nothing is overlaid on the photo. Vertical 4:5. This is a stand-in: the site needs an approved clinic photograph. " + PHOTO)
 add(T, "og/default", 1200, 630, "Ảnh chia sẻ mặc định (Facebook/Zalo)",
-    "Wide banner background: soft mint-to-ivory gradient with subtle pearly light, a blurred bright clinic "
+    "Wide banner background: soft mint-to-white gradient with subtle pearly light, a blurred bright clinic "
     "interior with teal accents on the right third; the left 60% is calm, empty space for a logo and headline "
     "to be added later. 1200x630. " + PHOTO)
 add(T, "misc/not-found", 800, 600, "Minh họa trang 404",
@@ -155,7 +143,7 @@ def placeholder(path: Path, w: int, h: int, label: str, real: bool, transparent:
     else:
         img = Image.new("RGB", (pw, ph))
         d = ImageDraw.Draw(img)
-        top, bottom = (240, 250, 250), (255, 251, 245)
+        top, bottom = (242, 247, 247), (255, 255, 255)
         for y in range(ph):
             t = y / ph
             d.line([(0, y), (pw, y)], fill=tuple(int(top[i] + (bottom[i] - top[i]) * t) for i in range(3)))
@@ -163,9 +151,9 @@ def placeholder(path: Path, w: int, h: int, label: str, real: bool, transparent:
     size = max(14, pw // 26)
     f = ImageFont.truetype(FONT_BOLD, size)
     fs = ImageFont.truetype(FONT, max(11, int(size * 0.72)))
-    lines = [(label, f, (8, 95, 102)), (f"{w}×{h}", fs, (82, 102, 106))]
+    lines = [(label, f, (8, 122, 130)), (f"{w}×{h}", fs, (82, 102, 106))]
     if real:
-        lines.insert(0, ("ẢNH THẬT", fs, (180, 83, 42)))
+        lines.insert(0, ("ẢNH THẬT", fs, (138, 90, 0)))
     # Shrink any line that is wider than the image.
     for i, (text, fo, color) in enumerate(lines):
         sz = fo.size
@@ -185,7 +173,7 @@ def placeholder(path: Path, w: int, h: int, label: str, real: bool, transparent:
 def main():
     for group, rel, w, h, label, prompt, note in M:
         base = THEME_IMG if group == T else DEMO_IMG
-        placeholder(base / "_placeholders" / f"{rel}.webp", w, h, label, prompt is None, rel.startswith("concerns/") or rel.startswith("misc/"))
+        placeholder(base / "_placeholders" / f"{rel}.webp", w, h, label, prompt is None, rel.startswith("misc/"))
 
     out = [
         "# Image list and GPT prompts",
@@ -201,7 +189,7 @@ def main():
         "4. **ẢNH THẬT (real photo)** rows must not be AI images. Doctors, the clinic, devices and before/after results",
         "   are trust and legal claims: use real photos, and for customers get written consent.",
         "",
-        "Every prompt already includes the shared style: soft daylight, teal/aqua/mint/ivory palette, natural Vietnamese skin, no text.",
+        "Every prompt already includes the shared style: soft daylight, teal/aqua/mint/white palette, natural Vietnamese skin, no text.",
         "",
     ]
     titles = {T: "Theme images → `quangdang/assets/images/`", D: "Demo content → `dev/demo-images/` (on the live site, upload these as Featured image in WordPress)"}

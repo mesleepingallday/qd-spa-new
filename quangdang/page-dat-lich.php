@@ -63,13 +63,13 @@ while ( have_posts() ) :
 		</div>
 	</section>
 
-	<section class="section section--tight bk-section" aria-label="Đặt lịch">
+	<section class="section section--tight bk-section" aria-label="Đặt lịch" data-hide-actionbar>
 		<div class="container">
 
 			<?php // Confirmation: filled and shown by booking.js after a successful submit, or shown as-is after a no-JS post. ?>
 			<div class="bk-done" data-booking-done<?php echo $qd_sent ? '' : ' hidden'; ?> tabindex="-1">
 				<span class="bk-done__check"><?php qd_the_icon( 'check', array( 'size' => 40 ) ); ?></span>
-				<h2 class="bk-done__title">Đã nhận lịch hẹn</h2>
+				<h2 class="bk-done__title">Đã nhận yêu cầu đặt lịch</h2>
 				<p class="bk-done__lead">Phòng khám sẽ gọi xác nhận trong 15 phút (giờ làm việc).</p>
 				<dl class="bk-done__summary" data-done-summary hidden></dl>
 				<div class="bk-done__actions">
@@ -153,7 +153,7 @@ while ( have_posts() ) :
 										<?php endforeach; ?>
 									</div>
 
-									<p class="bk-label" id="bk-slot-label">Chọn buổi</p>
+									<p class="bk-label" id="bk-slot-label">Buổi bạn muốn đến</p>
 									<p class="field__error" data-error-for="slot" role="alert"<?php echo $qd_err( 'slot' ) ? '' : ' hidden'; ?>><?php echo esc_html( $qd_err( 'slot' ) ); ?></p>
 									<div class="bk-slots" role="radiogroup" aria-labelledby="bk-slot-label">
 										<?php foreach ( $qd_slots as $qd_key => $qd_slot ) : ?>
@@ -193,7 +193,7 @@ while ( have_posts() ) :
 						</div>
 
 						<aside class="bk-summary" aria-labelledby="bk-sum-title">
-							<h2 class="bk-summary__title" id="bk-sum-title">Lịch hẹn của bạn</h2>
+							<h2 class="bk-summary__title" id="bk-sum-title">Yêu cầu của bạn</h2>
 							<dl class="bk-summary__list">
 								<div><dt>Dịch vụ</dt><dd data-sum="service" data-empty="Chưa chọn">Chưa chọn</dd></div>
 								<div><dt>Ngày</dt><dd data-sum="date" data-empty="Chưa chọn">Chưa chọn</dd></div>
@@ -203,7 +203,7 @@ while ( have_posts() ) :
 								<li><?php qd_the_icon( 'map-pin', array( 'size' => 18 ) ); ?><span><?php echo esc_html( qd_clinic( 'address' ) ); ?></span></li>
 								<li><?php qd_the_icon( 'clock', array( 'size' => 18 ) ); ?><span><?php echo esc_html( qd_clinic( 'hours' ) ); ?></span></li>
 							</ul>
-							<button class="btn btn--primary btn--lg btn--block" type="submit"><?php qd_the_icon( 'calendar-check', array( 'size' => 20 ) ); ?><span>Đặt lịch hẹn</span></button>
+							<button class="btn btn--primary btn--lg btn--block" type="submit"><?php qd_the_icon( 'calendar-check', array( 'size' => 20 ) ); ?><span>Gửi yêu cầu đặt lịch</span></button>
 							<div class="booking-form__status" role="status" aria-live="polite"></div>
 							<p class="bk-summary__note">Thông tin chỉ dùng để liên hệ đặt lịch. Hoặc gọi <a href="<?php echo esc_attr( qd_tel_href() ); ?>"><?php echo esc_html( qd_clinic( 'hotline' ) ); ?></a>.</p>
 						</aside>

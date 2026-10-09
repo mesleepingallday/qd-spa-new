@@ -17,7 +17,6 @@ get_header();
 				<?php echo qd_asset_img( 'misc/not-found', '', array( 'loading' => 'eager' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			</div>
 			<div class="not-found__body">
-				<p class="about-kicker">Lỗi 404</p>
 				<h1 class="page-title" id="nf-title">Rất tiếc, trang này không còn ở đây</h1>
 				<p class="lead">Đường dẫn có thể đã thay đổi hoặc gõ chưa đúng. Bạn thử tìm lại bên dưới, hoặc chọn vấn đề da bạn đang quan tâm nhé.</p>
 
@@ -28,9 +27,9 @@ get_header();
 				</form>
 
 				<p class="not-found__label" id="nf-concerns">Hoặc chọn vấn đề bạn quan tâm</p>
-				<ul class="chips" aria-labelledby="nf-concerns">
-					<?php foreach ( qd_concerns() as $qd_concern ) : ?>
-						<li><a class="chip" href="<?php echo esc_url( $qd_concern['url'] ); ?>"><?php echo esc_html( $qd_concern['label'] ); ?></a></li>
+				<ul class="concern-grid concern-grid--narrow" aria-labelledby="nf-concerns">
+					<?php foreach ( qd_concerns() as $qd_key => $qd_concern ) : ?>
+						<li><?php get_template_part( 'template-parts/components/concern-tile', null, array( 'key' => $qd_key, 'concern' => $qd_concern ) ); ?></li>
 					<?php endforeach; ?>
 				</ul>
 
@@ -38,7 +37,7 @@ get_header();
 					<?php
 					echo qd_button( 'Về trang chủ', home_url( '/' ), array( 'variant' => 'outline', 'icon' => 'arrow-left' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 					echo qd_button( 'Xem dịch vụ', get_post_type_archive_link( 'dich-vu' ), array( 'variant' => 'ghost' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
-					echo qd_button( 'Kiểm tra da 1 phút', home_url( '/tim-lieu-trinh/' ), array( 'variant' => 'ghost' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+					echo qd_button( 'Tìm dịch vụ phù hợp', home_url( '/tim-lieu-trinh/' ), array( 'variant' => 'ghost' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 					?>
 				</div>
 			</div>

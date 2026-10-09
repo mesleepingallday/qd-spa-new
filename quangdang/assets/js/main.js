@@ -1,6 +1,6 @@
 /**
  * Quang Đăng Clinic — site behaviour (no dependencies).
- * Header state · desktop mega menu · mobile drawer · search dialog · announcement · scroll-spy.
+ * Header state · desktop mega menu · mobile drawer · action bar · search dialog · announcement · scroll-spy.
  */
 (function () {
 	'use strict';
@@ -28,6 +28,7 @@
 		if (!trigger || !panel) return;
 		trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
 		panel.classList.toggle('is-open', open);
+		item.classList.toggle('is-open', open);
 		if (open) {
 			if (openItem && openItem !== item) setOpen(openItem, false);
 			openItem = item;
@@ -94,8 +95,17 @@
 			if (focusable) focusable.focus({ preventScroll: true });
 		};
 
+		// While the sheet is open the page behind it is inert (no focus, no screen-reader access).
+		var setPageInert = function (on) {
+			Array.prototype.forEach.call(
+				document.querySelectorAll('.skip-link, .announce, .site-header, #main, .site-footer, .action-bar, .float-chat'),
+				function (el) { el.inert = on; }
+			);
+		};
+
 		var openDrawer = function () {
 			lastFocus = document.activeElement;
+			setPageInert(true);
 			drawer.classList.add('is-open');
 			drawer.setAttribute('aria-hidden', 'false');
 			if (opener) opener.setAttribute('aria-expanded', 'true');
@@ -105,6 +115,7 @@
 		};
 
 		var closeDrawer = function () {
+			setPageInert(false);
 			drawer.classList.remove('is-open');
 			drawer.setAttribute('aria-hidden', 'true');
 			if (opener) opener.setAttribute('aria-expanded', 'false');
@@ -136,6 +147,30 @@
 		mqDesktop.addEventListener('change', function (e) { if (e.matches) closeDrawer(); });
 		var root = drawer.querySelector('#drawer-root');
 		if (root) root.classList.add('was-active');
+	}
+
+	/* Phone action bar: hidden while a text field has focus (on-screen keyboard) and while the
+	   booking form is on screen, so it never covers the field, its error message or a duplicate button. */
+	var actionBar = document.querySelector('.action-bar');
+	if (actionBar) {
+		var typing = false;
+		var zonesOnScreen = 0;
+		var syncBar = function () { actionBar.classList.toggle('is-hidden', typing || zonesOnScreen > 0); };
+		document.addEventListener('focusin', function (e) {
+			typing = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) && !/^(checkbox|radio|button|submit)$/.test(e.target.type || '');
+			syncBar();
+		});
+		document.addEventListener('focusout', function () { typing = false; syncBar(); });
+		var zones = document.querySelectorAll('[data-hide-actionbar]');
+		if ('IntersectionObserver' in window && zones.length) {
+			var seen = new Set();
+			var zoneIo = new IntersectionObserver(function (entries) {
+				entries.forEach(function (entry) { if (entry.isIntersecting) seen.add(entry.target); else seen.delete(entry.target); });
+				zonesOnScreen = seen.size;
+				syncBar();
+			}, { rootMargin: '0px 0px -20% 0px' }); // hide once the zone reaches the lower part of the screen, however tall it is
+			Array.prototype.forEach.call(zones, function (z) { zoneIo.observe(z); });
+		}
 	}
 
 	/* Search dialog --------------------------------------------------------- */

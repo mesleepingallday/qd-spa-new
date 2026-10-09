@@ -21,42 +21,50 @@ The theme uploads as a `.zip` to any WordPress hosting.
 
 ## 2. Design principles
 
-1. **Every element earns its place.** If a section doesn't help someone choose, trust or book, it goes.
+1. **Every element earns its place.** A section stays only if it answers a new question for the visitor: what can I get help with, who will help me, what happens next.
 2. **Readable for a 50-year-old on a cheap phone.** Body text 17–18px, contrast ≥ 4.5:1, tap targets ≥ 44px, no auto-playing carousels, no text baked into images.
-3. **One obvious next step per screen.** "Đặt lịch" is the only filled teal button. Everything else is outline or a text link.
-4. **Medical calm, spa warmth.** Teal for trust, warm ivory for softness, plenty of white space, real faces.
+3. **One obvious next step per screen.** "Đặt lịch" is the only filled teal button, on every page, including concern-coloured ones.
+4. **Bright, precise, human.** Large flat surfaces, strong type, real faces. One concentrated multicolour moment (the concern directory); everything else is white, mist, ink and teal.
 5. **Content is the SEO engine.** Every service links to related articles, and every article links to its service.
+
+The full redesign brief and its status live in `docs/REDESIGN.md`.
 
 ## 3. Brand system
 
-Colors were sampled from the fanpage posts (*Triệt lông Laser Double Cool* and *Làm việc xuyên lễ 2/9*).
+The logo and teal brand are unchanged. Tokens live in `assets/css/main.css` (§1, "Tokens v2") and are checked by `python3 dev/contrast-check.py`.
 
 | Token | Hex | Use |
 | --- | --- | --- |
-| `brand-600` | `#0A727A` | Primary buttons, links, active states (white text 5.7:1 ✓) |
-| `brand-700` | `#085F66` | Hover/pressed |
-| `brand-900` | `#0A3639` | Footer background, headings on light backgrounds |
-| `brand-500` | `#178C8B` | Fanpage teal: icons, large display text, decorative lines (do not use for body text) |
-| `brand-300` | `#7CD0CF` | Fanpage aqua: highlights and focus ring, never as a text color on white |
-| `brand-100` | `#DCF2F1` | Chips, icon tiles |
-| `brand-50` | `#F0FAFA` | Mint section background |
-| `ivory-50` | `#FFFBF5` | Warm section background (from the 2/9 poster) |
-| `ivory-200` | `#F1E6D8` | Warm borders and dividers on ivory |
-| `accent-600` | `#B4532A` | **Promotions only**: offer badges and sale prices (white text 5.0:1 ✓) |
-| `ink` | `#14292B` | Body text |
-| `ink-muted` | `#52666A` | Secondary text, meta (6.1:1 ✓) |
-| `line` | `#E2ECEC` | Hairline borders |
+| `--ink` | `#0E2A2F` | Text (15.1:1 on white) |
+| `--muted` | `#4B6468` | Secondary text (6.3:1 on white, 5.9:1 on mist) |
+| `--paper` / `--mist` | `#FFFFFF` / `#F2F7F7` | Surfaces |
+| `--teal` | `#087A82` | Buttons and links (white text 5.1:1); hover `--teal-hover` `#066A72` |
+| `--teal-bright` | `#19C6BE` | One flat feature surface per page (appointment panel); ink text 7.1:1 |
+| `--teal-deep` | `#052E33` | Footer and one optional dark section |
+| `--sun` | `#FFC93C` | Genuine offers only; ink text 9.8:1 |
 
-**Type**
-- **Be Vietnam Pro** for UI and body. It was designed for Vietnamese, so diacritics never collide. Weights 400, 500, 600 and 700.
-- **Playfair Display** for display headings only (H1 and section titles of 28px and up). It echoes the serif in the logo. Line-height is ≥ 1.25 so stacked marks (ệ, ẫ, ổ) never touch the line above.
-- Scale: 14 meta · 16 UI · 18 article body · 20 card title · 24 H3 · 30/36 H2 · 36/52 H1 (mobile/desktop).
+**Concern colours.** Each of the 8 concerns has `--concern-tile` (fill behind a white glyph, ≥ 3:1), `--concern-ink` (text on its own tint, ≥ 4.5:1) and `--concern-tint` (quiet surface), set by `data-concern="{key}"` (keys from `qd_concerns()`). Hue always comes with the concern's visible name and glyph: colour never carries the meaning alone. Hues never recolour actions, errors or validation.
 
-**Shape and depth.** Buttons are pills (they echo the fanpage label pills). Cards are 20px radius with a hairline border and no shadow. Shadow is used only on floating layers: the mega menu, the drawer and the sticky booking card.
+| Concern | Tile | Ink | Tint |
+| --- | --- | --- | --- |
+| Mụn | `#FF452C` | `#CF1900` | `#FFECEA` |
+| Thâm | `#D76F00` | `#A45500` | `#FBF1E6` |
+| Nám – tàn nhang | `#FF3D74` | `#D2003C` | `#FFECF1` |
+| Sẹo | `#9574F9` | `#7145F7` | `#F4F1FE` |
+| Xóa xăm | `#6082FF` | `#2957FF` | `#EFF2FF` |
+| Triệt lông | `#0A94CB` | `#08719A` | `#E6F4FA` |
+| Trẻ hóa da | `#219E62` | `#19794B` | `#E9F5EF` |
+| Filler – Botox | `#D755D7` | `#B22AB2` | `#FBEEFB` |
 
-**Imagery.** Soft daylight, real Vietnamese skin tones, teal and ivory backdrops, no heavy retouching, no text inside images. **Doctors, the clinic, devices and before/after photos must be real photos** (see `IMAGE-PROMPTS.md`, section "Real photos").
+**Type.** One family: **Quang Dang Sans**, a Vietnamese + Latin subset of Google Sans Flex (SIL OFL), one variable file (`opsz` 12–80, `wght` 400–700), built by `dev/fonts.py`. Google's own subset files omit the combining marks U+0302, U+0306 and U+031B, so decomposed (NFD) Vietnamese would fall back to a serif; this build keeps them. Scale: H1 64–80px desktop / 36–44px phone, H2 36–48 / 28–34, H3 22–28, body 18 / 17, line-height 1.14–1.20 for headings and 1.6 for body. Default glyph forms (no stylistic sets). Sentence case, no all-caps labels, no accented word inside a headline.
 
-**Icons.** Lucide (inline SVG, 1.75 stroke) for UI. A custom set of 8 "concern" illustrations for the onboarding picker.
+**Shape and depth.** Radius by role: photographic stage 32–40px, editorial feature 24–28px, card 18–22px, field 12–14px, pills 999px. Shadow only on overlays (menus, drawer, dialogs). Large flat colour fields, no gradient washes.
+
+**Motion.** State changes are immediate; press feedback 140–180ms; disclosures about 200ms; no stagger, springs or scroll-reveals. `prefers-reduced-motion` removes translation and scale.
+
+**Imagery.** Soft daylight, real Vietnamese skin tones, visible skin texture, no text inside images. **Doctors, the clinic, devices and before/after photos must be real photos** (see `IMAGE-PROMPTS.md`, section "Real photos"). The home hero currently uses a generated placeholder portrait: replace it with an approved clinic photograph before release.
+
+**Icons.** Phosphor (MIT, inline SVG, "bold" for small UI glyphs, "duotone" for feature icons) through `qd_icon()`; templates keep their old icon names via an alias table, regenerate with `python3 dev/icons.py`. The 8 concern glyphs are original artwork (`inc/concern-glyphs.php`, 32px grid, 2px round strokes).
 
 ## 4. Information architecture
 
@@ -111,8 +119,8 @@ Colors were sampled from the fanpage posts (*Triệt lông Laser Double Cool* an
 ### Mega menu
 
 **Desktop (≥ 1024px)**
-- **Utility bar** (36px, ivory): 📍 Tầng 5, TTTM Đức Tài – Tâm Đạt, Quỳnh Lưu · 🕗 8:00–20:00 hằng ngày · Zalo · Facebook.
-- **Header** (76px, white, sticky; it shrinks to 64px once you scroll): logo, then the nav (Giới thiệu, Dịch vụ, Tin tức, Đào tạo), then search, hotline and **[Đặt lịch]**.
+- No utility bar: the address and hours live in the footer, the contact page, the booking strip and the phone menu sheet.
+- **Header** (72px, solid white with an optional light blur, sticky): logo, then the nav (Giới thiệu, Dịch vụ, Tin tức, Đào tạo), then search, hotline and **[Đặt lịch]**. A parent item is a real link plus a separate disclosure button (the link works without JavaScript).
 - **Dịch vụ** opens a full-width panel:
   ```
   ┌ CHĂM SÓC VÀ ĐIỀU TRỊ DA ─────────────────────────────────────┬ NỘI KHOA THẨM MỸ ─┐
@@ -157,15 +165,15 @@ Colors were sampled from the fanpage posts (*Triệt lông Laser Double Cool* an
 ## 6. Key flows
 
 **A. First visit and onboarding.** There are no pop-ups. A modal on first visit annoys people and hurts Core Web Vitals. Onboarding happens on the page itself:
-1. Home hero: *"Bạn đang quan tâm vấn đề gì?"* followed by 8 concern chips (Mụn, Thâm, Nám – tàn nhang, Sẹo, Xóa xăm, Triệt lông, Trẻ hóa da, Filler – Botox). Each chip goes straight to its category.
-2. A secondary CTA, *"Chưa rõ? Kiểm tra da 1 phút"*, leads to `/tim-lieu-trinh/`.
+1. Home: the concern directory, *"Bạn cần hỗ trợ về vấn đề nào?"*, shows 8 coloured tiles (Mụn, Thâm, Nám – tàn nhang, Sẹo, Xóa xăm, Triệt lông, Trẻ hóa da, Filler – Botox). Each goes straight to its category.
+2. A secondary link, *"Tìm dịch vụ phù hợp"* (hero and under the directory), leads to `/tim-lieu-trinh/`.
 3. **The quiz asks 4 steps, one question per screen, with a progress bar and a back button:**
-   1. Main concern (multi-select icon chips)
+   1. Main concern (multi-select, the same concern tiles as the home directory, on real checkboxes)
    2. Area (face, back, underarm, arms/legs, bikini), shown only when it applies
    3. Skin type (oily, dry, combination, sensitive, "not sure")
    4. Priority (budget, fast results, no downtime)
-4. The result screen shows 1–3 recommended services, each with a reason ("Vì bạn chọn: mụn viêm + da dầu"), its price-from and the number of sessions. It offers **[Đặt lịch tư vấn miễn phí]** (the service is pre-filled) and 2 articles to read. A disclaimer notes that the doctor confirms the plan at the visit.
-5. The answers are saved in `localStorage`, so the booking form is pre-filled and the home hero can say *"Liệu trình gợi ý cho bạn"* on the next visit.
+4. The result screen shows 1–3 recommended services, each with a reason ("Vì bạn chọn: mụn viêm + da dầu"), its price-from and the number of sessions. It is titled *"Dịch vụ bạn có thể quan tâm"* (information, not a prescription: a doctor confirms the plan) and offers **[Đặt lịch tư vấn miễn phí]** (the service is pre-filled) and 2 articles to read. A disclaimer notes that the doctor confirms the plan at the visit.
+5. The answers are saved in `localStorage`, so the booking form is pre-filled and the quiz offers to show the last result again.
 
 **B. Booking** (`/dat-lich/`, and a compact version on service pages):
 1. Service: pre-filled from the page or quiz, or "Chưa biết – cần bác sĩ tư vấn".
@@ -177,17 +185,17 @@ Colors were sampled from the fanpage posts (*Triệt lông Laser Double Cool* an
 
 ## 7. Screen specs (section order)
 
-**Home**
-1. Announcement bar (optional and dismissible). It carries a current notice such as *"Làm việc xuyên lễ 2/9"* or this month's offer.
-2. Hero: the H1 *"Làn da khỏe đẹp, điều trị chuẩn y khoa"*, a subtitle, **[Đặt lịch khám]** and [Kiểm tra da 1 phút], the 8 concern chips, and a portrait on the right (it sits above the text on mobile). A trust row underneath lists 4 icon facts.
-3. *Dịch vụ theo vấn đề da*: 7 category cards (image, name, number of services, price-from).
-4. *Vì sao chọn Quang Đăng*: 4 pillars, each linking to its About subpage (doctors, technology, medical process, facility).
-5. *Quy trình 5 bước*: Thăm khám, Soi da, Phác đồ riêng, Điều trị, Tái khám. This lowers first-visit anxiety.
-6. *Bác sĩ*: the doctor card(s), using real photos.
-7. *Kết quả thật*: before/after slider cards (real photos, with consent), plus a note on how results can vary.
-8. *Ưu đãi đang diễn ra*: up to 3 promotion cards with countdown badges.
-9. *Cẩm nang làm đẹp*: 1 featured post and 3 cards.
-10. Booking strip: a mini form (name, phone, concern) alongside the address, hours and a small map link.
+**Home** (each section answers a new question; see `template-parts/home/`)
+1. Announcement (optional, dismissible, quiet strip).
+2. Hero: H1 *"Làn da khỏe đẹp, điều trị chuẩn y khoa"*, one supporting line, **[Đặt lịch khám]** (desktop; on phones the action bar carries it) and *Tìm dịch vụ phù hợp*, and a photograph. On phones: copy first, then the photograph; the phone hero offers *Chọn vấn đề của bạn* (jumps to the directory) instead of a second booking button.
+3. **Concern directory**, *"Bạn cần hỗ trợ về vấn đề nào?"*: 8 labelled links (Mụn, Thâm, Nám, Sẹo, Xóa xăm, Triệt lông, Trẻ hóa, Filler / Botox), each a coloured tile with its own glyph. One row of 8 on desktop, 4 × 2 on phones. The one multicolour moment on the page.
+4. **Service feature**: one category in depth (cover, intro, its first three services with sessions and price-from). Default: the first category with ≥ 3 services; override with the `qd_home_feature_category` filter.
+5. Practitioner: real portrait, name, role, one factual line, link to the profile. Hidden without a doctor.
+6. Process: the 5 first-visit steps (the only numbered list: it is a real sequence). Vertical on phones, the one dark section.
+7. Results (before/after pairs): hidden until real, consented photos exist. Side-by-side, labelled; an optional comparison control is deferred.
+8. Guidance: one featured article plus rows.
+9. Offers: only when a promotion is running (sun badge, ink text).
+10. Appointment: one flat `--teal-bright` panel with the booking form; the action bar hides while it is on screen.
 
 **Service detail.** Breadcrumb, H1 with a one-line promise, then the **facts row** (Giá từ · Số buổi · Thời gian/buổi · Nghỉ dưỡng). In-page tabs follow (Tổng quan · Phù hợp · Quy trình · Bảng giá · Kết quả · Hỏi đáp), sticky under the header. The sections, in order:
 - Overview (editor content)

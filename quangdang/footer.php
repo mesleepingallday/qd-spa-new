@@ -20,7 +20,7 @@ if ( ! $qd_service_links ) {
 </main>
 
 <footer class="site-footer">
-	<div class="container site-footer__main">
+	<div class="container site-footer__main" id="site-nav">
 		<div>
 			<?php get_template_part( 'template-parts/site/brand' ); ?>
 			<p class="site-footer__about">Phòng khám chuyên khoa Da liễu – Thẩm mỹ. Bác sĩ trực tiếp thăm khám, phác đồ riêng cho từng làn da.</p>
@@ -61,7 +61,7 @@ if ( ! $qd_service_links ) {
 					'Cẩm nang làm đẹp'     => '/tin-tuc/cam-nang-lam-dep/',
 					'Sự kiện – Ưu đãi'     => '/tin-tuc/su-kien-uu-dai/',
 					'Đào tạo'              => '/dao-tao/',
-					'Kiểm tra da 1 phút'   => '/tim-lieu-trinh/',
+					'Tìm dịch vụ phù hợp'   => '/tim-lieu-trinh/',
 				) as $qd_label => $qd_path ) {
 					printf( '<li><a href="%s">%s</a></li>', esc_url( home_url( $qd_path ) ), esc_html( $qd_label ) );
 				}

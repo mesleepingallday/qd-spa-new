@@ -45,7 +45,7 @@ if ( ! $qd_cases ) {
 			)
 		);
 		?>
-		<div class="grid grid--3 scroller">
+		<div class="grid grid--3">
 			<?php foreach ( $qd_cases as list( $qd_n, $qd_service, $qd_after, $qd_url ) ) : ?>
 				<figure class="card result-card">
 					<div class="result-card__pair">

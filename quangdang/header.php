@@ -1,6 +1,6 @@
 <?php
 /**
- * Site header: announcement, utility bar, sticky header with mega menu, mobile drawer.
+ * Site header: optional announcement, sticky header with mega menu, mobile drawer.
  *
  * @package QuangDang
  */
@@ -20,27 +20,16 @@ defined( 'ABSPATH' ) || exit;
 
 <?php get_template_part( 'template-parts/site/announcement' ); ?>
 
-<div class="utility">
-	<div class="container utility__inner">
-		<div class="utility__group">
-			<a class="utility__item" href="<?php echo esc_url( qd_clinic( 'map_url' ) ); ?>" target="_blank" rel="noopener">
-				<?php qd_the_icon( 'map-pin', array( 'size' => 15 ) ); ?><?php echo esc_html( qd_clinic( 'address_short' ) ); ?>
-			</a>
-			<span class="utility__item"><?php qd_the_icon( 'clock', array( 'size' => 15 ) ); ?><?php echo esc_html( qd_clinic( 'hours' ) ); ?></span>
-		</div>
-		<div class="utility__group">
-			<a class="utility__item" href="<?php echo esc_url( qd_clinic( 'zalo' ) ); ?>" target="_blank" rel="noopener"><?php qd_the_icon( 'message-circle', array( 'size' => 15 ) ); ?>Zalo</a>
-			<a class="utility__item" href="<?php echo esc_url( qd_clinic( 'facebook' ) ); ?>" target="_blank" rel="noopener"><?php qd_the_icon( 'facebook', array( 'size' => 15 ) ); ?>Facebook</a>
-			<a class="utility__item" href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>">Liên hệ</a>
-		</div>
-	</div>
-</div>
-
 <header class="site-header" data-header>
 	<div class="container site-header__inner">
-		<button class="icon-btn site-header__menu-btn" type="button" aria-controls="drawer" aria-expanded="false" data-drawer-open>
-			<?php qd_the_icon( 'menu', array( 'size' => 24 ) ); ?><span class="sr-only">Mở menu</span>
+		<button class="site-header__menu-btn" type="button" aria-controls="drawer" aria-expanded="false" data-drawer-open>
+			<?php qd_the_icon( 'menu', array( 'size' => 22 ) ); ?><span>Menu</span>
 		</button>
+		<?php // Without JavaScript the button above does nothing, so a plain link jumps to the footer's full link list. ?>
+		<noscript>
+			<style>.site-header__menu-btn:not(a){display:none}</style>
+			<a class="site-header__menu-btn" href="#site-nav"><?php qd_the_icon( 'menu', array( 'size' => 22 ) ); ?><span>Menu</span></a>
+		</noscript>
 
 		<?php get_template_part( 'template-parts/site/brand' ); ?>
 

@@ -29,7 +29,7 @@ if ( ! $qd_promos ) {
 	return;
 }
 ?>
-<section class="section section--ivory" aria-labelledby="home-promos">
+<section class="section" aria-labelledby="home-promos">
 	<div class="container">
 		<?php
 		qd_section_head(
@@ -41,7 +41,7 @@ if ( ! $qd_promos ) {
 			)
 		);
 		?>
-		<div class="grid grid--3 scroller">
+		<div class="grid grid--3">
 			<?php foreach ( $qd_promos as $qd_promo ) : ?>
 				<?php get_template_part( 'template-parts/components/post-card', null, array( 'post' => $qd_promo ) ); ?>
 			<?php endforeach; ?>

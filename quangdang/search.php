@@ -102,14 +102,14 @@ get_header();
 					<?php echo '' === $qd_query ? 'Bạn muốn tìm gì?' : 'Không có kết quả cho “' . esc_html( $qd_query ) . '”'; ?>
 				</h2>
 				<p>Thử từ khóa ngắn hơn (VD: “mụn”, “nám”) hoặc chọn vấn đề da bạn đang quan tâm:</p>
-				<div class="chips blog-empty__chips">
-					<?php foreach ( qd_concerns() as $qd_concern ) : ?>
-						<a class="chip" href="<?php echo esc_url( $qd_concern['url'] ); ?>"><?php echo esc_html( $qd_concern['label'] ); ?></a>
+				<ul class="concern-grid concern-grid--narrow blog-empty__concerns">
+					<?php foreach ( qd_concerns() as $qd_key => $qd_concern ) : ?>
+						<li><?php get_template_part( 'template-parts/components/concern-tile', null, array( 'key' => $qd_key, 'concern' => $qd_concern ) ); ?></li>
 					<?php endforeach; ?>
-				</div>
+				</ul>
 				<p>Chưa biết nên chọn liệu trình nào?</p>
 				<div class="btn-row">
-					<?php echo qd_button( 'Kiểm tra da 1 phút', home_url( '/tim-lieu-trinh/' ), array( 'icon' => 'sparkles' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+					<?php echo qd_button( 'Tìm dịch vụ phù hợp', home_url( '/tim-lieu-trinh/' ), array( 'icon' => 'sparkles' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 					<?php echo qd_button( 'Hỏi bác sĩ qua Zalo', qd_clinic( 'zalo' ), array( 'variant' => 'ghost', 'icon' => 'message-circle', 'attrs' => array( 'target' => '_blank', 'rel' => 'noopener' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				</div>
 			</div>
@@ -120,7 +120,7 @@ get_header();
 <?php if ( $qd_total ) : ?>
 	<section class="section section--flush-top">
 		<div class="container">
-			<p class="search-more">Không thấy điều bạn cần? <a href="<?php echo esc_url( home_url( '/tim-lieu-trinh/' ) ); ?>">Kiểm tra da 1 phút</a> để được gợi ý liệu trình phù hợp.</p>
+			<p class="search-more">Không thấy điều bạn cần? <a href="<?php echo esc_url( home_url( '/tim-lieu-trinh/' ) ); ?>">Tìm dịch vụ phù hợp</a> bằng vài câu hỏi ngắn.</p>
 			<?php get_template_part( 'template-parts/components/booking-strip', null, array( 'source' => 'search' ) ); ?>
 		</div>
 	</section>

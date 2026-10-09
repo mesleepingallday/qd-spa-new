@@ -15,14 +15,14 @@ $qd_steps = array(
 	array( 'Tái khám', 'Theo dõi kết quả, điều chỉnh phác đồ, hỗ trợ qua Zalo.' ),
 );
 ?>
-<section class="section" aria-labelledby="home-process">
+<section class="section section--dark process" aria-labelledby="home-process">
 	<div class="container">
 		<?php
 		qd_section_head(
 			array(
 				'id'    => 'home-process',
-				'title' => 'Lần đầu đến khám, bạn sẽ được gì?',
-				'desc'  => 'Quy trình 5 bước giống nhau cho mọi khách hàng, mọi liệu trình.',
+				'title' => 'Lần đầu đến khám diễn ra thế nào?',
+				'desc'  => 'Năm bước, theo thứ tự, giống nhau cho mọi khách hàng.',
 			)
 		);
 		?>
