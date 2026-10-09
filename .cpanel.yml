@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export THEME_DIR=/home/vientha8/public_html/wp-content/themes/quangdang
+    - /bin/mkdir -p $THEME_DIR
+    - /bin/cp -Rf quangdang/. $THEME_DIR/
