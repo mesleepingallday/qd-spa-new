@@ -39,26 +39,6 @@ Wide banner background: soft mint-to-white gradient with subtle pearly light, a 
 A hand mirror lying next to a small green leaf and a tiny question mark sparkle, friendly and calm. Minimal line illustration, single 2px-equivalent stroke, teal #087A82 lines with a soft aqua #19C6BE fill accent, rounded line caps, centered with generous empty padding, TRANSPARENT background (PNG with alpha), no text, no shadows. 
 ```
 
-### results/
-
-**`results/1-truoc.png`** · Trước – Trị mụn · 800×800  
-**ẢNH THẬT, không dùng AI.** ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Cùng góc chụp, cùng ánh sáng với ảnh Sau.
-
-**`results/1-sau.png`** · Sau – Trị mụn · 800×800  
-**ẢNH THẬT, không dùng AI.** ẢNH THẬT, cùng khách hàng và góc chụp với ảnh Trước.
-
-**`results/2-truoc.png`** · Trước – Điều trị nám · 800×800  
-**ẢNH THẬT, không dùng AI.** ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Cùng góc chụp, cùng ánh sáng với ảnh Sau.
-
-**`results/2-sau.png`** · Sau – Điều trị nám · 800×800  
-**ẢNH THẬT, không dùng AI.** ẢNH THẬT, cùng khách hàng và góc chụp với ảnh Trước.
-
-**`results/3-truoc.png`** · Trước – Trị thâm nách · 800×800  
-**ẢNH THẬT, không dùng AI.** ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Cùng góc chụp, cùng ánh sáng với ảnh Sau.
-
-**`results/3-sau.png`** · Sau – Trị thâm nách · 800×800  
-**ẢNH THẬT, không dùng AI.** ẢNH THẬT, cùng khách hàng và góc chụp với ảnh Trước.
-
 ### about/
 
 **`about/le-tan.png`** · Quầy lễ tân · 1200×900  
@@ -342,6 +322,20 @@ Skincare trainees in teal uniforms practicing a facial on a classmate under an i
 ```text
 An instructor demonstrating a skin analysis device to two trainees in a modern clinic. Horizontal 16:9. Photorealistic editorial photo, soft natural window daylight, calm clinical-luxury mood. Color palette: teal #087A82, bright aqua #19C6BE, mist white #F2F7F7, clean white. Realistic Vietnamese / East Asian skin with natural texture, no plastic retouching. Clean minimal background, shallow depth of field, 50mm lens. No text, no logos, no watermark.
 ```
+
+### results/
+
+**`results/1.png`** · Poster kết quả 1 · 1200×1200  
+**ẢNH THẬT, không dùng AI.** POSTER trước/sau từ ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Trên web: wp-admin → Kết quả khách hàng → Ảnh poster.
+
+**`results/2.png`** · Poster kết quả 2 · 1200×1200  
+**ẢNH THẬT, không dùng AI.** POSTER trước/sau từ ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Trên web: wp-admin → Kết quả khách hàng → Ảnh poster.
+
+**`results/3.png`** · Poster kết quả 3 · 1200×1200  
+**ẢNH THẬT, không dùng AI.** POSTER trước/sau từ ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Trên web: wp-admin → Kết quả khách hàng → Ảnh poster.
+
+**`results/4.png`** · Poster kết quả 4 · 1200×1200  
+**ẢNH THẬT, không dùng AI.** POSTER trước/sau từ ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Trên web: wp-admin → Kết quả khách hàng → Ảnh poster.
 
 ### doctors/
 
