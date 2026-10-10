@@ -192,7 +192,7 @@ The logo and teal brand are unchanged. Tokens live in `assets/css/main.css` (§1
 4. **Service feature**: one category in depth (cover, intro, its first three services with sessions and price-from). Default: the first category with ≥ 3 services; override with the `qd_home_feature_category` filter.
 5. Practitioner: real portrait, name, role, one factual line, link to the profile. Hidden without a doctor.
 6. Process: the 5 first-visit steps (the only numbered list: it is a real sequence). Vertical on phones, the one dark section.
-7. Results (before/after pairs): hidden until real, consented photos exist. Side-by-side, labelled; an optional comparison control is deferred.
+7. Results: a curved carousel of the clinic's square before/after posters, managed in wp-admin → Kết quả khách hàng (poster, service, caption, the poster's points as text, consent). Only cases marked with written consent render; the section is hidden when there are none.
 8. Guidance: one featured article plus rows.
 9. Offers: only when a promotion is running (sun badge, ink text).
 10. Appointment: one flat `--teal-bright` panel with the booking form; the action bar hides while it is on screen.

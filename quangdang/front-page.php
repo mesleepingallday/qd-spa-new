@@ -16,7 +16,7 @@ foreach ( array(
 	'feature',   // One service in depth: cover, introduction, first three services with price.
 	'doctor',    // Lead doctor (real photo).
 	'process',   // The first visit in 5 ordered steps.
-	'results',   // Before/after pairs (hidden until real, consented photos exist).
+	'results',   // Before/after posters, curved carousel (only consented cases; hidden when none).
 	'articles',  // Latest beauty handbook posts: one feature + rows.
 	'promos'     // Active promotions (hidden when none are running).
 ) as $qd_section ) {
