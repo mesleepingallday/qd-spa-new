@@ -3,7 +3,7 @@
  * Services hub (/dich-vu/).
  *
  * Job: "see everything the clinic does, grouped by problem".
- * Hero → quick-jump chips → zone "Chăm sóc và điều trị da" (Điều trị da categories + Chăm sóc da services)
+ * Hero (concern directory) → sticky group tabs → zone "Chăm sóc và điều trị da" (Điều trị da categories + Chăm sóc da services)
  * → quiz help card → Nội khoa thẩm mỹ → booking strip.
  *
  * @package QuangDang
@@ -25,36 +25,48 @@ $qd_flat   = function ( array $cats ) {
 $qd_care_services    = $qd_flat( qd_service_categories( 'cham-soc-da' ) );
 $qd_medical_services = $qd_flat( qd_service_categories( 'noi-khoa-tham-my' ) );
 
-$qd_chips = array();
-if ( $qd_treat || $qd_care_services ) {
-	$qd_chips['cham-soc-va-dieu-tri-da'] = 'Chăm sóc và điều trị da';
-}
+$qd_tabs = array();
 if ( $qd_treat ) {
-	$qd_chips['dieu-tri-da'] = 'Điều trị da';
+	$qd_tabs['dieu-tri-da'] = 'Điều trị da';
 }
 if ( $qd_care_services ) {
-	$qd_chips['cham-soc-da'] = 'Chăm sóc da';
+	$qd_tabs['cham-soc-da'] = 'Chăm sóc da';
 }
 if ( $qd_medical_services ) {
-	$qd_chips['noi-khoa-tham-my'] = 'Nội khoa thẩm mỹ';
+	$qd_tabs['noi-khoa-tham-my'] = 'Nội khoa thẩm mỹ';
 }
 ?>
-<section class="page-hero">
+<section class="page-hero hub-hero">
 	<div class="container">
 		<?php qd_breadcrumbs(); ?>
-		<h1 class="page-title">Dịch vụ</h1>
-		<p class="lead">Từ điều trị mụn, nám, sẹo đến chăm sóc da và nội khoa thẩm mỹ. Chọn theo vấn đề bạn đang gặp, bác sĩ sẽ tư vấn phác đồ phù hợp.</p>
-		<?php if ( $qd_chips ) : ?>
-			<nav class="hub-jump" aria-label="Đi nhanh tới nhóm dịch vụ">
-				<ul class="chips">
-					<?php foreach ( $qd_chips as $qd_anchor => $qd_label ) : ?>
-						<li><a class="chip" href="#<?php echo esc_attr( $qd_anchor ); ?>"><?php echo esc_html( $qd_label ); ?></a></li>
+		<div class="hub-hero__grid">
+			<div class="hub-hero__text">
+				<h1 class="page-title">Dịch vụ</h1>
+				<p class="lead">Từ điều trị mụn, nám, sẹo đến chăm sóc da và nội khoa thẩm mỹ. Chọn theo vấn đề bạn đang gặp, bác sĩ sẽ tư vấn phác đồ phù hợp.</p>
+			</div>
+			<div class="hub-hero__pick" role="group" aria-labelledby="hub-pick">
+				<h2 class="hub-hero__pick-title" id="hub-pick">Bạn đang gặp vấn đề gì?</h2>
+				<ul class="concern-grid concern-grid--narrow">
+					<?php foreach ( qd_concerns() as $qd_key => $qd_concern ) : ?>
+						<li><?php get_template_part( 'template-parts/components/concern-tile', null, array( 'key' => $qd_key, 'concern' => $qd_concern ) ); ?></li>
 					<?php endforeach; ?>
 				</ul>
-			</nav>
-		<?php endif; ?>
+			</div>
+		</div>
 	</div>
 </section>
+
+<?php if ( count( $qd_tabs ) > 1 ) : ?>
+	<nav class="section-tabs hub-tabs" aria-label="Đi nhanh tới nhóm dịch vụ" data-scrollspy>
+		<div class="container">
+			<ul>
+				<?php foreach ( $qd_tabs as $qd_anchor => $qd_label ) : ?>
+					<li><a href="#<?php echo esc_attr( $qd_anchor ); ?>"><?php echo esc_html( $qd_label ); ?></a></li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	</nav>
+<?php endif; ?>
 
 <?php if ( $qd_treat || $qd_care_services ) : ?>
 	<section id="cham-soc-va-dieu-tri-da" class="section hub-zone" aria-labelledby="zone-1-title">
@@ -73,13 +85,13 @@ if ( $qd_medical_services ) {
 						)
 					);
 					?>
-					<div class="grid grid--3 hub-cats">
+					<div class="grid grid--3 hub-fill hub-cats">
 						<?php foreach ( $qd_treat as $qd_cat ) : ?>
 							<?php
 							$qd_facts    = qd_service_facts( $qd_cat );
 							$qd_children = qd_service_children( $qd_cat->ID );
 							?>
-							<article class="card hub-cat">
+							<article class="card hub-cat" data-concern="<?php echo esc_attr( qd_concern_for_post( $qd_cat ) ); ?>">
 								<?php echo qd_concern_mark( qd_concern_for_post( $qd_cat ), array( 'size' => 'sm', 'class' => 'hub-cat__mark' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 								<a class="hub-cat__media" href="<?php echo esc_url( get_permalink( $qd_cat ) ); ?>" tabindex="-1" aria-hidden="true"><?php echo qd_thumb( $qd_cat, 'qd-card', '4-3' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></a>
 								<div class="card__body">
@@ -118,7 +130,7 @@ if ( $qd_medical_services ) {
 						)
 					);
 					?>
-					<div class="grid grid--3">
+					<div class="grid grid--3 hub-fill">
 						<?php foreach ( $qd_care_services as $qd_service ) : ?>
 							<?php get_template_part( 'template-parts/components/service-card', null, array( 'post' => $qd_service, 'heading' => 'h4' ) ); ?>
 						<?php endforeach; ?>
@@ -147,7 +159,7 @@ if ( $qd_medical_services ) {
 				)
 			);
 			?>
-			<div class="grid grid--3">
+			<div class="grid grid--3 hub-fill">
 				<?php foreach ( $qd_medical_services as $qd_service ) : ?>
 					<?php get_template_part( 'template-parts/components/service-card', null, array( 'post' => $qd_service ) ); ?>
 				<?php endforeach; ?>

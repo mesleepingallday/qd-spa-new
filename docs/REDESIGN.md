@@ -76,6 +76,19 @@ Budgets: CSS ≤ 25 KB, fonts ≤ 100 KB, hero image ≤ 180 KB phone. Before th
 
 `contrast-check.py` 71/71 · `check-shell.mjs` 26/26 · `check-forms.mjs` 18/18 · `check-degrade.mjs` 12/12 · overflow sweep of 19 URLs at 320/375/768/1024/1440 clean · lab home LCP 1.80 s, CLS 0, CSS 13.1 KB gz, fonts 82.5 KB, JS 8.2 KB gz in total (booking.js 5.2 KB is existing behaviour; the redesign itself added +0.6 KB gz to `main.js`, 2,410 → 2,995 B, against a 3 KB budget).
 
+## Phase 8: /gioi-thieu/, /dich-vu/, /tin-tuc/, /dao-tao/ upgrade
+
+Same system (tokens, font, rules), more structure. The one signature device is the **ruler**: a millimetre scale with steps hung on it, used only for real sequences (a patient visit on `/gioi-thieu/`, how a course runs on `/dao-tao/`). Built once in `template-parts/about/ruler.php`, styled in `assets/css/pages/trust.css` (loads on `/gioi-thieu/` and the training archive). The same file holds the fact row (`template-parts/about/facts.php`).
+
+- `/gioi-thieu/`: photo stage hero with a service-led H1, fact row built only from data the site has (doctor count, lead doctor's years, service count; missing values are left out), ruler timeline, bento of the six subpages (two large with photo, four small), lead doctor with credentials. `.about-kicker` no longer used on the hub.
+- `/dich-vu/`: the eight concern tiles are the hero's working part; sticky group tabs with scroll-spy (existing `data-scrollspy`, no new JS); category cards take the concern tint; a last row that would leave a gap stretches to fill it (`.hub-fill`).
+- `/tin-tuc/`: hero head row (title + lead left, tabs right on desktop); the featured post is an open editorial spread instead of another boxed card. Topic chips still wrap on purpose (every topic stays visible).
+- `/dao-tao/`: reasons moved into the hero as a short checklist with a photo stage, course cards link text "Xem khóa học", ruler on the one dark band, FAQ with `FAQPage` schema.
+
+Filters for owners: `qd_about_facts`, `qd_about_visit_steps`, `qd_training_path`, `qd_training_faq`, `qd_training_reasons`.
+
+Owner to confirm: the five visit steps and the four course steps match reality; the FAQ answers (no fee, certificate or class-size promises were made). Real photos needed: reception (4:3), lead doctor (4:5), treatment room or classroom (4:3), two large About cards (4:3).
+
 ## Rollback
 
 The pre-redesign theme is commit `c481265`. `git archive --format=zip --prefix=quangdang/ c481265:quangdang -o dist/quangdang-before-redesign.zip` rebuilds an installable copy; upload it over the new theme in Appearance → Themes. No database change is involved (the `lich-hen` posts and settings are untouched), so rolling back is just a theme swap.

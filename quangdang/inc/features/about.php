@@ -32,6 +32,7 @@ add_filter(
 	'qd_page_styles',
 	function ( $styles ) {
 		$styles['qd-about']    = array( 'assets/css/pages/about.css', fn() => qd_is_about_area() || is_404() );
+		$styles['qd-trust']    = array( 'assets/css/pages/trust.css', fn() => is_page( 'gioi-thieu' ) || is_post_type_archive( 'khoa-hoc' ) );
 		$styles['qd-training'] = array( 'assets/css/pages/training.css', fn() => is_singular( 'khoa-hoc' ) || is_post_type_archive( 'khoa-hoc' ) );
 		return $styles;
 	}

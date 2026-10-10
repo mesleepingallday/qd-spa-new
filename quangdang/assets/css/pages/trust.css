@@ -1,0 +1,128 @@
+/* Trust devices shared by /gioi-thieu/ and /dao-tao/: the ruler timeline and the fact row ---------- */
+
+/* Ruler: a millimetre scale (a tick every 6px, a longer one every 12px) with the steps hung on it.
+   The scale is a mask, so it takes the token colour. It marks a real sequence only. */
+.ruler {
+	--ruler-scale: var(--line-strong);
+	--ruler-mark: var(--teal);
+	--ruler-num: var(--teal-hover);
+	--ruler-title: var(--ink);
+	--ruler-text: var(--muted);
+	position: relative;
+	display: grid;
+	margin: 0;
+	padding: 0 0 0 52px;
+	list-style: none;
+}
+
+.ruler::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 16px;
+	background: var(--ruler-scale);
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='12'%3E%3Crect width='1' height='12'/%3E%3Crect width='16' height='1'/%3E%3Crect y='6' width='9' height='1'/%3E%3C/svg%3E") 0 0 / 16px 12px repeat-y;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='12'%3E%3Crect width='1' height='12'/%3E%3Crect width='16' height='1'/%3E%3Crect y='6' width='9' height='1'/%3E%3C/svg%3E") 0 0 / 16px 12px repeat-y;
+}
+
+.ruler__step {
+	position: relative;
+	display: grid;
+	grid-template-columns: 2.25rem minmax(0, 1fr);
+	column-gap: 12px;
+	align-content: start;
+	padding-bottom: 32px;
+}
+
+.ruler__step:last-child { padding-bottom: 0; }
+
+/* The long tick that pins a step to the scale */
+.ruler__step::before {
+	content: "";
+	position: absolute;
+	left: -52px;
+	top: 16px;
+	width: 40px;
+	height: 2px;
+	background: var(--ruler-mark);
+}
+
+.ruler__num {
+	grid-row: span 2;
+	font-size: 1.75rem;
+	font-weight: 700;
+	line-height: 1.2;
+	font-variant-numeric: tabular-nums;
+	color: var(--ruler-num);
+}
+
+.ruler__title { padding-top: 3px; font-size: 1.1875rem; font-weight: 600; color: var(--ruler-title); }
+.ruler__text { margin-top: 4px; font-size: 1rem; color: var(--ruler-text); max-width: 44ch; }
+
+@media (min-width: 1024px) {
+	.ruler {
+		grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr));
+		column-gap: 28px;
+		padding: 64px 0 0;
+	}
+
+	.ruler::before {
+		right: 0;
+		bottom: auto;
+		width: auto;
+		height: 16px;
+		-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='16'%3E%3Crect width='12' height='1'/%3E%3Crect width='1' height='16'/%3E%3Crect x='6' width='1' height='9'/%3E%3C/svg%3E") 0 0 / 12px 16px repeat-x;
+		mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='16'%3E%3Crect width='12' height='1'/%3E%3Crect width='1' height='16'/%3E%3Crect x='6' width='1' height='9'/%3E%3C/svg%3E") 0 0 / 12px 16px repeat-x;
+	}
+
+	.ruler__step { grid-template-columns: minmax(0, 1fr); padding-bottom: 0; }
+	.ruler__step::before { left: 0; top: -64px; width: 2px; height: 40px; }
+	.ruler__num { grid-row: auto; margin-bottom: 6px; font-size: 2.25rem; }
+	.ruler__title { padding-top: 0; }
+}
+
+/* On the dark band */
+.ruler--dark {
+	--ruler-scale: rgb(255 255 255 / 0.4);
+	--ruler-mark: var(--teal-bright);
+	--ruler-num: var(--teal-bright);
+	--ruler-title: #fff;
+	--ruler-text: rgb(255 255 255 / 0.8);
+}
+
+/* Fact row: three or four plain figures between two hairlines ------------------------------------- */
+.fact-row {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+	gap: 0 24px;
+	margin: 0;
+	border-block: 1px solid var(--line);
+}
+
+.fact-row__item {
+	display: flex;
+	flex-direction: column-reverse; /* the figure reads first; the term stays first in the markup */
+	justify-content: flex-end;
+	gap: 2px;
+	padding: 18px 0;
+}
+
+.fact-row__figure {
+	margin: 0;
+	font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
+	font-weight: 700;
+	line-height: 1.15;
+	letter-spacing: -0.01em;
+	color: var(--ink);
+}
+
+.fact-row__label { font-size: 0.9375rem; line-height: 1.4; color: var(--muted); }
+
+@media (min-width: 900px) {
+	.fact-row { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0; }
+	.fact-row__item { padding: 22px 28px; }
+	.fact-row__item:first-child { padding-left: 0; }
+	.fact-row__item + .fact-row__item { border-left: 1px solid var(--line); }
+}

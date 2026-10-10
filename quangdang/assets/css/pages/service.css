@@ -156,11 +156,28 @@
 
 
 /* Services hub ------------------------------------------------------------ */
-.hub-jump { margin-top: 24px; }
-.hub-jump ul { list-style: none; padding: 0; }
-.hub-zone, .hub-group, #noi-khoa-tham-my { scroll-margin-top: calc(var(--header-h) + var(--admin-bar-h) + 16px); }
+.hub-hero { padding-bottom: 36px; }
+.hub-hero__grid { display: grid; gap: 28px; align-items: center; }
+.hub-hero .lead { margin-top: 14px; }
 
-.hub-zone { padding-top: 8px; }
+/* The concern directory is the hero's working part: pick the problem, land on its page */
+.hub-hero__pick { padding: 24px 12px 12px; border-radius: var(--r-feature); background: #fff; }
+.hub-hero__pick-title { margin-bottom: 18px; padding-inline: 8px; font-size: 1.125rem; font-weight: 600; }
+.hub-hero .concern-grid.concern-grid--narrow { max-width: none; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 4px; }
+.hub-hero .concern-tile__label { font-size: 0.875rem; }
+
+@media (min-width: 1024px) {
+	.hub-hero { padding-bottom: 64px; }
+	.hub-hero__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; }
+	.hub-hero__pick { padding: 32px 28px 20px; border-radius: var(--r-stage); }
+	.hub-hero__pick-title { margin-bottom: 24px; padding-inline: 4px; font-size: 1.25rem; }
+}
+
+/* Group tabs stay under the header while the zones scroll past (the .section-tabs bar above is shared) */
+.hub-tabs { margin-top: -1px; }
+.hub-zone, .hub-group, #noi-khoa-tham-my { scroll-margin-top: calc(var(--header-h) + var(--admin-bar-h) + 64px); }
+
+.hub-zone { padding-top: 40px; }
 
 .hub-zone__title {
 	margin-bottom: 28px;
@@ -172,10 +189,26 @@
 }
 
 .hub-group + .hub-group { margin-top: clamp(40px, 6vw, 64px); }
+.hub-group .section-title { font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem); } /* the h3 stays below the zone's h2 */
+.hub-group .section-head { margin-bottom: 24px; }
 
+/* Cards that would leave a gap in the last row stretch to fill it: 5 cards = 3 + 2 wide, 4 cards = 2 x 2 at the end */
+@media (min-width: 1024px) {
+	.hub-fill { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+	.hub-fill > * { grid-column: span 2; }
+	.hub-fill .frame { aspect-ratio: 16 / 9; } /* wide cards would otherwise get a very tall 4:3 photo */
+	.hub-fill > :nth-last-child(2):nth-child(3n+1),
+	.hub-fill > :nth-last-child(2):nth-child(3n+1) ~ *,
+	.hub-fill > :nth-last-child(4):nth-child(3n+1),
+	.hub-fill > :nth-last-child(4):nth-child(3n+1) ~ * { grid-column: span 3; }
+}
+
+/* A category card carries its concern's quiet tint; the title, prices and links stay ink and teal */
 .hub-cat { position: relative; }
+.hub-cat[data-concern]:not([data-concern=""]) { border-color: transparent; background: var(--concern-tint); }
 .hub-cat__mark { position: absolute; left: 12px; top: 12px; z-index: 2; }
 .hub-cat__media { display: block; text-decoration: none; }
+.hub-cat__media .frame { aspect-ratio: 16 / 9; }
 .hub-cat .card__title a::after { content: none; }
 .hub-cat__meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; font-size: 0.875rem; color: var(--muted); }
 
@@ -183,7 +216,7 @@
 	list-style: none;
 	margin: 6px 0 0;
 	padding: 10px 0 0;
-	border-top: 1px solid var(--line);
+	border-top: 1px solid rgb(14 42 47 / 0.14);
 	display: grid;
 }
 
@@ -196,7 +229,7 @@
 	text-decoration: none;
 }
 
-.hub-cat__list li + li { border-top: 1px dashed var(--line); }
+.hub-cat__list li + li { border-top: 1px dashed rgb(14 42 47 / 0.18); }
 .hub-cat__list a:hover { color: var(--teal-hover); text-decoration: underline; }
 
 .hub-help { max-width: 720px; margin-inline: auto; }
