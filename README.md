@@ -19,7 +19,7 @@ Website for **Phòng khám Da liễu Thẩm mỹ Quang Đăng** (Qbe+ Quang Đă
 
 1. cPanel → Git Version Control → Create. Clone URL `https://github.com/mesleepingallday/qd-spa-new.git` (or the SSH URL plus a read-only deploy key in GitHub if the repo is private). Repository Path `repositories/qd-spa-new`.
 2. Manage → Basic Information → Checked-Out Branch: `main`.
-3. `.cpanel.yml` copies `quangdang/` into `/home/vientha8/public_html/wp/wp-content/themes/quangdang-main` (the folder of the active theme). If WordPress lives in another folder (the one containing `wp-config.php`), edit `THEME_DIR` there.
+3. `.cpanel.yml` runs `dev/cpanel-deploy.sh /home/vientha8/public_html/wp-content/themes`: it copies `quangdang/` into every theme folder there whose `style.css` is "Quang Đăng Clinic" (whatever the folder is called), or creates `quangdang/` if there is none. The path must be the `wp-content/themes` of the WordPress that holds `wp-config.php`; if it does not exist the deploy fails instead of creating a stray copy.
 4. Manage → Pull or Deploy → Update from Remote, then Deploy HEAD Commit. Do not edit files inside the clone; cPanel needs a clean working tree.
 
 Recommended plugins: Rank Math **or** Yoast (titles, sitemap). The theme detects them and only adds the medical schema they don't cover.
