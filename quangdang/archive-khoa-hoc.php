@@ -1,6 +1,9 @@
 <?php
 /**
- * Training archive (/dao-tao/): hero, course cards, "why learn here", registration CTA.
+ * Training archive (/dao-tao/): hero with the reasons to learn here, course cards, how a course runs
+ * (ruler on the one dark band), FAQ, registration CTA.
+ *
+ * Job: "is this course real, what will I do in it, when does it start?"
  *
  * @package QuangDang
  */
@@ -16,19 +19,59 @@ $qd_reasons = apply_filters(
 	)
 );
 
+// How a course runs, in order. Owner to confirm these four steps match the real course format.
+$qd_path = apply_filters(
+	'qd_training_path',
+	array(
+		array( 'Kiến thức nền tảng', 'Bác sĩ da liễu giảng về cấu tạo da và các vấn đề thường gặp, kể cả khi nào cần chuyển cho bác sĩ.' ),
+		array( 'Thực hành trên thiết bị', 'Tập ngay tại phòng khám, cạnh những thiết bị đang dùng hằng ngày.' ),
+		array( 'Kèm từng người', 'Lớp nhỏ để giảng viên theo sát và chỉnh từng thao tác của bạn.' ),
+		array( 'Đánh giá cuối khóa', 'Giảng viên nhận xét điểm mạnh và phần cần luyện thêm trước khi bạn vào nghề.' ),
+	)
+);
+
+$qd_faq = apply_filters(
+	'qd_training_faq',
+	array(
+		array( 'Tôi chưa biết gì về chăm sóc da, có học được không?', 'Được. Khóa cơ bản dành cho người mới bắt đầu, đi từ cấu tạo da đến quy trình chăm sóc chuẩn.' ),
+		array( 'Tôi sẽ thực hành ở đâu?', 'Ngay tại phòng khám, cạnh những thiết bị đang dùng hằng ngày, có giảng viên kèm.' ),
+		array( 'Mỗi lớp có bao nhiêu học viên?', 'Lớp nhỏ để giảng viên theo sát từng người. Số học viên cụ thể được báo khi bạn đăng ký.' ),
+		array( 'Xem học phí và lịch khai giảng ở đâu?', 'Ở từng khóa học phía trên. Nếu cần hỏi thêm, để lại số điện thoại và bên đào tạo sẽ gọi lại.' ),
+	)
+);
+qd_schema_faq( $qd_faq );
+
 get_header();
 ?>
 <section class="page-hero training-hero">
 	<div class="container">
 		<?php qd_breadcrumbs(); ?>
-		<h1 class="page-title">Học nghề chăm sóc da cùng bác sĩ</h1>
-		<p class="lead">Các khóa học ngắn, thực hành nhiều, dành cho người mới bắt đầu và kỹ thuật viên muốn nâng tay nghề.</p>
+		<div class="training-hero__grid">
+			<div class="training-hero__text">
+				<h1 class="page-title">Học nghề chăm sóc da cùng bác sĩ</h1>
+				<p class="lead">Các khóa học ngắn, thực hành nhiều, dành cho người mới bắt đầu và kỹ thuật viên muốn nâng tay nghề.</p>
+				<ul class="checklist training-hero__reasons">
+					<?php foreach ( $qd_reasons as list( $qd_icon, $qd_title ) ) : ?>
+						<li><?php qd_the_icon( 'check-circle', array( 'size' => 20 ) ); ?><span><?php echo esc_html( $qd_title ); ?></span></li>
+					<?php endforeach; ?>
+				</ul>
+				<div class="btn-row training-hero__cta">
+					<?php echo qd_button( 'Xem các khóa học', '#course-list', array( 'variant' => 'outline', 'icon_end' => 'chevron-down' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+				</div>
+			</div>
+			<?php
+			$qd_photo = qd_about_photo( 'about/phong-dieu-tri', 'Phòng điều trị tại Quang Đăng, nơi học viên thực hành', '4-3', array( 'loading' => 'eager', 'fetchpriority' => 'high' ), 'training-hero__photo' );
+			if ( $qd_photo ) :
+				?>
+				<div class="training-hero__media"><?php echo $qd_photo; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+			<?php endif; ?>
+		</div>
 	</div>
 </section>
 
 <section class="section" aria-labelledby="course-list">
 	<div class="container">
-		<h2 class="sr-only" id="course-list">Danh sách khóa học</h2>
+		<h2 class="section-title course-list__title" id="course-list">Các khóa học</h2>
 		<?php if ( have_posts() ) : ?>
 			<div class="grid grid--2 course-grid">
 				<?php
@@ -59,7 +102,7 @@ get_header();
 							</ul>
 							<div class="card__foot">
 								<p class="price"><small>Học phí</small> <?php echo esc_html( $qd_fee ? qd_price( $qd_fee ) : 'Liên hệ' ); ?></p>
-								<span class="card__arrow" aria-hidden="true"><?php qd_the_icon( 'arrow-right', array( 'size' => 18 ) ); ?></span>
+								<span class="link-more" aria-hidden="true">Xem khóa học<?php qd_the_icon( 'arrow-right', array( 'size' => 16 ) ); ?></span>
 							</div>
 						</div>
 					</article>
@@ -72,29 +115,43 @@ get_header();
 	</div>
 </section>
 
-<section class="section section--mint" aria-labelledby="why-learn">
+<section class="section section--dark training-path" aria-labelledby="course-path">
 	<div class="container">
 		<?php
 		qd_section_head(
 			array(
-				'id'    => 'why-learn',
-				'title' => 'Vì sao học tại Quang Đăng',
+				'id'    => 'course-path',
+				'title' => 'Một khóa học diễn ra thế nào',
+				'desc'  => 'Từ kiến thức nền đến thao tác thật, mỗi bước đều có giảng viên bên cạnh.',
 			)
 		);
+		get_template_part( 'template-parts/about/ruler', null, array( 'steps' => $qd_path, 'class' => 'ruler--dark' ) );
 		?>
-		<ul class="grid grid--3 reasons">
-			<?php foreach ( $qd_reasons as list( $qd_icon, $qd_title, $qd_text ) ) : ?>
-				<li class="reason">
-					<span class="icon-tile"><?php qd_the_icon( $qd_icon, array( 'size' => 24 ) ); ?></span>
-					<h3 class="reason__title"><?php echo esc_html( $qd_title ); ?></h3>
-					<p class="reason__text"><?php echo esc_html( $qd_text ); ?></p>
-				</li>
-			<?php endforeach; ?>
-		</ul>
 	</div>
 </section>
 
-<section class="section" aria-labelledby="course-cta">
+<section class="section" aria-labelledby="course-faq">
+	<div class="container training-faq">
+		<?php
+		qd_section_head(
+			array(
+				'id'    => 'course-faq',
+				'title' => 'Câu hỏi thường gặp',
+			)
+		);
+		?>
+		<div class="accordion">
+			<?php foreach ( $qd_faq as $qd_i => list( $qd_q, $qd_a ) ) : ?>
+				<details<?php echo 0 === $qd_i ? ' open' : ''; ?>>
+					<summary><?php echo esc_html( $qd_q ); ?></summary>
+					<div class="accordion__body"><p><?php echo esc_html( $qd_a ); ?></p></div>
+				</details>
+			<?php endforeach; ?>
+		</div>
+	</div>
+</section>
+
+<section class="section section--flush-top" aria-labelledby="course-cta">
 	<div class="container">
 		<div class="booking-strip">
 			<div>
