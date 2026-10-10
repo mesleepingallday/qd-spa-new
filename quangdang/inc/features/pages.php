@@ -4,9 +4,10 @@
  *
  * /gioi-thieu/ (and its six subpages) and /tin-tuc/ are WordPress pages, not post types, so a fresh
  * install or a site that only received the theme files answers 404 on them. This creates whatever is
- * missing, once per version, the first time an administrator opens wp-admin. It never edits or
- * overwrites a page that already exists (in any status, trash included) and never touches the
- * front-page setting.
+ * missing, once per version, on the first request after the files arrive. It never edits or
+ * overwrites a page that already exists (published, draft, private or pending; WordPress frees the slug
+ * of a trashed page, so a trashed one is replaced by a new page) and never touches the front-page setting
+ * or a posts page the owner already chose.
  *
  * @package QuangDang
  */
@@ -80,14 +81,29 @@ function qd_ensure_core_pages() {
 	return $created;
 }
 
+/**
+ * Run once per theme version, on the first request after the files arrive (a visitor's request is enough,
+ * nobody has to open wp-admin). add_option() fails when the lock exists, so two simultaneous first requests
+ * cannot both create the pages. A lock left by a crashed request expires after five minutes.
+ */
 add_action(
-	'admin_init',
+	'init',
 	function () {
-		if ( ! current_user_can( 'manage_options' ) || get_option( 'qd_core_pages_ver' ) === QD_VERSION ) {
+		if ( get_option( 'qd_core_pages_ver' ) === QD_VERSION ) {
+			return;
+		}
+		$lock = (int) get_option( 'qd_core_pages_lock', 0 );
+		if ( $lock && time() - $lock < 5 * MINUTE_IN_SECONDS ) {
+			return;
+		}
+		delete_option( 'qd_core_pages_lock' );
+		if ( ! add_option( 'qd_core_pages_lock', time(), '', false ) ) {
 			return;
 		}
 		qd_ensure_core_pages();
 		update_option( 'qd_core_pages_ver', QD_VERSION, false );
+		delete_option( 'qd_core_pages_lock' );
 		flush_rewrite_rules( false );
-	}
+	},
+	99 // After the post types are registered, so the rewrite rules flushed here include them.
 );
