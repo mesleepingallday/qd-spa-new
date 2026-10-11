@@ -4,8 +4,8 @@
  * on phones. On desktop the filled "Đặt lịch" is here; on phones it lives in the sticky action bar, so
  * the phone hero offers the concern directory instead of a second booking button.
  *
- * The photograph is a generated placeholder until an approved clinic photograph replaces it
- * (assets/images/hero/home-portrait.webp).
+ * The photograph is the real clinic logo wall (assets/images/hero/home-portrait.webp, 2:3). The frame
+ * crops it per breakpoint (home.css), so object-position keeps the whole logo in view.
  *
  * @package QuangDang
  */
@@ -28,7 +28,7 @@ defined( 'ABSPATH' ) || exit;
 
 		<div class="hero__media">
 			<div class="hero__photo frame frame--4-5">
-				<?php echo qd_asset_img( 'hero/home-portrait', 'Người phụ nữ mỉm cười, tay chạm nhẹ lên má, làn da sáng khỏe', array( 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '(min-width: 1024px) 520px, 100vw' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+				<?php echo qd_asset_img( 'hero/home-portrait', 'Logo Qbe+ Quang Đăng, Viện thẩm mỹ quốc tế, trên tường phòng khám', array( 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '(min-width: 1024px) 520px, 100vw' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			</div>
 		</div>
 	</div>

@@ -96,7 +96,7 @@ The pre-redesign theme is commit `c481265`. `git archive --format=zip --prefix=q
 ## Still the owner's to do before launch
 
 - One real Android Chrome journey and one Zalo in-app journey on staging (not reproducible here).
-- Replace the placeholder hero and doctor photographs; the layouts survive the swap. Add result posters in wp-admin → Kết quả khách hàng (square, ≥ 1200 px, consent set to "Đã có"); the section stays hidden until one exists.
+- Replace the placeholder doctor photographs (the hero is the real logo-wall photo); the layouts survive the swap. Add result posters in wp-admin → Kết quả khách hàng (square, ≥ 1200 px, consent set to "Đã có"); the section stays hidden until one exists.
 - Substantiate or remove the existing copy "gọi xác nhận trong 15 phút (giờ làm việc)", "Tư vấn miễn phí, không ràng buộc" and "Bác sĩ da liễu trực tiếp thăm khám"; confirm the real clinic address, hours, phone and Zalo in `qd_clinic()`.
 - Decide on the optional hero line "Hiểu làn da. Chăm sóc đúng hướng." (not applied).
 - Check the pages against Vietnamese medical-advertising and patient-photo consent rules.

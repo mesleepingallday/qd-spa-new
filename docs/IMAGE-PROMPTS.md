@@ -17,11 +17,8 @@ Every prompt already includes the shared style: soft daylight, teal/aqua/mint/wh
 
 ### hero/
 
-**`hero/home-portrait.png`** · Ảnh hero trang chủ · 1200×1500
-
-```text
-Portrait of a Vietnamese woman in her early 30s with clear, healthy, softly glowing skin and a gentle natural smile, hair neatly tied back, wearing a soft white knit top, one hand lightly touching her cheek. Background: softly blurred bright clinic interior in mint and white tones with a hint of teal. Keep the face in the upper-right two thirds so both the 5:6 desktop crop and the 4:3 phone crop keep it; nothing is overlaid on the photo. Vertical 4:5. This is a stand-in: the site needs an approved clinic photograph. Photorealistic editorial photo, soft natural window daylight, calm clinical-luxury mood. Color palette: teal #087A82, bright aqua #19C6BE, mist white #F2F7F7, clean white. Realistic Vietnamese / East Asian skin with natural texture, no plastic retouching. Clean minimal background, shallow depth of field, 50mm lens. No text, no logos, no watermark.
-```
+**`hero/home-portrait.png`** · Ảnh hero trang chủ · 1200×1800  
+**ẢNH THẬT, không dùng AI.** ẢNH THẬT: logo Qbe+ Quang Đăng trên tường phòng khám, dọc 2:3. Khung hero cắt 4:3 (điện thoại, máy tính bảng) và 5:6 (máy tính), nên giữ logo ở giữa ảnh.
 
 ### og/
 
