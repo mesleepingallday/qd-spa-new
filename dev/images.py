@@ -41,11 +41,8 @@ def add(group, path, w, h, label, prompt=None, note=""):
 
 # --- Theme design assets (shipped with the theme) --------------------------------------------
 T = "theme"
-add(T, "hero/home-portrait", 1200, 1500, "Ảnh hero trang chủ",
-    "Portrait of a Vietnamese woman in her early 30s with clear, healthy, softly glowing skin and a gentle "
-    "natural smile, hair neatly tied back, wearing a soft white knit top, one hand lightly touching her cheek. "
-    "Background: softly blurred bright clinic interior in mint and white tones with a hint of teal. "
-    "Keep the face in the upper-right two thirds so both the 5:6 desktop crop and the 4:3 phone crop keep it; nothing is overlaid on the photo. Vertical 4:5. This is a stand-in: the site needs an approved clinic photograph. " + PHOTO)
+add(T, "hero/home-portrait", 1200, 1800, "Ảnh hero trang chủ", None,
+    "ẢNH THẬT: logo Qbe+ Quang Đăng trên tường phòng khám, dọc 2:3. Khung hero cắt 4:3 (điện thoại, máy tính bảng) và 5:6 (máy tính), nên giữ logo ở giữa ảnh.")
 add(T, "og/default", 1200, 630, "Ảnh chia sẻ mặc định (Facebook/Zalo)",
     "Wide banner background: soft mint-to-white gradient with subtle pearly light, a blurred bright clinic "
     "interior with teal accents on the right third; the left 60% is calm, empty space for a logo and headline "
