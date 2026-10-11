@@ -98,7 +98,7 @@ The logo and teal brand are unchanged. Tokens live in `assets/css/main.css` (§1
   khoa-hoc-cham-soc-da-chuyen-sau/
 ── not in the menu, but needed by the flows ──
 /tim-lieu-trinh/                    Skin quiz (onboarding)
-/dat-lich/                          Booking
+/dat-lich/                          Booking (the main buttons open SalonHero; see Customizer "Link đặt lịch chính")
 /lien-he/                           Contact, map, opening hours
 ```
 

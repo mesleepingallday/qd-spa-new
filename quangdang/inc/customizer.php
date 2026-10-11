@@ -32,6 +32,7 @@ function qd_clinic_fields() {
 		'license'       => array( 'Số giấy phép hoạt động', '[cần điền]', 'text' ),
 		'announcement'  => array( 'Thông báo đầu trang (để trống để ẩn)', 'Phòng khám làm việc xuyên lễ – đặt lịch trước để được ưu tiên.', 'text' ),
 		'announce_url'  => array( 'Link của thông báo', '/dat-lich/', 'text' ),
+		'booking_url'   => array( 'Link đặt lịch chính (SalonHero). Để trống để dùng trang /dat-lich/', 'https://vienthammyquangdang.salonhero.vn/dat-lich', 'url' ),
 	);
 }
 

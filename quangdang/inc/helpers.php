@@ -206,6 +206,23 @@ function qd_booking_url( $service = null ) {
 }
 
 /**
+ * Link of the main "Đặt lịch" buttons (header, hero, mobile menu, phone bar): the SalonHero booking
+ * page set in Customize → Thông tin phòng khám, or our own booking page when that field is empty.
+ * Service pages, the quiz and the short forms keep using qd_booking_url() to pre-select a service.
+ */
+function qd_main_booking_url() {
+	$url = qd_clinic( 'booking_url' );
+	return $url ? $url : qd_booking_url();
+}
+
+/**
+ * Attributes for a link to qd_main_booking_url(): external links open in a new tab.
+ */
+function qd_main_booking_attrs() {
+	return qd_clinic( 'booking_url' ) ? array( 'target' => '_blank', 'rel' => 'noopener' ) : array();
+}
+
+/**
  * Button markup. Variants: primary | outline | ghost | light (on dark bg).
  *
  * @param string $label Text.

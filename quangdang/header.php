@@ -45,10 +45,11 @@ defined( 'ABSPATH' ) || exit;
 			<?php
 			echo qd_button( // phpcs:ignore WordPress.Security.EscapeOutput
 				'Đặt lịch',
-				qd_booking_url( is_singular( 'dich-vu' ) && ! qd_is_service_category() ? get_the_ID() : null ),
+				qd_main_booking_url(),
 				array(
 					'class' => 'site-header__book',
 					'icon'  => 'calendar-days',
+					'attrs' => qd_main_booking_attrs(),
 				)
 			);
 			?>
