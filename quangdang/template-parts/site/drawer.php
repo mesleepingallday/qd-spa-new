@@ -136,7 +136,7 @@ foreach ( $qd_tree as $qd_item ) {
 		<div class="drawer__foot">
 			<a class="action-bar__btn" href="<?php echo esc_attr( qd_tel_href() ); ?>"><?php qd_the_icon( 'phone', array( 'size' => 22 ) ); ?>Gọi</a>
 			<a class="action-bar__btn" href="<?php echo esc_url( qd_clinic( 'zalo' ) ); ?>" target="_blank" rel="noopener"><?php qd_the_icon( 'message-circle', array( 'size' => 22 ) ); ?>Zalo</a>
-			<?php echo qd_button( 'Đặt lịch khám', qd_booking_url(), array( 'icon' => 'calendar-days' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+			<?php echo qd_button( 'Đặt lịch khám', qd_main_booking_url(), array( 'icon' => 'calendar-days', 'attrs' => qd_main_booking_attrs() ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 		</div>
 	</div>
 </div>

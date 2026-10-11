@@ -22,6 +22,8 @@ Website for **Phòng khám Da liễu Thẩm mỹ Quang Đăng** (Qbe+ Quang Đă
 3. `.cpanel.yml` runs `dev/cpanel-deploy.sh /home/vientha8/public_html/wp-content/themes`: it copies `quangdang/` into every theme folder there whose `style.css` is "Quang Đăng Clinic" (whatever the folder is called), or creates `quangdang/` if there is none. The path must be the `wp-content/themes` of the WordPress that holds `wp-config.php`; if it does not exist the deploy fails instead of creating a stray copy.
 4. Manage → Pull or Deploy → Update from Remote, then Deploy HEAD Commit. Do not edit files inside the clone; cPanel needs a clean working tree.
 
+The main "Đặt lịch" buttons (header, home hero, mobile menu, phone bottom bar) open the SalonHero booking page in a new tab. The address is the Customizer field **Link đặt lịch chính (SalonHero)** under Thông tin phòng khám; clear it to use the theme's own `/dat-lich/` page. Service pages, the quiz and the short forms still use `/dat-lich/`.
+
 Recommended plugins: Rank Math **or** Yoast (titles, sitemap). The theme detects them and only adds the medical schema they don't cover.
 
 ## Local development

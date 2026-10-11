@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 			<p class="hero__lead">Bác sĩ da liễu trực tiếp thăm khám và lên phác đồ riêng cho từng làn da. Ngay tại Quỳnh Lưu, Nghệ An.</p>
 			<div class="hero__actions">
 				<?php
-				echo qd_button( 'Đặt lịch khám', qd_booking_url(), array( 'size' => 'lg', 'class' => 'hero__book' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+				echo qd_button( 'Đặt lịch khám', qd_main_booking_url(), array( 'size' => 'lg', 'class' => 'hero__book', 'attrs' => qd_main_booking_attrs() ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 				echo qd_button( 'Chọn vấn đề của bạn', '#concerns', array( 'size' => 'lg', 'variant' => 'outline', 'icon_end' => 'arrow-right', 'class' => 'hero__pick' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 				?>
 				<a class="link-more hero__guide" href="<?php echo esc_url( home_url( '/tim-lieu-trinh/' ) ); ?>">Tìm dịch vụ phù hợp<?php qd_the_icon( 'arrow-right', array( 'size' => 16 ) ); ?></a>
