@@ -133,3 +133,24 @@
 	.article-split .article-row { grid-template-columns: 168px minmax(0, 1fr); gap: 20px; }
 	.article-split .article-row__title { font-size: 1.125rem; }
 }
+
+/* Space: bento mosaic of real clinic photos */
+.space { display: grid; gap: 32px; }
+.space__text .lead { margin-top: 12px; }
+.space__text .checklist { margin-top: 24px; }
+.space__text .link-more { margin-top: 16px; }
+.space__mosaic { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.space__big { grid-column: 1 / -1; }
+.space__big .frame { border-radius: var(--r-card); }
+.space__mosaic > .frame { border-radius: var(--r-card); }
+
+@media (min-width: 640px) {
+	.space__mosaic { gap: 16px; }
+}
+
+@media (min-width: 1024px) {
+	.space { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: center; }
+	.space__mosaic { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); grid-template-rows: auto auto; }
+	.space__big { grid-column: 1; grid-row: 1 / 3; display: flex; }
+	.space__big .frame { aspect-ratio: auto; flex: 1; min-height: 100%; border-radius: var(--r-feature); }
+}

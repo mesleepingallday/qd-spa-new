@@ -1,8 +1,8 @@
 <?php
 /**
- * About: Cơ sở vật chất — gallery of the real facility + address / getting-there block.
- * Photos are real-photo slots (about/*). In production the gallery only renders photos that
- * are real (never a wall of placeholders), following template-parts/home/results.php.
+ * About: Cơ sở vật chất — guided tour rows of the real facility + address / getting-there block.
+ * Rows are real-photo slots (about/*). In production a row only renders when one of its photos
+ * is real (never a placeholder), following template-parts/home/results.php.
  *
  * @package QuangDang
  */
@@ -13,33 +13,77 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 
-	// [asset key, caption, alt]
-	$qd_shots = apply_filters(
+	// Each row: title, text, facts [label => value], candidate photos [key, alt] in priority order.
+	$qd_rows = apply_filters(
 		'qd_about_facility',
 		array(
-			array( 'about/le-tan', 'Quầy lễ tân – nơi bạn được đón tiếp và đăng ký', 'Quầy lễ tân Phòng khám Quang Đăng' ),
-			array( 'about/phong-tu-van', 'Phòng tư vấn và soi da riêng tư', 'Phòng tư vấn và soi da' ),
-			array( 'about/phong-dieu-tri', 'Phòng điều trị sạch sẽ, thoáng mát', 'Phòng điều trị' ),
-			array( 'about/may-picosure', 'Khu đặt máy Laser Picosure', 'Máy Laser Picosure' ),
-			array( 'about/may-double-cool', 'Khu đặt máy triệt lông Double Cool', 'Máy triệt lông Double Cool' ),
+			array(
+				'title' => 'Đón tiếp & sảnh chờ',
+				'text'  => 'Khu đón tiếp ngay lối vào. Sảnh chờ có ghế sofa để bạn ngồi thư giãn trước khi thăm khám.',
+				'facts' => array(
+					'Không gian' => 'Sảnh chờ có sofa',
+					'Dành cho'   => 'Khách và người đi cùng',
+				),
+				'photos' => array(
+					array( 'about/sanh-cho', 'Sảnh chờ của phòng khám với ghế sofa màu xanh' ),
+					array( 'about/le-tan', 'Khu đón tiếp của Phòng khám Quang Đăng' ),
+				),
+			),
+			array(
+				'title' => 'Phòng chăm sóc da',
+				'text'  => 'Mỗi giường có rèm riêng, giúp bạn thoải mái và kín đáo khi chăm sóc da.',
+				'facts' => array(
+					'Riêng tư' => 'Rèm riêng từng giường',
+					'Vệ sinh'  => 'Khăn riêng cho từng khách',
+				),
+				'photos' => array(
+					array( 'about/phong-cham-soc-da', 'Phòng chăm sóc da với giường có rèm trắng riêng cho từng giường' ),
+					array( 'about/loi-vao', 'Nhìn vào phòng chăm sóc da từ cửa ra vào' ),
+				),
+			),
+			array(
+				'title' => 'Phòng điều trị laser',
+				'text'  => 'Phòng điều trị laser tách biệt, thực hiện theo chỉ định của bác sĩ.',
+				'facts' => array(
+					'Không gian' => 'Phòng riêng',
+					'Thực hiện'  => 'Theo chỉ định của bác sĩ',
+				),
+				'photos' => array(
+					array( 'about/phong-laser', 'Phòng điều trị laser của phòng khám' ),
+				),
+			),
+			array(
+				'title' => 'Khu triệt lông',
+				'text'  => 'Khu triệt lông bố trí gọn gàng, mỗi lượt điều trị có giường riêng.',
+				'facts' => array(
+					'Khu vực' => 'Triệt lông',
+					'Bố trí'  => 'Giường điều trị riêng',
+				),
+				'photos' => array(
+					array( 'about/khu-triet-long', 'Khu triệt lông với máy và giường điều trị' ),
+				),
+			),
 		)
 	);
-	$qd_shots = array_values(
-		array_filter(
-			$qd_shots,
-			function ( $s ) {
-				$img = qd_asset_image( $s[0] );
-				return $img && ( ! $img['placeholder'] || qd_show_placeholders() );
+	// Keep a row only when one of its photos can be shown (never a placeholder in production).
+	$qd_tour = array();
+	foreach ( $qd_rows as $qd_row ) {
+		foreach ( (array) $qd_row['photos'] as list( $qd_key, $qd_alt ) ) {
+			$qd_photo = qd_about_photo( $qd_key, $qd_alt, '4-5', qd_about_photo_attrs( $qd_key ), 'tour__frame' );
+			if ( $qd_photo ) {
+				$qd_row['photo'] = $qd_photo;
+				$qd_tour[]       = $qd_row;
+				break;
 			}
-		)
-	);
+		}
+	}
 
 	$qd_embed = qd_clinic( 'map_embed' );
 
 	get_template_part( 'template-parts/about/hero' );
 	?>
 
-	<?php if ( $qd_shots ) : ?>
+	<?php if ( $qd_tour ) : ?>
 		<section class="section" aria-labelledby="facility-gallery">
 			<div class="container">
 				<?php
@@ -51,16 +95,24 @@ while ( have_posts() ) :
 					)
 				);
 				?>
-				<ul class="gallery">
-					<?php foreach ( $qd_shots as list( $qd_key, $qd_caption, $qd_alt ) ) : ?>
-						<li class="gallery__item">
-							<figure>
-								<?php echo qd_about_photo( $qd_key, $qd_alt, '4-3', array(), 'gallery__frame' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-								<figcaption><?php echo esc_html( $qd_caption ); ?></figcaption>
-							</figure>
-						</li>
+				<div class="tour">
+					<?php foreach ( $qd_tour as $qd_row ) : ?>
+						<article class="tour__row">
+							<div class="tour__media"><?php echo $qd_row['photo']; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+							<div class="tour__body">
+								<h3 class="tour__title"><?php echo esc_html( $qd_row['title'] ); ?></h3>
+								<p><?php echo esc_html( $qd_row['text'] ); ?></p>
+								<?php if ( ! empty( $qd_row['facts'] ) ) : ?>
+									<dl class="facts">
+										<?php foreach ( $qd_row['facts'] as $qd_label => $qd_value ) : ?>
+											<div><dt><?php echo esc_html( $qd_label ); ?></dt><dd><?php echo esc_html( $qd_value ); ?></dd></div>
+										<?php endforeach; ?>
+									</dl>
+								<?php endif; ?>
+							</div>
+						</article>
 					<?php endforeach; ?>
-				</ul>
+				</div>
 			</div>
 		</section>
 	<?php endif; ?>

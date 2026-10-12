@@ -245,6 +245,23 @@ function qd_about_photo( $key, $alt, $ratio = '4-3', $attrs = array(), $class = 
 }
 
 /**
+ * Vertical crop (object-position) for the portrait clinic photos, so the empty ceiling is cut off.
+ * Keys without an entry are centred. Returns img attributes for qd_about_photo().
+ *
+ * @param string $key Asset key.
+ * @return array
+ */
+function qd_about_photo_attrs( $key ) {
+	$y = array(
+		'about/phong-cham-soc-da' => 75,
+		'about/khu-triet-long'    => 75,
+		'about/loi-vao'           => 70,
+		'about/chi-tiet-khan'     => 60,
+	);
+	return isset( $y[ $key ] ) ? array( 'style' => 'object-position:center ' . $y[ $key ] . '%' ) : array();
+}
+
+/**
  * Editor content of the current page, or '' when it only repeats the excerpt
  * (the demo content is just the excerpt in a paragraph).
  */
