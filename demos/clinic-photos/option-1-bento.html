@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phương án 1 – Bento mosaic</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="shared.css">
+<style>
+.bento{display:grid;gap:32px}
+.bento .mosaic{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.mosaic__big{grid-column:1/-1}
+.mosaic__big .frame,.mosaic .frame--1-1{border-radius:var(--r-card)}
+.bento__text .checklist{margin-top:24px}
+.bento__text .link-more{margin-top:16px}
+@media (min-width:640px){.mosaic{gap:16px!important}}
+@media (min-width:1024px){
+.bento{grid-template-columns:5fr 7fr;gap:64px;align-items:center}
+.bento .mosaic{grid-template-columns:3fr 2fr;grid-template-rows:auto auto;gap:16px}
+.mosaic__big{grid-column:1;grid-row:1/3;display:flex}
+.mosaic__big .frame{aspect-ratio:auto;flex:1;min-height:100%;border-radius:var(--r-feature)}
+}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px}
+.tile{display:flex;flex-direction:column;height:100%}
+.tile .frame{border-radius:var(--r-card)}
+.tile figcaption{margin-top:10px;font-size:.9375rem;color:var(--muted)}
+.g-big{grid-column:1/-1}
+@media (min-width:1024px){
+.gallery{grid-template-columns:repeat(12,minmax(0,1fr));gap:32px 24px}
+.g-big{grid-column:span 8;grid-row:span 2}
+.g-side{grid-column:span 4}
+.g-sm{grid-column:span 3}
+.g-big .tile__frame{aspect-ratio:auto;flex:1;border-radius:var(--r-feature)}
+.g-big .tile__frame.frame--pending{min-height:420px}
+}
+</style>
+</head>
+<body>
+<div class="demo-nav"><div class="container"><h1 style="font-size:.9375rem;font-weight:600;color:#fff">Phương án 1: Ảnh xếp mosaic</h1><a href="index.html">&larr; Các phương án</a></div></div>
+<header class="mock-header"><div class="container"><span class="mock-header__logo">Phòng khám Quang Đăng</span><nav class="mock-header__nav" aria-label="Menu mẫu"><span>Dịch vụ</span><span>Bác sĩ</span><span>Cơ sở vật chất</span><span>Liên hệ</span></nav><a class="mock-header__cta" href="#">Đặt lịch</a></div></header>
+<div class="demo-label"><div class="container">Trang chủ</div></div>
+<section class="section" aria-labelledby="h-space"><div class="container"><div class="bento">
+<div class="bento__text"><h2 class="section-title" id="h-space">Không gian phòng khám</h2><p class="section-lead">Sạch sẽ, riêng tư, đúng chuẩn y khoa.</p><ul class="checklist"><li>Rèm riêng từng giường</li><li>Phòng laser tách biệt</li><li>Khăn riêng cho từng khách</li></ul><a class="link-more" href="#facility">Xem cơ sở vật chất &rarr;</a></div>
+<div class="mosaic">
+<div class="mosaic__big"><a class="frame frame--4-5 mosaic__bigframe" href="photos/phong-cham-soc-da.webp" data-lightbox="home" data-caption="Phòng chăm sóc da – rèm riêng từng giường"><img src="photos/phong-cham-soc-da.webp" width="960" height="1280" alt="Phòng chăm sóc da với giường có rèm trắng riêng cho từng giường" class="pos-cham-soc-da" decoding="async"></a></div>
+<a class="frame frame--1-1" href="photos/khu-triet-long.webp" data-lightbox="home" data-caption="Khu triệt lông"><img src="photos/khu-triet-long.webp" width="960" height="1280" alt="Khu triệt lông với máy và giường điều trị" class="pos-triet-long" loading="lazy" decoding="async"></a>
+<a class="frame frame--1-1" href="photos/chi-tiet-khan.webp" data-lightbox="home" data-caption="Khăn riêng cho từng khách"><img src="photos/chi-tiet-khan.webp" width="960" height="1280" alt="Khăn thêu tên phòng khám xếp gọn, dùng riêng cho từng khách" class="pos-khan" loading="lazy" decoding="async"></a>
+</div>
+</div></div></section>
+<section class="section section--mist" aria-labelledby="h-doc">
+<div class="container"><div class="doctor-feature">
+<h2 class="section-title" id="h-doc">Bác sĩ trực tiếp thăm khám</h2>
+<p class="section-lead" style="margin-top:0">Mỗi khách được bác sĩ da liễu hỏi bệnh sử và tư vấn hướng chăm sóc phù hợp trước khi bắt đầu điều trị.</p>
+</div></div></section>
+<div class="demo-label"><div class="container">Trang Cơ sở vật chất</div></div>
+<main id="facility">
+<section aria-labelledby="h-fac-title"><div class="container page-hero"><h2 class="page-title" id="h-fac-title">Cơ sở vật chất</h2><p class="section-lead">Không gian riêng tư, sạch sẽ để bạn yên tâm trước và trong lúc điều trị.</p></div>
+<div class="container" style="padding-block:32px 0"><h3 class="sr-only" id="h-fac">Ảnh các khu vực</h3></div>
+<div class="section" style="padding-top:0"><div class="container"><ul class="gallery" aria-labelledby="h-fac">
+<li class="g-big"><figure class="tile"><a class="frame frame--3-4 tile__frame" href="photos/phong-cham-soc-da.webp" data-lightbox="facility" data-caption="Phòng chăm sóc da – rèm riêng từng giường"><img src="photos/phong-cham-soc-da.webp" width="960" height="1280" alt="Phòng chăm sóc da với giường có rèm trắng riêng cho từng giường" class="pos-cham-soc-da" loading="lazy" decoding="async"></a><figcaption>Phòng chăm sóc da – rèm riêng từng giường</figcaption></figure></li>
+<li class="g-side"><figure class="tile"><a class="frame frame--3-4 tile__frame" href="photos/khu-triet-long.webp" data-lightbox="facility" data-caption="Khu triệt lông"><img src="photos/khu-triet-long.webp" width="960" height="1280" alt="Khu triệt lông với máy và giường điều trị" class="pos-triet-long" loading="lazy" decoding="async"></a><figcaption>Khu triệt lông</figcaption></figure></li>
+<li class="g-side"><figure class="tile"><a class="frame frame--3-4 tile__frame" href="photos/loi-vao.webp" data-lightbox="facility" data-caption="Lối vào phòng chăm sóc da"><img src="photos/loi-vao.webp" width="960" height="1280" alt="Nhìn vào phòng chăm sóc da từ cửa ra vào" class="pos-loi-vao" loading="lazy" decoding="async"></a><figcaption>Lối vào phòng chăm sóc da</figcaption></figure></li>
+<li class="g-sm"><figure class="tile"><a class="frame frame--3-4 tile__frame" href="photos/chi-tiet-khan.webp" data-lightbox="facility" data-caption="Khăn riêng cho từng khách"><img src="photos/chi-tiet-khan.webp" width="960" height="1280" alt="Khăn thêu tên phòng khám xếp gọn, dùng riêng cho từng khách" class="pos-khan" loading="lazy" decoding="async"></a><figcaption>Khăn riêng cho từng khách</figcaption></figure></li>
+<li class="g-sm"><figure class="tile"><span class="frame frame--3-4 frame--pending tile__frame" role="img" aria-label="Sảnh chờ – ngồi thư giãn trước khi thăm khám (ảnh sắp có)"><strong>Sảnh chờ – ngồi thư giãn trước khi thăm khám</strong><small>Ảnh sắp có</small></span><figcaption>Sảnh chờ – ngồi thư giãn trước khi thăm khám</figcaption></figure></li>
+<li class="g-sm"><figure class="tile"><span class="frame frame--3-4 frame--pending tile__frame" role="img" aria-label="Khu đón tiếp (ảnh sắp có)"><strong>Khu đón tiếp</strong><small>Ảnh sắp có</small></span><figcaption>Khu đón tiếp</figcaption></figure></li>
+<li class="g-sm"><figure class="tile"><span class="frame frame--3-4 frame--pending tile__frame" role="img" aria-label="Phòng điều trị laser (ảnh sắp có)"><strong>Phòng điều trị laser</strong><small>Ảnh sắp có</small></span><figcaption>Phòng điều trị laser</figcaption></figure></li>
+</ul></div></div></section></main>
+<footer class="site-foot"><div class="container">Trang demo, chỉ để so sánh cách trình bày ảnh. Không phải trang chính thức.</div></footer>
+<script src="lightbox.js"></script>
+</body>
+</html>

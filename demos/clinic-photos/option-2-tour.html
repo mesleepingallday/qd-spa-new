@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phương án 2 – Tham quan theo bước</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="shared.css">
+<style>
+.steps__body{grid-column:2}
+.steps__thumb{margin-top:12px;width:96px}
+.thumb{border-radius:var(--r-card)}
+.thumb.frame--pending{padding:8px}
+.tour{display:grid;gap:48px}
+.row{display:grid;gap:20px;align-items:center}
+.row__frame{border-radius:var(--r-feature)}
+.row__title{font-size:1.5rem;font-weight:650;line-height:1.25;margin-bottom:12px}
+@media (min-width:640px){.steps__thumb{width:120px}}
+@media (min-width:1024px){
+.steps{grid-template-columns:repeat(5,minmax(0,1fr));gap:24px}
+.steps__item{grid-template-columns:1fr;padding:0}
+.steps__item:not(:last-child)::before{left:60px;right:-12px;top:23px;bottom:auto;width:auto;height:2px}
+.steps__num{grid-row:1;grid-column:1;margin-bottom:16px}
+.steps__title{grid-row:2;grid-column:1}.steps__body{grid-row:3;grid-column:1}
+.steps__title{padding-top:0}
+.tour{gap:72px}
+.row{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:72px}
+.row:nth-child(even) .row__media{order:2}
+.row__media{max-width:480px;width:100%;justify-self:center}
+}
+</style>
+</head>
+<body>
+<div class="demo-nav"><div class="container"><h1 style="font-size:.9375rem;font-weight:600;color:#fff">Phương án 2: Tham quan theo từng bước</h1><a href="index.html">&larr; Các phương án</a></div></div>
+<header class="mock-header"><div class="container"><span class="mock-header__logo">Phòng khám Quang Đăng</span><nav class="mock-header__nav" aria-label="Menu mẫu"><span>Dịch vụ</span><span>Bác sĩ</span><span>Cơ sở vật chất</span><span>Liên hệ</span></nav><a class="mock-header__cta" href="#">Đặt lịch</a></div></header>
+<div class="demo-label"><div class="container">Trang chủ</div></div>
+<section class="section section--dark" aria-labelledby="h-process"><div class="container">
+<div class="section-head"><div><h2 class="section-title" id="h-process" style="color:#fff">Lần đầu đến khám diễn ra thế nào?</h2><p class="section-lead">Năm bước, theo thứ tự, giống nhau cho mọi khách hàng.</p></div></div>
+<ol class="steps">
+<li class="steps__item"><span class="steps__num" aria-hidden="true">1</span><h3 class="steps__title">Thăm khám</h3><div class="steps__body"><p class="steps__text">Bác sĩ hỏi bệnh sử, thói quen chăm sóc da và mong muốn của bạn.</p><div class="steps__thumb"><span class="frame frame--1-1 frame--pending is-small thumb" role="img" aria-label="Khu đón tiếp (ảnh sắp có)"><small>Ảnh sắp có</small></span></div></div></li>
+<li class="steps__item"><span class="steps__num" aria-hidden="true">2</span><h3 class="steps__title">Soi da</h3><div class="steps__body"><p class="steps__text">Máy soi da phân tích mụn, sắc tố, độ ẩm và lỗ chân lông.</p><div class="steps__thumb"><span class="frame frame--1-1 frame--pending is-small thumb" role="img" aria-label="Sảnh chờ – ngồi thư giãn trước khi thăm khám (ảnh sắp có)"><small>Ảnh sắp có</small></span></div></div></li>
+<li class="steps__item"><span class="steps__num" aria-hidden="true">3</span><h3 class="steps__title">Phác đồ riêng</h3><div class="steps__body"><p class="steps__text">Tư vấn liệu trình, số buổi và chi phí rõ ràng trước khi làm.</p></div></li>
+<li class="steps__item"><span class="steps__num" aria-hidden="true">4</span><h3 class="steps__title">Điều trị</h3><div class="steps__body"><p class="steps__text">Thực hiện tại phòng điều trị vô khuẩn, đúng chỉ định.</p><div class="steps__thumb"><span class="frame frame--1-1 thumb"><img src="photos/phong-cham-soc-da.webp" width="960" height="1280" alt="Phòng chăm sóc da với giường có rèm trắng riêng cho từng giường" class="pos-cham-soc-da" loading="lazy" decoding="async"></span></div></div></li>
+<li class="steps__item"><span class="steps__num" aria-hidden="true">5</span><h3 class="steps__title">Tái khám</h3><div class="steps__body"><p class="steps__text">Theo dõi kết quả, điều chỉnh phác đồ, hỗ trợ qua Zalo.</p></div></li>
+</ol></div></section>
+<section class="section section--mist" aria-labelledby="h-doc">
+<div class="container"><div class="doctor-feature">
+<h2 class="section-title" id="h-doc">Bác sĩ trực tiếp thăm khám</h2>
+<p class="section-lead" style="margin-top:0">Mỗi khách được bác sĩ da liễu hỏi bệnh sử và tư vấn hướng chăm sóc phù hợp trước khi bắt đầu điều trị.</p>
+</div></div></section>
+<div class="demo-label"><div class="container">Trang Cơ sở vật chất</div></div>
+<main><section aria-labelledby="h-fac-title"><div class="container page-hero"><h2 class="page-title" id="h-fac-title">Cơ sở vật chất</h2><p class="section-lead">Không gian riêng tư, sạch sẽ để bạn yên tâm trước và trong lúc điều trị.</p></div>
+<div class="section" style="padding-top:40px"><div class="container"><div class="tour">
+<article class="row"><div class="row__media"><span class="frame frame--4-5 frame--pending row__frame" role="img" aria-label="Sảnh chờ – ngồi thư giãn trước khi thăm khám (ảnh sắp có)"><strong>Sảnh chờ – ngồi thư giãn trước khi thăm khám</strong><small>Ảnh sắp có</small></span></div><div class="row__body"><h3 class="row__title">Đón tiếp &amp; sảnh chờ</h3><p>Khu đón tiếp ngay lối vào. Sảnh chờ có ghế sofa để bạn ngồi thư giãn trước khi thăm khám.</p><dl class="facts"><div><dt>Không gian</dt><dd>Sảnh chờ có sofa</dd></div><div><dt>Dành cho</dt><dd>Khách và người đi cùng</dd></div></dl></div></article>
+<article class="row"><div class="row__media"><span class="frame frame--4-5 row__frame"><img src="photos/phong-cham-soc-da.webp" width="960" height="1280" alt="Phòng chăm sóc da với giường có rèm trắng riêng cho từng giường" class="pos-cham-soc-da" loading="lazy" decoding="async"></span></div><div class="row__body"><h3 class="row__title">Phòng chăm sóc da</h3><p>Mỗi giường có rèm riêng, giúp bạn thoải mái và kín đáo khi chăm sóc da.</p><dl class="facts"><div><dt>Riêng tư</dt><dd>Rèm riêng từng giường</dd></div><div><dt>Vệ sinh</dt><dd>Khăn riêng cho từng khách</dd></div></dl></div></article>
+<article class="row"><div class="row__media"><span class="frame frame--4-5 frame--pending row__frame" role="img" aria-label="Phòng điều trị laser (ảnh sắp có)"><strong>Phòng điều trị laser</strong><small>Ảnh sắp có</small></span></div><div class="row__body"><h3 class="row__title">Phòng điều trị laser</h3><p>Phòng điều trị laser tách biệt, thực hiện theo chỉ định của bác sĩ.</p><dl class="facts"><div><dt>Không gian</dt><dd>Phòng riêng</dd></div><div><dt>Thực hiện</dt><dd>Theo chỉ định của bác sĩ</dd></div></dl></div></article>
+<article class="row"><div class="row__media"><span class="frame frame--4-5 row__frame"><img src="photos/khu-triet-long.webp" width="960" height="1280" alt="Khu triệt lông với máy và giường điều trị" class="pos-triet-long" loading="lazy" decoding="async"></span></div><div class="row__body"><h3 class="row__title">Khu triệt lông</h3><p>Khu triệt lông bố trí gọn gàng, mỗi lượt điều trị có giường riêng.</p><dl class="facts"><div><dt>Khu vực</dt><dd>Triệt lông</dd></div><div><dt>Bố trí</dt><dd>Giường điều trị riêng</dd></div></dl></div></article>
+</div></div></div></section></main>
+<footer class="site-foot"><div class="container">Trang demo, chỉ để so sánh cách trình bày ảnh. Không phải trang chính thức.</div></footer>
+</body>
+</html>
