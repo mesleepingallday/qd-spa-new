@@ -41,10 +41,10 @@ function qd_schema_clinic() {
 		'openingHours'     => 'Mo-Su 08:00-20:00',
 		'sameAs'           => array_values( array_filter( array( qd_clinic( 'facebook' ), qd_clinic( 'zalo' ) ) ) ),
 	);
-	$logo_id = get_theme_mod( 'custom_logo' );
-	if ( $logo_id ) {
-		$node['logo'] = wp_get_attachment_image_url( $logo_id, 'full' );
-	}
+	$logo_id      = get_theme_mod( 'custom_logo' );
+	$node['logo'] = $logo_id
+		? wp_get_attachment_image_url( $logo_id, 'full' )
+		: QD_URI . '/assets/images/brand/logo-on-light.png';
 	return $node;
 }
 
