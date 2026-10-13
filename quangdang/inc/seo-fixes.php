@@ -28,7 +28,8 @@ function qd_slug_aliases() {
 			'phuc-hoi-da'                     => 'cham-soc-phuc-hoi-da',
 			'tre-hoa-da-cong-nghe-cao'        => 'cham-soc-tre-hoa-da-bang-cong-nghe-cao',
 			'kiem-dau-tre-hoa-laser-picosure' => 'kiem-dau-tre-hoa-da-bang-cong-nghe-laser-picosure',
-			'xoa-xam-tattoo'                  => 'xoa-xam-tatoo',
+			'xoa-xam-tattoo'                  => 'xoa-xam-hinh-xam',
+			'xoa-xam-tatoo'                   => 'xoa-xam-hinh-xam',
 		)
 	);
 }
@@ -52,7 +53,7 @@ function qd_resolve_url( $url ) {
 
 	static $map = null;
 	if ( null === $map ) {
-		$map = get_transient( 'qd_url_map' );
+		$map = get_transient( 'qd_url_map_v2' );
 		$map = is_array( $map ) ? $map : array();
 	}
 	if ( array_key_exists( $path, $map ) ) {
@@ -64,8 +65,9 @@ function qd_resolve_url( $url ) {
 	$first    = $segments[0];
 	$last     = end( $segments );
 
-	if ( url_to_postid( home_url( "/$path/" ) ) ) {
-		$resolved = home_url( "/$path/" );
+	$id = url_to_postid( home_url( "/$path/" ) );
+	if ( $id ) {
+		$resolved = get_permalink( $id ); // Canonical address, not a path WordPress would 301.
 	} elseif ( 1 === count( $segments ) && in_array( $first, array( 'dich-vu', 'dao-tao' ), true ) ) {
 		$resolved = home_url( "/$path/" ); // CPT archives.
 	} else {
@@ -90,12 +92,12 @@ function qd_resolve_url( $url ) {
 	}
 
 	$map[ $path ] = is_string( $resolved ) ? $resolved : '';
-	set_transient( 'qd_url_map', $map, DAY_IN_SECONDS );
+	set_transient( 'qd_url_map_v2', $map, DAY_IN_SECONDS );
 	return $map[ $path ];
 }
 
 foreach ( array( 'save_post', 'deleted_post', 'created_term', 'edited_term', 'delete_term' ) as $qd_hook ) {
-	add_action( $qd_hook, fn() => delete_transient( 'qd_url_map' ) );
+	add_action( $qd_hook, fn() => delete_transient( 'qd_url_map_v2' ) );
 }
 
 /**
@@ -200,6 +202,9 @@ function qd_auto_description() {
 	if ( is_post_type_archive( 'dich-vu' ) ) {
 		return qd_trim_description( "Bảng dịch vụ của $clinic (Quỳnh Lưu, Nghệ An): điều trị mụn, thâm, nám, sẹo, xóa xăm, chăm sóc da, filler, botox. Xem ai phù hợp, số buổi và giá từ." );
 	}
+	if ( is_post_type_archive( 'khoa-hoc' ) ) {
+		return qd_trim_description( "Khóa học chăm sóc da cơ bản và chuyên sâu tại $clinic, Quỳnh Lưu, Nghệ An: học lý thuyết và thực hành cùng bác sĩ, kỹ thuật viên. Xem lịch học và học phí." );
+	}
 	if ( is_category() ) {
 		$term = get_queried_object();
 		$desc = term_description( $term );
@@ -281,7 +286,136 @@ add_action(
 				wp_insert_term( $name, 'category', array( 'slug' => $slug ) );
 			}
 		}
-		delete_transient( 'qd_url_map' );
+		delete_transient( 'qd_url_map_v2' );
 		update_option( 'qd_core_content_v1', time(), false );
+	}
+);
+
+/**
+ * Concern tiles and chips (home, search, 404, quiz) link straight to the canonical page. A concern
+ * with no category page of its own falls back to a representative service, never the services
+ * archive: qd_concern_for_post() matches by URL prefix and /dich-vu/ would match every service.
+ */
+add_filter(
+	'qd_concerns',
+	function ( $concerns ) {
+		$fallback = array( 'filler-botox' => '/dich-vu/filler/' );
+		foreach ( $concerns as $key => &$concern ) {
+			$url = qd_resolve_url( $concern['url'] );
+			if ( '' === $url && isset( $fallback[ $key ] ) ) {
+				$url = qd_resolve_url( home_url( $fallback[ $key ] ) );
+			}
+			if ( $url ) {
+				$concern['url'] = $url;
+			}
+		}
+		return $concerns;
+	},
+	20
+);
+
+/**
+ * Title with search intent and location, used when the editor hasn't set one ('' = keep the plugin's).
+ */
+function qd_auto_title() {
+	$brand = 'Quang Đăng';
+	if ( is_post_type_archive( 'dich-vu' ) ) {
+		return "Dịch vụ da liễu thẩm mỹ tại Quỳnh Lưu, Nghệ An | $brand";
+	}
+	if ( is_post_type_archive( 'khoa-hoc' ) ) {
+		return "Khóa học chăm sóc da tại Nghệ An | $brand";
+	}
+	if ( ! is_singular( 'dich-vu' ) ) {
+		return '';
+	}
+	$post = get_queried_object();
+	if ( get_post_meta( $post->ID, 'rank_math_title', true ) || get_post_meta( $post->ID, '_yoast_wpseo_title', true ) ) {
+		return '';
+	}
+	$name  = wp_strip_all_tags( get_the_title( $post ) );
+	$title = "$name tại Quỳnh Lưu, Nghệ An | $brand";
+	return mb_strlen( $title ) <= 60 ? $title : "$name | $brand";
+}
+foreach ( array( 'rank_math/frontend/title', 'wpseo_title', 'pre_get_document_title' ) as $qd_hook ) {
+	add_filter(
+		$qd_hook,
+		function ( $title ) use ( $qd_hook ) {
+			if ( 'pre_get_document_title' === $qd_hook && qd_seo_plugin_active() ) {
+				return $title;
+			}
+			$auto = qd_auto_title();
+			return $auto ? $auto : $title;
+		},
+		20
+	);
+}
+
+/**
+ * Keep redirected duplicates (qd_redirect_map()) out of the XML sitemap.
+ */
+$qd_sitemap_filter = function ( $entry ) {
+	$loc = is_array( $entry ) ? ( $entry['loc'] ?? '' ) : '';
+	$path = trim( (string) wp_parse_url( $loc, PHP_URL_PATH ), '/' );
+	return $path && isset( qd_redirect_map()[ $path ] ) ? false : $entry;
+};
+add_filter( 'rank_math/sitemap/entry', $qd_sitemap_filter );
+add_filter( 'wpseo_sitemap_entry', $qd_sitemap_filter );
+
+/**
+ * One clinic entity: Rank Math's site entity (#organization) becomes a plain Organization with the
+ * clinic's name, so the theme's #clinic node is the only MedicalClinic. The @id is kept, so the
+ * WebSite / publisher references still resolve.
+ */
+add_filter(
+	'rank_math/json_ld',
+	function ( $data ) {
+		if ( ! is_array( $data ) ) {
+			return $data;
+		}
+		foreach ( $data as &$entity ) {
+			if ( ! is_array( $entity ) || ! str_ends_with( (string) ( $entity['@id'] ?? '' ), '#organization' ) ) {
+				continue;
+			}
+			$types = (array) ( $entity['@type'] ?? array() );
+			if ( array_intersect( $types, array( 'LocalBusiness', 'MedicalClinic', 'MedicalBusiness', 'HealthAndBeautyBusiness', 'BeautySalon', 'DaySpa', 'Physician' ) ) ) {
+				$entity['@type'] = 'Organization';
+				$entity['name']  = qd_clinic( 'name' );
+				unset( $entity['openingHours'], $entity['openingHoursSpecification'], $entity['priceRange'], $entity['geo'] );
+			}
+		}
+		return $data;
+	},
+	99
+);
+
+/**
+ * One-time content fix: the tattoo-removal service was published as "Xóa xăm tatoo" / xoa-xam-tatoo.
+ * WordPress keeps the old slug, so the old URL 301s to the new one.
+ */
+add_action(
+	'admin_init',
+	function () {
+		if ( get_option( 'qd_content_fix_v2' ) || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$post = get_posts(
+			array(
+				'name'           => 'xoa-xam-tatoo',
+				'post_type'      => 'dich-vu',
+				'post_status'    => 'any',
+				'posts_per_page' => 1,
+			)
+		);
+		if ( $post ) {
+			wp_update_post(
+				array(
+					'ID'         => $post[0]->ID,
+					'post_name'  => 'xoa-xam-hinh-xam',
+					'post_title' => 'Xóa hình xăm',
+				)
+			);
+		}
+		delete_transient( 'qd_url_map_v2' );
+		update_option( 'qd_content_fix_v2', time(), false );
 	}
 );

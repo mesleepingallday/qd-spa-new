@@ -45,10 +45,14 @@ Done in the theme (`inc/seo-fixes.php`):
 - ✅ 301s: the 6 root About duplicates → `/gioi-thieu/…`, and any 404 URL that matches a real page (for example `/dich-vu/noi-khoa-tham-my/filler/`).
 - ✅ Each page gets its own meta description automatically. A description written in Rank Math always wins.
 - ✅ The footer shows "Đánh giá trên Google" (your review link).
+- ✅ (round 2) Menu, concern tiles and chips link straight to the canonical page (no 301 hops; "Filler – Botox" was a 404).
+- ✅ (round 2) Service titles carry the location: "Điều trị mụn tại Quỳnh Lưu, Nghệ An | Quang Đăng" (only when no Rank Math title is set). The `/dich-vu/` and `/dao-tao/` archives get a real title and description.
+- ✅ (round 2) The redirected About duplicates are out of the XML sitemap.
+- ✅ (round 2) Only one clinic entity in the schema: Rank Math's site entity is turned into a plain Organization with the clinic name.
+- ✅ (round 2) "Xóa xăm tatoo" is renamed to "Xóa hình xăm" (`/dich-vu/xoa-xam/xoa-xam-hinh-xam/`) the first time an admin opens wp-admin; the old URL 301s.
 
 Still to do in wp-admin:
-- [ ] Delete the 6 About pages at the root (`/doi-ngu-chuyen-gia-bac-si/`, `/qua-trinh-hinh-thanh/`, `/tam-nhin-su-menh/`, `/cong-nghe-san-pham/`, `/co-so-vat-chat/`); the redirects already cover them.
-- [ ] Service "xoa-xam-tatoo": change the slug to `xoa-xam-hinh-xam` and fix "tatoo" in the title. WordPress redirects the old URL.
+- [ ] (Optional: they already redirect and are out of the sitemap) Delete the 6 About pages at the root (`/doi-ngu-chuyen-gia-bac-si/`, `/qua-trinh-hinh-thanh/`, `/tam-nhin-su-menh/`, `/cong-nghe-san-pham/`, `/co-so-vat-chat/`); the redirects already cover them.
 - [ ] Settings → General → Site Title, and Rank Math → Titles & Meta → Local SEO → name: "Phòng khám Da liễu Thẩm mỹ Quang Đăng", type **Organization** (this removes the second clinic schema node).
 - [ ] Customize → Thông tin phòng khám: the licence number, latitude/longitude and the Google listing link.
 - [ ] Write the 2 course posts (Đào tạo) and the first blog posts. They appear in the menu automatically.
