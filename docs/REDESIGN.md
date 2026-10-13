@@ -23,7 +23,7 @@ Spec: the "Quang Đăng: a bright, confident clinic experience" brief (9 Oct 202
 - **Shell.** The utility bar is gone (address and hours stay in the drawer, footer, contact and booking strip). A parent menu item is a real link plus a separate disclosure button, so "Dịch vụ" works without JavaScript. The phone header shows a labelled "Menu" button; search moves into the menu sheet below 480px and the logo tagline yields below 360px so nothing overflows. The drawer makes the page inert while open. The action bar hides while a text field has focus and while the booking form is on screen. "Kiểm tra da 1 phút" is now "Tìm dịch vụ phù hợp" everywhere.
 - **One palette.** `theme.json` is the palette; the CSS tokens read its presets with the same hex as fallback, and `dev/contrast-check.py` fails if the two differ. The legacy `brand-*`, `ivory-*` and `accent-*` slugs and the `--c-*` CSS aliases were removed in Phase 7; promotions use `--sun`.
 - **One font, really.** theme.json's global styles, the editor stylesheet and the logo stand-in all use the one sans now; Be Vietnam Pro and Playfair Display are removed (14 files). Leaving the logo stand-in in Playfair alone cost 28 KB on every page. The official logo is an uploaded image and is unaffected.
-- **Home composition.** The old trust row, the four "why" pillars and the 8-tile category grid with the quiz tile are gone: each repeated the menu or made claims the clinic has not verified. The hero's floating doctor chip is gone too (the practitioner has her own section). Results and offers stack on phones instead of scrolling sideways. The results comparison control is deferred: the section only renders with real consented photos.
+- **Home composition.** The old trust row, the four "why" pillars and the 8-tile category grid with the quiz tile are gone: each repeated the menu or made claims the clinic has not verified. The hero's floating doctor chip is gone too (the practitioner has her own section). Offers stack on phones. Results are a curved (concave) carousel of before/after posters: the bend is a CSS scroll-driven animation (Chrome, Edge, Safari 26+), other browsers and reduced motion get a flat snap carousel. Cases come from the `ket-qua` type (`inc/features/results.php`) and only render with written consent.
 - **Links never take a concern hue** (red for Mụn would read as an error): concern colour is for tiles and quiet panel tints only; links on tints are `--teal-hover` (≥ 5.5:1 on every tint, in the gate).
 - **Admin bar.** Sticky things (header, service index, sticky aside) sit below the WordPress admin bar through `--admin-bar-h` (WP's own variable, 0 for visitors and under 601px where the bar scrolls away); `dev/check-shell.mjs` logs in locally to prove it. Before this, logged-in editors would have had the sticky header hidden under the bar.
 - **Concern identity on service pages.** `qd_concern_for_post()` maps a category or service to its concern by URL prefix; the hero takes the concern's quiet tint and shows its tile (beside the H1 on categories, beside the category link on services). Booking buttons and links stay teal.
@@ -76,6 +76,19 @@ Budgets: CSS ≤ 25 KB, fonts ≤ 100 KB, hero image ≤ 180 KB phone. Before th
 
 `contrast-check.py` 71/71 · `check-shell.mjs` 26/26 · `check-forms.mjs` 18/18 · `check-degrade.mjs` 12/12 · overflow sweep of 19 URLs at 320/375/768/1024/1440 clean · lab home LCP 1.80 s, CLS 0, CSS 13.1 KB gz, fonts 82.5 KB, JS 8.2 KB gz in total (booking.js 5.2 KB is existing behaviour; the redesign itself added +0.6 KB gz to `main.js`, 2,410 → 2,995 B, against a 3 KB budget).
 
+## Phase 8: /gioi-thieu/, /dich-vu/, /tin-tuc/, /dao-tao/ upgrade
+
+Same system (tokens, font, rules), more structure. The one signature device is the **ruler**: a millimetre scale with steps hung on it, used only for real sequences (a patient visit on `/gioi-thieu/`, how a course runs on `/dao-tao/`). Built once in `template-parts/about/ruler.php`, styled in `assets/css/pages/trust.css` (loads on `/gioi-thieu/` and the training archive). The same file holds the fact row (`template-parts/about/facts.php`).
+
+- `/gioi-thieu/`: photo stage hero with a service-led H1, fact row built only from data the site has (doctor count, lead doctor's years, service count; missing values are left out), ruler timeline, bento of the six subpages (two large with photo, four small), lead doctor with credentials. `.about-kicker` no longer used on the hub.
+- `/dich-vu/`: the eight concern tiles are the hero's working part; sticky group tabs with scroll-spy (existing `data-scrollspy`, no new JS); category cards take the concern tint; a last row that would leave a gap stretches to fill it (`.hub-fill`).
+- `/tin-tuc/`: hero head row (title + lead left, tabs right on desktop); the featured post is an open editorial spread instead of another boxed card. Topic chips still wrap on purpose (every topic stays visible).
+- `/dao-tao/`: reasons moved into the hero as a short checklist with a photo stage, course cards link text "Xem khóa học", ruler on the one dark band, FAQ with `FAQPage` schema.
+
+Filters for owners: `qd_about_facts`, `qd_about_visit_steps`, `qd_training_path`, `qd_training_faq`, `qd_training_reasons`.
+
+Owner to confirm: the five visit steps and the four course steps match reality; the FAQ answers (no fee, certificate or class-size promises were made). Real photos needed: reception (4:3), lead doctor (4:5), treatment room or classroom (4:3), two large About cards (4:3).
+
 ## Rollback
 
 The pre-redesign theme is commit `c481265`. `git archive --format=zip --prefix=quangdang/ c481265:quangdang -o dist/quangdang-before-redesign.zip` rebuilds an installable copy; upload it over the new theme in Appearance → Themes. No database change is involved (the `lich-hen` posts and settings are untouched), so rolling back is just a theme swap.
@@ -83,8 +96,8 @@ The pre-redesign theme is commit `c481265`. `git archive --format=zip --prefix=q
 ## Still the owner's to do before launch
 
 - One real Android Chrome journey and one Zalo in-app journey on staging (not reproducible here).
-- Replace the placeholder hero, doctor and results photographs; the layouts survive the swap and the results section stays hidden until a consented pair exists.
+- Replace the placeholder doctor photographs (the hero is the real logo-wall photo); the layouts survive the swap. Add result posters in wp-admin → Kết quả khách hàng (square, ≥ 1200 px, consent set to "Đã có"); the section stays hidden until one exists.
 - Substantiate or remove the existing copy "gọi xác nhận trong 15 phút (giờ làm việc)", "Tư vấn miễn phí, không ràng buộc" and "Bác sĩ da liễu trực tiếp thăm khám"; confirm the real clinic address, hours, phone and Zalo in `qd_clinic()`.
 - Decide on the optional hero line "Hiểu làn da. Chăm sóc đúng hướng." (not applied).
 - Check the pages against Vietnamese medical-advertising and patient-photo consent rules.
-- Deferred: the optional before/after range slider (side-by-side is the default and ships); the prototype file `Quang_Dang_Homepage_Prototype.html` was never on this machine, so Phase 2 was not diffed against it.
+- Deferred: the prototype file `Quang_Dang_Homepage_Prototype.html` was never on this machine, so Phase 2 was not diffed against it.

@@ -74,21 +74,24 @@ foreach ( $qd_posts as $qd_item ) {
 <section class="page-hero blog-hero">
 	<div class="container">
 		<?php qd_breadcrumbs(); ?>
-		<h1 class="page-title"><?php echo esc_html( $qd_title ); ?></h1>
-		<?php if ( $qd_lead ) : ?>
-			<p class="lead"><?php echo esc_html( $qd_lead ); ?></p>
-		<?php endif; ?>
-		<?php if ( $qd_service ) : ?>
-			<a class="link-more blog-hero__service" href="<?php echo esc_url( get_permalink( $qd_service ) ); ?>">Xem dịch vụ <?php echo esc_html( mb_strtolower( $qd_service->post_title ) ); ?><?php qd_the_icon( 'arrow-right', array( 'size' => 16 ) ); ?></a>
-		<?php endif; ?>
-
-		<nav class="blog-tabs" aria-label="Chuyên mục tin tức">
-			<ul>
-				<?php foreach ( $qd_tabs as list( $qd_label, $qd_url, $qd_active ) ) : ?>
-					<li><a href="<?php echo esc_url( $qd_url ); ?>"<?php echo $qd_active ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $qd_label ); ?></a></li>
-				<?php endforeach; ?>
-			</ul>
-		</nav>
+		<div class="blog-hero__head">
+			<div class="blog-hero__text">
+			<h1 class="page-title"><?php echo esc_html( $qd_title ); ?></h1>
+			<?php if ( $qd_lead ) : ?>
+				<p class="lead"><?php echo esc_html( $qd_lead ); ?></p>
+			<?php endif; ?>
+			<?php if ( $qd_service ) : ?>
+				<a class="link-more blog-hero__service" href="<?php echo esc_url( get_permalink( $qd_service ) ); ?>">Xem dịch vụ <?php echo esc_html( mb_strtolower( $qd_service->post_title ) ); ?><?php qd_the_icon( 'arrow-right', array( 'size' => 16 ) ); ?></a>
+			<?php endif; ?>
+			</div>
+			<nav class="blog-tabs" aria-label="Chuyên mục tin tức">
+				<ul>
+					<?php foreach ( $qd_tabs as list( $qd_label, $qd_url, $qd_active ) ) : ?>
+						<li><a href="<?php echo esc_url( $qd_url ); ?>"<?php echo $qd_active ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $qd_label ); ?></a></li>
+					<?php endforeach; ?>
+				</ul>
+			</nav>
+		</div>
 
 		<?php if ( $qd_topics ) : ?>
 			<nav class="blog-topics" aria-label="Chủ đề">

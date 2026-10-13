@@ -41,20 +41,14 @@ def add(group, path, w, h, label, prompt=None, note=""):
 
 # --- Theme design assets (shipped with the theme) --------------------------------------------
 T = "theme"
-add(T, "hero/home-portrait", 1200, 1500, "Ảnh hero trang chủ",
-    "Portrait of a Vietnamese woman in her early 30s with clear, healthy, softly glowing skin and a gentle "
-    "natural smile, hair neatly tied back, wearing a soft white knit top, one hand lightly touching her cheek. "
-    "Background: softly blurred bright clinic interior in mint and white tones with a hint of teal. "
-    "Keep the face in the upper-right two thirds so both the 5:6 desktop crop and the 4:3 phone crop keep it; nothing is overlaid on the photo. Vertical 4:5. This is a stand-in: the site needs an approved clinic photograph. " + PHOTO)
+add(T, "hero/home-portrait", 1200, 1800, "Ảnh hero trang chủ", None,
+    "ẢNH THẬT: logo Qbe+ Quang Đăng trên tường phòng khám, dọc 2:3. Khung hero cắt 4:3 (điện thoại, máy tính bảng) và 5:6 (máy tính), nên giữ logo ở giữa ảnh.")
 add(T, "og/default", 1200, 630, "Ảnh chia sẻ mặc định (Facebook/Zalo)",
     "Wide banner background: soft mint-to-white gradient with subtle pearly light, a blurred bright clinic "
     "interior with teal accents on the right third; the left 60% is calm, empty space for a logo and headline "
     "to be added later. 1200x630. " + PHOTO)
 add(T, "misc/not-found", 800, 600, "Minh họa trang 404",
     "A hand mirror lying next to a small green leaf and a tiny question mark sparkle, friendly and calm. " + ILLUS.replace("Part of a matching set of 8 icons — keep identical style.", ""))
-for n, svc in [(1, "Trị mụn"), (2, "Điều trị nám"), (3, "Trị thâm nách")]:
-    add(T, f"results/{n}-truoc", 800, 800, f"Trước – {svc}", None, "ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Cùng góc chụp, cùng ánh sáng với ảnh Sau.")
-    add(T, f"results/{n}-sau", 800, 800, f"Sau – {svc}", None, "ẢNH THẬT, cùng khách hàng và góc chụp với ảnh Trước.")
 for key, label in [
     ("about/le-tan", "Quầy lễ tân"),
     ("about/phong-dieu-tri", "Phòng điều trị"),
@@ -128,6 +122,9 @@ for slug, subject in {
     "khoa-hoc-cham-soc-da-chuyen-sau": "an instructor demonstrating a skin analysis device to two trainees in a modern clinic",
 }.items():
     add(D, f"courses/{slug}", 1280, 720, f"Khóa học: {slug}", subject[0].upper() + subject[1:] + ". Horizontal 16:9. " + PHOTO)
+for n in range(1, 5):
+    add(D, f"results/{n}", 1200, 1200, f"Poster kết quả {n}", None,
+        "POSTER trước/sau từ ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Trên web: wp-admin → Kết quả khách hàng → Ảnh poster.")
 for n in (1, 2):
     add(D, f"doctors/{n}", 960, 1200, f"Bác sĩ {n}", None, "ẢNH THẬT của bác sĩ: áo blouse trắng, nền sáng trơn, khoảng 4:5.")
 

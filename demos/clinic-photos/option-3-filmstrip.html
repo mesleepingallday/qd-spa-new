@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phương án 3 – Dải ảnh</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="shared.css">
+<style>
+.strip-wrap{position:relative}
+.strip{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px var(--gutter) 12px;margin-inline:calc(var(--gutter) * -1);scroll-padding-inline:var(--gutter);overscroll-behavior-x:contain}
+.strip__item{flex:0 0 72vw;scroll-snap-align:start}
+.tile{display:flex;flex-direction:column}
+.tile .frame{border-radius:var(--r-card)}
+.tile figcaption{margin-top:10px;font-size:.9375rem;color:var(--muted)}
+.strip-ctrl{display:flex;align-items:center;gap:16px;margin-top:8px}
+.strip-bar{flex:1;height:4px;border-radius:var(--r-pill);background:var(--line);position:relative;overflow:hidden}
+.strip-bar span{position:absolute;top:0;bottom:0;left:0;width:30%;background:var(--teal)}
+.strip-btns{display:none;gap:8px}
+.js .strip-btns{display:none}
+.strip-btn{width:44px;height:44px;border-radius:50%;border:2px solid var(--teal);background:#fff;color:var(--teal);font-size:1.5rem;line-height:1;display:grid;place-items:center}
+.strip-btn:hover{background:var(--teal);color:#fff}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px}
+@media (min-width:640px){.strip__item{flex-basis:280px}.js .strip-btns{display:flex}.gallery{gap:24px 20px}}
+@media (min-width:1024px){.strip{margin-inline:0;padding-inline:0;scroll-padding-inline:0}.gallery{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 24px}}
+</style>
+</head>
+<body>
+<div class="demo-nav"><div class="container"><h1 style="font-size:.9375rem;font-weight:600;color:#fff">Phương án 3: Dải ảnh cuộn ngang</h1><a href="index.html">&larr; Các phương án</a></div></div>
+<header class="mock-header"><div class="container"><span class="mock-header__logo">Phòng khám Quang Đăng</span><nav class="mock-header__nav" aria-label="Menu mẫu"><span>Dịch vụ</span><span>Bác sĩ</span><span>Cơ sở vật chất</span><span>Liên hệ</span></nav><a class="mock-header__cta" href="#">Đặt lịch</a></div></header>
+<div class="demo-label"><div class="container">Trang chủ</div></div>
+<section class="section" aria-labelledby="h-space"><div class="container">
+<div class="section-head"><div><h2 class="section-title" id="h-space">Không gian phòng khám</h2><p class="section-lead">Sạch sẽ, riêng tư, đúng chuẩn y khoa.</p></div><a class="link-more" href="#facility">Xem tất cả &rarr;</a></div>
+<div class="strip-wrap"><ul class="strip" tabindex="0" role="region" aria-label="Ảnh phòng khám, cuộn ngang">
+<li class="strip__item"><figure class="tile"><a class="frame frame--3-4 tile__frame" href="photos/phong-cham-soc-da.webp" data-lightbox="strip" data-caption="Phòng chăm sóc da – rèm riêng từng giường"><img src="photos/phong-cham-soc-da.webp" width="960" height="1280" alt="Phòng chăm sóc da với giường có rèm trắng riêng cho từng giường" class="pos-cham-soc-da" loading="lazy" decoding="async"></a><figcaption>Phòng chăm sóc da – rèm riêng từng giường</figcaption></figure></li>
+<li class="strip__item"><figure class="tile"><a class="frame frame--3-4 tile__frame" href="photos/khu-triet-long.webp" data-lightbox="strip" data-caption="Khu triệt lông"><img src="photos/khu-triet-long.webp" width="960" height="1280" alt="Khu triệt lông với máy và giường điều trị" class="pos-triet-long" loading="lazy" decoding="async"></a><figcaption>Khu triệt lông</figcaption></figure></li>
+<li class="strip__item"><figure class="tile"><a class="frame frame--3-4 tile__frame" href="photos/loi-vao.webp" data-lightbox="strip" data-caption="Lối vào phòng chăm sóc da"><img src="photos/loi-vao.webp" width="960" height="1280" alt="Nhìn vào phòng chăm sóc da từ cửa ra vào" class="pos-loi-vao" loading="lazy" decoding="async"></a><figcaption>Lối vào phòng chăm sóc da</figcaption></figure></li>
+<li class="strip__item"><figure class="tile"><a class="frame frame--3-4 tile__frame" href="photos/chi-tiet-khan.webp" data-lightbox="strip" data-caption="Khăn riêng cho từng khách"><img src="photos/chi-tiet-khan.webp" width="960" height="1280" alt="Khăn thêu tên phòng khám xếp gọn, dùng riêng cho từng khách" class="pos-khan" loading="lazy" decoding="async"></a><figcaption>Khăn riêng cho từng khách</figcaption></figure></li>
+<li class="strip__item"><figure class="tile"><span class="frame frame--3-4 frame--pending tile__frame" role="img" aria-label="Sảnh chờ – ngồi thư giãn trước khi thăm khám (ảnh sắp có)"><strong>Sảnh chờ – ngồi thư giãn trước khi thăm khám</strong><small>Ảnh sắp có</small></span><figcaption>Sảnh chờ – ngồi thư giãn trước khi thăm khám</figcaption></figure></li>
+<li class="strip__item"><figure class="tile"><span class="frame frame--3-4 frame--pending tile__frame" role="img" aria-label="Khu đón tiếp (ảnh sắp có)"><strong>Khu đón tiếp</strong><small>Ảnh sắp có</small></span><figcaption>Khu đón tiếp</figcaption></figure></li>
+<li class="strip__item"><figure class="tile"><span class="frame frame--3-4 frame--pending tile__frame" role="img" aria-label="Phòng điều trị laser (ảnh sắp có)"><strong>Phòng điều trị laser</strong><small>Ảnh sắp có</small></span><figcaption>Phòng điều trị laser</figcaption></figure></li>
+</ul>
+<div class="strip-ctrl"><div class="strip-bar" aria-hidden="true"><span></span></div><div class="strip-btns"><button type="button" class="strip-btn" data-strip-prev aria-label="Ảnh trước">&#8249;</button><button type="button" class="strip-btn" data-strip-next aria-label="Ảnh sau">&#8250;</button></div></div></div>
+</div></section>
+<section class="section section--mist" aria-labelledby="h-doc">
+<div class="container"><div class="doctor-feature">
+<h2 class="section-title" id="h-doc">Bác sĩ trực tiếp thăm khám</h2>
+<p class="section-lead" style="margin-top:0">Mỗi khách được bác sĩ da liễu hỏi bệnh sử và tư vấn hướng chăm sóc phù hợp trước khi bắt đầu điều trị.</p>
+</div></div></section>
+<div class="demo-label"><div class="container">Trang Cơ sở vật chất</div></div>
+<main id="facility"><section aria-labelledby="h-fac-title"><div class="container page-hero"><h2 class="page-title" id="h-fac-title">Cơ sở vật chất</h2><p class="section-lead">Không gian riêng tư, sạch sẽ để bạn yên tâm trước và trong lúc điều trị.</p></div>
+<div class="section" style="padding-top:32px"><div class="container"><ul class="gallery" aria-label="Ảnh các khu vực">
+<li><figure class="tile"><a class="frame frame--3-4 tile__frame" href="photos/phong-cham-soc-da.webp" data-lightbox="facility" data-caption="Phòng chăm sóc da – rèm riêng từng giường"><img src="photos/phong-cham-soc-da.webp" width="960" height="1280" alt="Phòng chăm sóc da với giường có rèm trắng riêng cho từng giường" class="pos-cham-soc-da" loading="lazy" decoding="async"></a><figcaption>Phòng chăm sóc da – rèm riêng từng giường</figcaption></figure></li>
+<li><figure class="tile"><a class="frame frame--3-4 tile__frame" href="photos/khu-triet-long.webp" data-lightbox="facility" data-caption="Khu triệt lông"><img src="photos/khu-triet-long.webp" width="960" height="1280" alt="Khu triệt lông với máy và giường điều trị" class="pos-triet-long" loading="lazy" decoding="async"></a><figcaption>Khu triệt lông</figcaption></figure></li>
+<li><figure class="tile"><a class="frame frame--3-4 tile__frame" href="photos/loi-vao.webp" data-lightbox="facility" data-caption="Lối vào phòng chăm sóc da"><img src="photos/loi-vao.webp" width="960" height="1280" alt="Nhìn vào phòng chăm sóc da từ cửa ra vào" class="pos-loi-vao" loading="lazy" decoding="async"></a><figcaption>Lối vào phòng chăm sóc da</figcaption></figure></li>
+<li><figure class="tile"><a class="frame frame--3-4 tile__frame" href="photos/chi-tiet-khan.webp" data-lightbox="facility" data-caption="Khăn riêng cho từng khách"><img src="photos/chi-tiet-khan.webp" width="960" height="1280" alt="Khăn thêu tên phòng khám xếp gọn, dùng riêng cho từng khách" class="pos-khan" loading="lazy" decoding="async"></a><figcaption>Khăn riêng cho từng khách</figcaption></figure></li>
+<li><figure class="tile"><span class="frame frame--3-4 frame--pending tile__frame" role="img" aria-label="Sảnh chờ – ngồi thư giãn trước khi thăm khám (ảnh sắp có)"><strong>Sảnh chờ – ngồi thư giãn trước khi thăm khám</strong><small>Ảnh sắp có</small></span><figcaption>Sảnh chờ – ngồi thư giãn trước khi thăm khám</figcaption></figure></li>
+<li><figure class="tile"><span class="frame frame--3-4 frame--pending tile__frame" role="img" aria-label="Khu đón tiếp (ảnh sắp có)"><strong>Khu đón tiếp</strong><small>Ảnh sắp có</small></span><figcaption>Khu đón tiếp</figcaption></figure></li>
+<li><figure class="tile"><span class="frame frame--3-4 frame--pending tile__frame" role="img" aria-label="Phòng điều trị laser (ảnh sắp có)"><strong>Phòng điều trị laser</strong><small>Ảnh sắp có</small></span><figcaption>Phòng điều trị laser</figcaption></figure></li>
+</ul></div></div></section></main>
+<footer class="site-foot"><div class="container">Trang demo, chỉ để so sánh cách trình bày ảnh. Không phải trang chính thức.</div></footer>
+<script src="lightbox.js"></script>
+<script>
+(function(){
+var s=document.querySelector('.strip');if(!s)return;
+document.documentElement.classList.add('js');
+var bar=document.querySelector('.strip-bar span');
+function upd(){var max=s.scrollWidth-s.clientWidth;var w=s.clientWidth/s.scrollWidth*100;bar.style.width=w+'%';bar.style.left=(max>0?s.scrollLeft/max*(100-w):0)+'%';}
+function step(d){var c=s.querySelector('.strip__item');var w=c.getBoundingClientRect().width+16;s.scrollBy({left:d*w,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+document.querySelector('[data-strip-prev]').onclick=function(){step(-1)};
+document.querySelector('[data-strip-next]').onclick=function(){step(1)};
+s.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+})();
+</script>
+</body>
+</html>

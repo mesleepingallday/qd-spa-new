@@ -65,11 +65,11 @@ function qd_schema_clinic() {
 	if ( qd_clinic( 'price_range' ) ) {
 		$node['priceRange'] = qd_clinic( 'price_range' );
 	}
-	$logo_id = get_theme_mod( 'custom_logo' );
-	if ( $logo_id ) {
-		$node['logo']  = wp_get_attachment_image_url( $logo_id, 'full' );
-		$node['image'] = $node['logo'];
-	}
+	$logo_id       = get_theme_mod( 'custom_logo' );
+	$node['logo']  = $logo_id
+		? wp_get_attachment_image_url( $logo_id, 'full' )
+		: QD_URI . '/assets/images/brand/logo-on-light.png';
+	$node['image'] = $node['logo'];
 	return $node;
 }
 

@@ -3,7 +3,8 @@
  * Live-site safety nets for SEO:
  * - every internal menu link resolves to content that exists (no 404s from the menu),
  * - 301s for duplicate pages and for design-style URLs that 404,
- * - an automatic, page-specific meta description when the editor hasn't written one,
+ * - an automatic, page-specific meta description when the editor hasn't written one
+ *   (printed by inc/brand-meta.php when no SEO plugin prints one, or via the plugin's filters),
  * - the pages and categories the theme's flows depend on are created once.
  *
  * @package QuangDang
@@ -152,6 +153,12 @@ add_action(
 			return;
 		}
 
+		// The clinic books through SalonHero: send the old /dat-lich/ address there while no local page exists.
+		if ( 'dat-lich' === $path && is_404() && qd_clinic( 'booking_url' ) ) {
+			wp_redirect( qd_clinic( 'booking_url' ), 302 ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- External booking host set by the admin.
+			exit;
+		}
+
 		$target = qd_redirect_map()[ $path ] ?? '';
 		if ( $target ) {
 			$target = home_url( $target );
@@ -238,23 +245,6 @@ foreach ( array( 'rank_math/frontend/description', 'rank_math/opengraph/facebook
 }
 
 /**
- * Without an SEO plugin, print the description ourselves.
- */
-add_action(
-	'wp_head',
-	function () {
-		if ( qd_seo_plugin_active() ) {
-			return;
-		}
-		$desc = qd_auto_description();
-		if ( $desc ) {
-			printf( '<meta name="description" content="%s">' . "\n", esc_attr( $desc ) );
-		}
-	},
-	1
-);
-
-/**
  * Create the pages and categories the theme's flows link to, once, if they are missing.
  * Templates page-dat-lich.php etc. pick the pages up by slug.
  */
@@ -264,8 +254,9 @@ add_action(
 		if ( get_option( 'qd_core_content_v1' ) || ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		$pages = array(
-			'dat-lich'       => 'Đặt lịch hẹn',
+		// No /dat-lich/ page while booking goes through SalonHero (Customizer "Link đặt lịch chính").
+		$pages = qd_clinic( 'booking_url' ) ? array() : array( 'dat-lich' => 'Đặt lịch hẹn' );
+		$pages += array(
 			'lien-he'        => 'Liên hệ & chỉ đường',
 			'tim-lieu-trinh' => 'Tìm liệu trình phù hợp',
 		);

@@ -37,9 +37,10 @@ Found on the live site today:
 8. Service pages carry about 1,100 words of rendered text, most of it template chrome. The real body copy is thin. That is handled in §5.
 9. Submit the sitemap in GSC and Bing, then *Request indexing* for the homepage and the 7 category pages.
 
-### Status after the theme update (upload the new theme zip for these to take effect)
+### Status after the theme update (live after merge to `main` and a cPanel deploy)
 Done in the theme (`inc/seo-fixes.php`):
-- ✅ The missing pages **/dat-lich/** (booking: every "Đặt lịch" button was a 404), **/lien-he/** and **/tim-lieu-trinh/**, plus the categories *Cẩm nang làm đẹp* and *Sự kiện – Ưu đãi*, are created automatically the first time an admin opens wp-admin after the update.
+- ✅ Booking goes through **SalonHero** (Customizer "Link đặt lịch chính"). Every booking button, including service pages and the quiz (they were 404s on `/dat-lich/`), now opens it, and the old `/dat-lich/` address forwards there.
+- ✅ The missing pages **/lien-he/** and **/tim-lieu-trinh/**, plus the categories *Cẩm nang làm đẹp* and *Sự kiện – Ưu đãi*, are created automatically the first time an admin opens wp-admin after the update.
 - ✅ Menu links always point to pages that exist (about 20 were 404s). Missing items are hidden; empty categories and courses show once they have content.
 - ✅ 301s: the 6 root About duplicates → `/gioi-thieu/…`, and any 404 URL that matches a real page (for example `/dich-vu/noi-khoa-tham-my/filler/`).
 - ✅ Each page gets its own meta description automatically. A description written in Rank Math always wins.
@@ -51,7 +52,7 @@ Still to do in wp-admin:
 - [ ] Settings → General → Site Title, and Rank Math → Titles & Meta → Local SEO → name: "Phòng khám Da liễu Thẩm mỹ Quang Đăng", type **Organization** (this removes the second clinic schema node).
 - [ ] Customize → Thông tin phòng khám: the licence number, latitude/longitude and the Google listing link.
 - [ ] Write the 2 course posts (Đào tạo) and the first blog posts. They appear in the menu automatically.
-- [ ] Search Console: submit `sitemap_index.xml`, then request indexing for `/`, `/dat-lich/` and the category pages.
+- [ ] Search Console: submit `sitemap_index.xml`, then request indexing for `/` and the category pages.
 
 ## 3. Local SEO, the #1 lever (weeks 1–2)
 Step-by-step, paste-ready setup: **`docs/GBP-SETUP.md`**.

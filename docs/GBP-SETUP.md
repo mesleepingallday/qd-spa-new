@@ -30,7 +30,7 @@ Phòng khám Da liễu Thẩm mỹ Quang Đăng
 | Service area | Quỳnh Lưu · Hoàng Mai · Diễn Châu |
 | Phone | 0981 618 549 |
 | Website | https://vienthammyquangdang.vn/?utm_source=google&utm_medium=gbp |
-| Booking link | https://vienthammyquangdang.vn/dat-lich/?utm_source=google&utm_medium=gbp |
+| Booking link | https://vienthammyquangdang.salonhero.vn/dat-lich |
 | Hours | Monday–Sunday 08:00–20:00. Add special hours for Tết and holidays. |
 | Opening date | [month/year the clinic opened] |
 
@@ -101,7 +101,7 @@ H: Phòng khám có bác sĩ da liễu trực tiếp khám không?
 Đ: Có. Bác sĩ da liễu trực tiếp thăm khám, soi da và lên phác đồ trước mọi liệu trình.
 
 H: Có cần đặt lịch trước không?
-Đ: Nên đặt trước qua số 0981 618 549 (gọi/Zalo) hoặc vienthammyquangdang.vn/dat-lich để không phải chờ.
+Đ: Nên đặt trước qua số 0981 618 549 (gọi/Zalo) hoặc vienthammyquangdang.salonhero.vn/dat-lich để không phải chờ.
 
 H: Trị mụn bao lâu thì thấy hiệu quả?
 Đ: Thường sau 2–4 buổi da giảm viêm rõ; số buổi cụ thể bác sĩ báo sau khi khám.
@@ -124,7 +124,7 @@ H: Phòng khám mở cửa giờ nào?
 (Check the answers on price, sessions and parking against what the clinic actually does before posting.)
 
 ## 9. The first 4 posts (Bài đăng → "Có gì mới" or "Ưu đãi")
-1. **Welcome:** "Phòng khám Da liễu Thẩm mỹ Quang Đăng chính thức hoạt động tại Tầng 5, TTTM Đức Tài – Tâm Đạt, Quỳnh Lưu. Bác sĩ da liễu trực tiếp thăm khám, phác đồ riêng cho từng làn da." → Button **Đặt lịch** → /dat-lich/ + photo of the reception area.
+1. **Welcome:** "Phòng khám Da liễu Thẩm mỹ Quang Đăng chính thức hoạt động tại Tầng 5, TTTM Đức Tài – Tâm Đạt, Quỳnh Lưu. Bác sĩ da liễu trực tiếp thăm khám, phác đồ riêng cho từng làn da." → Button **Đặt lịch** → https://vienthammyquangdang.salonhero.vn/dat-lich + photo of the reception area.
 2. **First visit:** "Lần đầu đến khám diễn ra thế nào? Soi da – bác sĩ tư vấn – báo giá rõ ràng – bạn quyết định." → Button **Tìm hiểu thêm** → /tim-lieu-trinh/.
 3. **Acne tip:** "3 sai lầm khiến mụn lâu khỏi: tự nặn mụn, dùng nhiều sản phẩm cùng lúc, bỏ kem chống nắng…" → Button → /dich-vu/dieu-tri-mun/.
 4. **Hair removal by season:** "Triệt lông từ bây giờ để mùa hè tự tin…" → Button → the hair-removal service page.

@@ -4,7 +4,7 @@
  *
  * @package QuangDang
  *
- * @var array $args { lead?: string, photo?: string (asset key), photo_alt?: string, subnav?: bool, kicker?: string, after?: string (trusted HTML) }
+ * @var array $args { lead?: string, photo?: string (asset key), photo_alt?: string, subnav?: bool, kicker?: string, title?: string (H1; defaults to the page title), stage?: bool (large rounded photo), after?: string (trusted HTML) }
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -13,7 +13,7 @@ $qd_lead   = $args['lead'] ?? ( has_excerpt() ? get_the_excerpt() : '' );
 $qd_photo  = ! empty( $args['photo'] ) ? qd_about_photo( $args['photo'], $args['photo_alt'] ?? '', '4-3', array( 'loading' => 'eager', 'fetchpriority' => 'high' ), 'about-hero__photo' ) : '';
 $qd_kicker = $args['kicker'] ?? '';
 ?>
-<section class="page-hero about-hero<?php echo $qd_photo ? ' about-hero--photo' : ''; ?>">
+<section class="page-hero about-hero<?php echo $qd_photo ? ' about-hero--photo' : ''; ?><?php echo ! empty( $args['stage'] ) ? ' about-hero--stage' : ''; ?>">
 	<div class="container">
 		<?php qd_breadcrumbs(); ?>
 		<div class="about-hero__grid">
@@ -21,7 +21,7 @@ $qd_kicker = $args['kicker'] ?? '';
 				<?php if ( $qd_kicker ) : ?>
 					<p class="about-kicker"><?php echo esc_html( $qd_kicker ); ?></p>
 				<?php endif; ?>
-				<h1 class="page-title"><?php the_title(); ?></h1>
+				<h1 class="page-title"><?php echo isset( $args['title'] ) ? esc_html( $args['title'] ) : get_the_title(); // phpcs:ignore WordPress.Security.EscapeOutput ?></h1>
 				<?php if ( $qd_lead ) : ?>
 					<p class="lead"><?php echo esc_html( $qd_lead ); ?></p>
 				<?php endif; ?>

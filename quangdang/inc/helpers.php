@@ -199,10 +199,31 @@ function qd_reading_time( $post = null ) {
  * @param int|WP_Post|null $service Service post.
  */
 function qd_booking_url( $service = null ) {
+	// With a third-party booking page (SalonHero) set, every booking button goes there.
+	if ( qd_clinic( 'booking_url' ) ) {
+		return qd_clinic( 'booking_url' );
+	}
 	$url     = home_url( '/dat-lich/' );
 	$service = $service ? get_post( $service ) : null;
 	// "dv", not "dich-vu": that name is the services post type's query var and would 404 the page.
 	return $service ? add_query_arg( 'dv', $service->post_name, $url ) : $url;
+}
+
+/**
+ * Link of the main "Đặt lịch" buttons (header, hero, mobile menu, phone bar): the SalonHero booking
+ * page set in Customize → Thông tin phòng khám, or our own booking page when that field is empty.
+ * qd_booking_url() returns the same SalonHero link when it is set (no service pre-selection there).
+ */
+function qd_main_booking_url() {
+	$url = qd_clinic( 'booking_url' );
+	return $url ? $url : qd_booking_url();
+}
+
+/**
+ * Attributes for a link to qd_main_booking_url(): external links open in a new tab.
+ */
+function qd_main_booking_attrs() {
+	return qd_clinic( 'booking_url' ) ? array( 'target' => '_blank', 'rel' => 'noopener' ) : array();
 }
 
 /**

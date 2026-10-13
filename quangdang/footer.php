@@ -22,7 +22,7 @@ if ( ! $qd_service_links ) {
 <footer class="site-footer">
 	<div class="container site-footer__main" id="site-nav">
 		<div>
-			<?php get_template_part( 'template-parts/site/brand' ); ?>
+			<?php get_template_part( 'template-parts/site/brand', null, array( 'variant' => 'dark' ) ); ?>
 			<p class="site-footer__about">Phòng khám chuyên khoa Da liễu – Thẩm mỹ. Bác sĩ trực tiếp thăm khám, phác đồ riêng cho từng làn da.</p>
 			<div class="site-footer__social">
 				<a href="<?php echo esc_url( qd_clinic( 'facebook' ) ); ?>" target="_blank" rel="noopener"><?php qd_the_icon( 'facebook', array( 'size' => 18, 'label' => 'Facebook' ) ); ?></a>
@@ -96,7 +96,7 @@ if ( ! $qd_service_links ) {
 	<a class="action-bar__btn" href="<?php echo esc_attr( qd_tel_href() ); ?>"><?php qd_the_icon( 'phone', array( 'size' => 22 ) ); ?>Gọi</a>
 	<a class="action-bar__btn" href="<?php echo esc_url( qd_clinic( 'zalo' ) ); ?>" target="_blank" rel="noopener"><?php qd_the_icon( 'message-circle', array( 'size' => 22 ) ); ?>Zalo</a>
 	<?php if ( ! $qd_on_booking ) : ?>
-		<?php echo qd_button( 'Đặt lịch khám', qd_booking_url( is_singular( 'dich-vu' ) && ! qd_is_service_category() ? get_the_ID() : null ), array( 'icon' => 'calendar-days' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+		<?php echo qd_button( 'Đặt lịch khám', qd_main_booking_url(), array( 'icon' => 'calendar-days', 'attrs' => qd_main_booking_attrs() ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 	<?php endif; ?>
 </nav>
 

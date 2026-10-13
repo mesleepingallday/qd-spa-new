@@ -10,8 +10,20 @@
 
 
 /* List ------------------------------------------------------------------------------ */
-.training-hero { padding-bottom: 32px; }
-.training-hero + .section { padding-top: 16px; }
+.training-hero { padding-bottom: 40px; }
+.training-hero__grid { display: grid; gap: 28px; align-items: center; }
+.training-hero .lead { margin-top: 14px; }
+.training-hero__reasons { margin-top: 24px; font-weight: 500; }
+.training-hero__cta { margin-top: 28px; }
+.training-hero__photo { border-radius: var(--r-feature); }
+
+@media (min-width: 1024px) {
+	.training-hero { padding-bottom: 72px; }
+	.training-hero__grid:has(.training-hero__media) { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 64px; }
+	.training-hero__photo { border-radius: var(--r-stage); }
+}
+
+.course-list__title { margin-bottom: 28px; }
 .course-grid { grid-template-columns: 1fr; }
 
 @media (min-width: 640px) {
@@ -35,12 +47,14 @@
 .course-card__facts .icon { margin-top: 3px; color: var(--teal); }
 .course-card .price small { margin-right: 4px; }
 .course-card .price { font-size: 1.1875rem; }
+.course-card:hover .card__foot .link-more .icon { transform: translateX(3px); }
 
-.reasons { list-style: none; padding: 0; margin: 0; }
-.reason { display: grid; gap: 10px; align-content: start; justify-items: start; }
-.reason .icon-tile { background: #fff; }
-.reason__title { font-size: 1.1875rem; margin-top: 4px; }
-.reason__text { color: var(--muted); }
+/* The one dark band: how a course runs, hung on the ruler (styles in trust.css) */
+.training-path .section-head { margin-bottom: 40px; }
+.training-path .section-lead { color: rgb(255 255 255 / 0.8); }
+
+.training-faq { max-width: 860px; }
+.training-faq .section-head { margin-bottom: 20px; }
 
 .course-grid + .pagination, .pagination { margin-top: 32px; }
 

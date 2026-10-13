@@ -14,10 +14,21 @@ Website for **Phòng khám Da liễu Thẩm mỹ Quang Đăng** (Qbe+ Quang Đă
 1. Zip the theme folder: `npm run zip` (or zip `quangdang/` by hand), producing `quangdang.zip`.
 2. In WordPress, go to Appearance → Themes → Add New → Upload, then activate it.
 3. Settings → Permalinks → choose **Post name** and save.
-4. Appearance → Customize → **Thông tin phòng khám**: fill in the real hotline, Zalo, Facebook, Google Maps link, Google listing and review links, coordinates (lat/long), price range and licence number. Under **Site Identity**, upload the official logo.
+4. Appearance → Customize → **Thông tin phòng khám**: fill in the real hotline, Zalo, Facebook, Google Maps link, Google listing link, coordinates (lat/long), price range and licence number. The header and footer logos ship with the theme in `quangdang/assets/images/brand/` (`logo-on-light` for white backgrounds, `logo-on-dark` for the footer); replace those files to change them. Under **Site Identity**, upload the Site Icon (favicon).
 5. Create the pages and services (see the sitemap in the design plan). Under Appearance → Menus, assign a menu to **Menu chính (mega menu)**. Until you do, the built-in menu mirrors the spreadsheet.
 
+### Alternative: deploy with cPanel Git Version Control
+
+1. cPanel → Git Version Control → Create. Clone URL `https://github.com/mesleepingallday/qd-spa-new.git` (or the SSH URL plus a read-only deploy key in GitHub if the repo is private). Repository Path `repositories/qd-spa-new`.
+2. Manage → Basic Information → Checked-Out Branch: `main`.
+3. `.cpanel.yml` runs `dev/cpanel-deploy.sh /home/vientha8/public_html/wp-content/themes`: it copies `quangdang/` into every theme folder there whose `style.css` is "Quang Đăng Clinic" (whatever the folder is called), or creates `quangdang/` if there is none. The path must be the `wp-content/themes` of the WordPress that holds `wp-config.php`; if it does not exist the deploy fails instead of creating a stray copy.
+4. Manage → Pull or Deploy → Update from Remote, then Deploy HEAD Commit. Do not edit files inside the clone; cPanel needs a clean working tree.
+
+The main "Đặt lịch" buttons (header, home hero, mobile menu, phone bottom bar) open the SalonHero booking page in a new tab. The address is the Customizer field **Link đặt lịch chính (SalonHero)** under Thông tin phòng khám; clear it to use the theme's own `/dat-lich/` page. Service pages, the quiz and the short forms still use `/dat-lich/`.
+
 Recommended plugins: Rank Math **or** Yoast (titles, sitemap). The theme detects them and only adds the medical schema they don't cover.
+
+Favicon and share image: the theme ships icons and `og-default.png` (1200×630) in `quangdang/assets/images/brand/`. Without a Site Icon set in Customize → Site Identity it prints those icons (to use the new icon, upload `icon-512.png` as the Site Icon). The theme also adds any of meta description, canonical and Open Graph / Twitter tags that nothing else printed (a `<!-- quangdang head: added … -->` comment shows what it added), and declares the page language as `vi`. With Rank Math or Yoast, set the plugin's default social image to `og-default.png`. The deploy script also puts `favicon.ico` in the WordPress root when missing, because the host answers `/favicon.ico` with its own 404.
 
 ## Local development
 
