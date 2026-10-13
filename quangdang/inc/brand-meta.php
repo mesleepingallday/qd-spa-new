@@ -101,7 +101,8 @@ add_action(
 		} elseif ( is_category() || is_tag() || is_tax() ) {
 			$desc = wp_strip_all_tags( term_description() );
 		}
-		$desc = $desc ? wp_trim_words( $desc, 30, '…' ) : 'Phòng khám chuyên khoa Da liễu – Thẩm mỹ tại Quỳnh Lưu, Nghệ An. Bác sĩ trực tiếp thăm khám, phác đồ riêng cho từng làn da.';
+		$auto = qd_auto_description(); // Page-specific (inc/seo-fixes.php).
+		$desc = $auto ? $auto : ( $desc ? wp_trim_words( $desc, 30, '…' ) : 'Phòng khám chuyên khoa Da liễu – Thẩm mỹ tại Quỳnh Lưu, Nghệ An. Bác sĩ trực tiếp thăm khám, phác đồ riêng cho từng làn da.' );
 		$url  = is_singular() ? get_permalink() : home_url( $wp->request ? user_trailingslashit( $wp->request ) : '/' );
 
 		$out   = '';

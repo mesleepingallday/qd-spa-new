@@ -95,6 +95,7 @@ function qd_service_catalog() {
 				'triet-long'                      => 'Triệt lông',
 				'xoa-not-ruoi'                    => 'Xóa nốt ruồi',
 				'kiem-dau-tre-hoa-laser-picosure' => 'Kiềm dầu, trẻ hóa da bằng công nghệ Laser Picosure',
+				'lam-sach-sau-voi-aquapeel'       => 'Làm sạch sâu với Aquapeel',
 			),
 		),
 		'noi-khoa-tham-my' => array(
@@ -218,7 +219,8 @@ function qd_menu_tree( $location = 'primary' ) {
 		$tree = qd_default_menu_tree();
 	}
 
-	$cache[ $location ] = qd_menu_mark_current( $tree );
+	// Point every internal link at content that really exists (inc/seo-fixes.php).
+	$cache[ $location ] = qd_menu_mark_current( qd_menu_fix_links( $tree ) );
 	return $cache[ $location ];
 }
 

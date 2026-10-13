@@ -25,6 +25,7 @@ foreach ( array(
 	'schema',         // JSON-LD structured data.
 	'search-console', // Serves the Google Search Console HTML file verification.
 	'brand-meta',     // Favicon links, /favicon.ico, Open Graph / Twitter tags with the share image.
+	'seo-fixes',      // Live-site safety nets: link resolver, 301s, meta descriptions, core pages.
 ) as $qd_file ) {
 	require QD_DIR . '/inc/' . $qd_file . '.php';
 }
