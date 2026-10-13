@@ -25,3 +25,13 @@ for dir in "${targets[@]}"; do
 	cp -Rf quangdang/. "$dir/"
 	echo "Deployed theme to $dir"
 done
+
+# The host answers /favicon.ico with its own 404 before WordPress runs, so the file has to exist in the
+# WordPress root. Only added when missing: an icon someone put there is never overwritten.
+ROOT="$(cd "$THEMES/../.." && pwd)"
+if [ -f "$ROOT/wp-config.php" ] || [ -f "$ROOT/wp-load.php" ]; then
+	if [ ! -e "$ROOT/favicon.ico" ]; then
+		cp quangdang/assets/images/brand/favicon.ico "$ROOT/favicon.ico"
+		echo "Added $ROOT/favicon.ico"
+	fi
+fi
