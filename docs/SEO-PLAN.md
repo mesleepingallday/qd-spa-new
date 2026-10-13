@@ -38,6 +38,7 @@ Found on the live site today:
 9. Submit the sitemap in GSC and Bing, then *Request indexing* for the homepage and the 7 category pages.
 
 ## 3. Local SEO, the #1 lever (weeks 1–2)
+Step-by-step, paste-ready setup: **`docs/GBP-SETUP.md`**.
 For a single clinic in Quỳnh Lưu, most bookings will come from the **Google Maps / local pack**, not blog traffic.
 - **Google Business Profile**: category "Phòng khám da liễu" (Dermatologist), secondary "Spa chăm sóc da" and "Dịch vụ xóa hình xăm". Use the exact address, the phone 0981618549, hours 8–20h every day, and the website and booking URL. Add each service with a price-from, at least 20 real photos (front of the building, reception, machines, doctor), and one post per week.
 - **Reviews**: ask every customer after treatment (QR code at reception plus a Zalo message with the review link). Target 30 reviews in 90 days. Reply to all of them.

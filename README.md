@@ -6,6 +6,7 @@ Website for **Phòng khám Da liễu Thẩm mỹ Quang Đăng** (Qbe+ Quang Đă
 - `docs/THEME-GUIDE.md`: conventions for building screens.
 - `docs/REDESIGN.md`: status, decisions and gates of the current redesign.
 - `docs/IMAGE-PROMPTS.md`: every image the site uses, with a ready-to-paste GPT prompt and the exact file name.
+- `docs/GBP-SETUP.md`: Google Business Profile setup, with ready-to-paste text.
 - `docs/SEO-PLAN.md`: the SEO launch plan (technical fixes, local SEO, keyword clusters, content calendar).
 
 ## Install on WordPress hosting
@@ -13,7 +14,7 @@ Website for **Phòng khám Da liễu Thẩm mỹ Quang Đăng** (Qbe+ Quang Đă
 1. Zip the theme folder: `npm run zip` (or zip `quangdang/` by hand), producing `quangdang.zip`.
 2. In WordPress, go to Appearance → Themes → Add New → Upload, then activate it.
 3. Settings → Permalinks → choose **Post name** and save.
-4. Appearance → Customize → **Thông tin phòng khám**: fill in the real hotline, Zalo, Facebook, Google Maps link, coordinates (lat/long), price range and licence number. Under **Site Identity**, upload the official logo.
+4. Appearance → Customize → **Thông tin phòng khám**: fill in the real hotline, Zalo, Facebook, Google Maps link, Google listing and review links, coordinates (lat/long), price range and licence number. Under **Site Identity**, upload the official logo.
 5. Create the pages and services (see the sitemap in the design plan). Under Appearance → Menus, assign a menu to **Menu chính (mega menu)**. Until you do, the built-in menu mirrors the spreadsheet.
 
 Recommended plugins: Rank Math **or** Yoast (titles, sitemap). The theme detects them and only adds the medical schema they don't cover.

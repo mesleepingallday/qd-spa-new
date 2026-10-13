@@ -46,7 +46,7 @@ function qd_schema_clinic() {
 			),
 			array( 'Quỳnh Lưu', 'Hoàng Mai', 'Diễn Châu', 'Nghệ An' )
 		),
-		'sameAs'           => array_values( array_filter( array( qd_clinic( 'facebook' ), qd_clinic( 'zalo' ) ) ) ),
+		'sameAs'           => array_values( array_filter( array( qd_clinic( 'facebook' ), qd_clinic( 'zalo' ), qd_clinic( 'gbp_url' ) ) ) ),
 	);
 	// Coordinates come from the Customizer; skipped until both are real numbers.
 	$lat = str_replace( ',', '.', trim( qd_clinic( 'lat' ) ) );
@@ -58,8 +58,9 @@ function qd_schema_clinic() {
 			'longitude' => (float) $lng,
 		);
 	}
-	if ( qd_clinic( 'map_url' ) ) {
-		$node['hasMap'] = qd_clinic( 'map_url' );
+	$map = qd_clinic( 'gbp_url' ) ? qd_clinic( 'gbp_url' ) : qd_clinic( 'map_url' );
+	if ( $map ) {
+		$node['hasMap'] = $map;
 	}
 	if ( qd_clinic( 'price_range' ) ) {
 		$node['priceRange'] = qd_clinic( 'price_range' );

@@ -73,7 +73,7 @@ if ( ! $qd_service_links ) {
 		<div>
 			<p class="site-footer__title">Liên hệ</p>
 			<ul class="site-footer__contact">
-				<li><?php qd_the_icon( 'map-pin', array( 'size' => 18 ) ); ?><span><?php echo esc_html( qd_clinic( 'address' ) ); ?><br><a href="<?php echo esc_url( qd_clinic( 'map_url' ) ); ?>" target="_blank" rel="noopener">Chỉ đường trên Google Maps</a></span></li>
+				<li><?php qd_the_icon( 'map-pin', array( 'size' => 18 ) ); ?><span><?php echo esc_html( qd_clinic( 'address' ) ); ?><br><a href="<?php echo esc_url( qd_clinic( 'map_url' ) ); ?>" target="_blank" rel="noopener">Chỉ đường trên Google Maps</a><?php if ( qd_clinic( 'review_url' ) ) : ?> · <a href="<?php echo esc_url( qd_clinic( 'review_url' ) ); ?>" target="_blank" rel="noopener">Đánh giá trên Google</a><?php endif; ?></span></li>
 				<li><?php qd_the_icon( 'clock', array( 'size' => 18 ) ); ?><span><?php echo esc_html( qd_clinic( 'hours' ) ); ?></span></li>
 				<li><?php qd_the_icon( 'phone', array( 'size' => 18 ) ); ?><a href="<?php echo esc_attr( qd_tel_href() ); ?>"><?php echo esc_html( qd_clinic( 'hotline' ) ); ?></a></li>
 				<?php if ( qd_clinic( 'email' ) ) : ?>
