@@ -64,7 +64,8 @@ A hand mirror lying next to a small green leaf and a tiny question mark sparkle,
 **Ảnh thật phòng khám (chân dung 960×1280, `.webp`), dùng ở trang chủ và trang Cơ sở vật chất:**
 
 - Đã có: `about/phong-cham-soc-da`, `about/khu-triet-long`, `about/loi-vao`, `about/chi-tiet-khan`.
-- Cần thêm: `about/sanh-cho` (sảnh chờ, ghế sofa xanh), `about/phong-laser` (phòng laser), `about/le-tan` (ảnh quầy lễ tân có logo trên tường).
+- Đã thêm đợt này: `about/sanh-cho` (sảnh chờ), `about/le-tan` (lễ tân), `about/khu-don-tiep` (tường logo Qbe), `about/phong-dieu-tri` (nhân viên chăm sóc da), `about/phong-tu-van` (soi da). Khuôn mặt khách trong `phong-dieu-tri` và `phong-tu-van` đã được làm mờ.
+- Còn cần: `about/phong-laser` (phòng laser).
 - Chỉ cần thả file đúng tên vào `quangdang/assets/images/about/`; trang tự dùng, không sửa code.
 
 **`about/le-tan.png`** · Quầy lễ tân · 1200×900  

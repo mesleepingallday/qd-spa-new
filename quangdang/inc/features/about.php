@@ -257,6 +257,11 @@ function qd_about_photo_attrs( $key ) {
 		'about/khu-triet-long'    => 75,
 		'about/loi-vao'           => 70,
 		'about/chi-tiet-khan'     => 60,
+		'about/sanh-cho'          => 75,
+		'about/khu-don-tiep'      => 40,
+		'about/le-tan'            => 60,
+		'about/phong-dieu-tri'    => 65,
+		'about/phong-tu-van'      => 60,
 	);
 	return isset( $y[ $key ] ) ? array( 'style' => 'object-position:center ' . $y[ $key ] . '%' ) : array();
 }

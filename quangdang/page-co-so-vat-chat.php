@@ -26,7 +26,19 @@ while ( have_posts() ) :
 				),
 				'photos' => array(
 					array( 'about/sanh-cho', 'Sảnh chờ của phòng khám với ghế sofa màu xanh' ),
-					array( 'about/le-tan', 'Khu đón tiếp của Phòng khám Quang Đăng' ),
+					array( 'about/le-tan', 'Lễ tân tại quầy đón tiếp của Phòng khám Quang Đăng' ),
+					array( 'about/khu-don-tiep', 'Khu đón tiếp với logo Qbe Quang Đăng' ),
+				),
+			),
+			array(
+				'title' => 'Phòng tư vấn & soi da',
+				'text'  => 'Bác sĩ thăm khám và soi da bằng máy phân tích trước khi tư vấn liệu trình.',
+				'facts' => array(
+					'Thực hiện bởi' => 'Bác sĩ da liễu',
+					'Thiết bị'      => 'Máy soi da',
+				),
+				'photos' => array(
+					array( 'about/phong-tu-van', 'Bác sĩ thăm khám và soi da cho khách bằng máy phân tích da' ),
 				),
 			),
 			array(
@@ -38,6 +50,7 @@ while ( have_posts() ) :
 				),
 				'photos' => array(
 					array( 'about/phong-cham-soc-da', 'Phòng chăm sóc da với giường có rèm trắng riêng cho từng giường' ),
+					array( 'about/phong-dieu-tri', 'Nhân viên chăm sóc da cho khách tại phòng điều trị' ),
 					array( 'about/loi-vao', 'Nhìn vào phòng chăm sóc da từ cửa ra vào' ),
 				),
 			),

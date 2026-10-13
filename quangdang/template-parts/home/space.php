@@ -12,11 +12,12 @@ defined( 'ABSPATH' ) || exit;
 $qd_candidates = apply_filters(
 	'qd_home_space',
 	array(
-		array( 'about/sanh-cho', 'Sảnh chờ của phòng khám với ghế sofa màu xanh' ),
+		array( 'about/sanh-cho', 'Sảnh chờ với ghế sofa xanh' ),
+		array( 'about/phong-dieu-tri', 'Nhân viên chăm sóc da cho khách tại phòng điều trị' ),
+		array( 'about/khu-don-tiep', 'Khu đón tiếp với logo Qbe Quang Đăng' ),
 		array( 'about/phong-cham-soc-da', 'Phòng chăm sóc da với giường có rèm trắng riêng cho từng giường' ),
 		array( 'about/khu-triet-long', 'Khu triệt lông với máy và giường điều trị' ),
 		array( 'about/chi-tiet-khan', 'Khăn thêu tên phòng khám xếp gọn, dùng riêng cho từng khách' ),
-		array( 'about/loi-vao', 'Nhìn vào phòng chăm sóc da từ cửa ra vào' ),
 	)
 );
 
