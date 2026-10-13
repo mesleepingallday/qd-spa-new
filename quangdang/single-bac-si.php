@@ -72,7 +72,7 @@ while ( have_posts() ) :
 			<?php qd_breadcrumbs(); ?>
 			<div class="doctor-hero__grid">
 				<div class="doctor-hero__photo">
-					<?php echo qd_thumb( null, 'qd-portrait', '4-5', array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+					<?php echo qd_thumb( null, 'qd-portrait', '4-5', array( 'loading' => 'eager', 'fetchpriority' => 'high', 'alt' => get_the_title() ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				</div>
 				<div class="doctor-hero__text">
 					<?php if ( $qd_role ) : ?>
