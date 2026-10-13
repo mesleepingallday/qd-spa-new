@@ -26,6 +26,8 @@ The main "Đặt lịch" buttons (header, home hero, mobile menu, phone bottom b
 
 Recommended plugins: Rank Math **or** Yoast (titles, sitemap). The theme detects them and only adds the medical schema they don't cover.
 
+Favicon and share image: the theme ships icons and `og-default.png` (1200×630) in `quangdang/assets/images/brand/`. Without a Site Icon set in Customize → Site Identity it prints those icons and serves `/favicon.ico`; without an SEO plugin it prints the Open Graph and Twitter tags. With Rank Math or Yoast, set the plugin's default social image to `og-default.png`.
+
 ## Local development
 
 Needs PHP 8.1+ with pdo_sqlite, and Node 18+ (screenshots only).

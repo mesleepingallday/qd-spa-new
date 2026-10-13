@@ -24,6 +24,7 @@ foreach ( array(
 	'template-tags',  // Breadcrumbs, post meta, section helpers.
 	'schema',         // JSON-LD structured data.
 	'search-console', // Serves the Google Search Console HTML file verification.
+	'brand-meta',     // Favicon links, /favicon.ico, Open Graph / Twitter tags with the share image.
 ) as $qd_file ) {
 	require QD_DIR . '/inc/' . $qd_file . '.php';
 }
