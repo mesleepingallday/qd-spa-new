@@ -39,11 +39,35 @@ function qd_schema_clinic() {
 		),
 		'medicalSpecialty' => 'Dermatology',
 		'openingHours'     => 'Mo-Su 08:00-20:00',
+		'areaServed'       => array_map(
+			fn( $place ) => array(
+				'@type' => 'AdministrativeArea',
+				'name'  => $place,
+			),
+			array( 'Quỳnh Lưu', 'Hoàng Mai', 'Diễn Châu', 'Nghệ An' )
+		),
 		'sameAs'           => array_values( array_filter( array( qd_clinic( 'facebook' ), qd_clinic( 'zalo' ) ) ) ),
 	);
+	// Coordinates come from the Customizer; skipped until both are real numbers.
+	$lat = str_replace( ',', '.', trim( qd_clinic( 'lat' ) ) );
+	$lng = str_replace( ',', '.', trim( qd_clinic( 'lng' ) ) );
+	if ( is_numeric( $lat ) && is_numeric( $lng ) ) {
+		$node['geo'] = array(
+			'@type'     => 'GeoCoordinates',
+			'latitude'  => (float) $lat,
+			'longitude' => (float) $lng,
+		);
+	}
+	if ( qd_clinic( 'map_url' ) ) {
+		$node['hasMap'] = qd_clinic( 'map_url' );
+	}
+	if ( qd_clinic( 'price_range' ) ) {
+		$node['priceRange'] = qd_clinic( 'price_range' );
+	}
 	$logo_id = get_theme_mod( 'custom_logo' );
 	if ( $logo_id ) {
-		$node['logo'] = wp_get_attachment_image_url( $logo_id, 'full' );
+		$node['logo']  = wp_get_attachment_image_url( $logo_id, 'full' );
+		$node['image'] = $node['logo'];
 	}
 	return $node;
 }
