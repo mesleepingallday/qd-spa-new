@@ -12,7 +12,7 @@ Website for **Phòng khám Da liễu Thẩm mỹ Quang Đăng** (Qbe+ Quang Đă
 1. Zip the theme folder: `npm run zip` (or zip `quangdang/` by hand), producing `quangdang.zip`.
 2. In WordPress, go to Appearance → Themes → Add New → Upload, then activate it.
 3. Settings → Permalinks → choose **Post name** and save.
-4. Appearance → Customize → **Thông tin phòng khám**: fill in the real hotline, Zalo, Facebook, Google Maps link and licence number. Under **Site Identity**, upload the official logo.
+4. Appearance → Customize → **Thông tin phòng khám**: fill in the real hotline, Zalo, Facebook, Google Maps link and licence number. The header and footer logos ship with the theme in `quangdang/assets/images/brand/` (`logo-on-light` for white backgrounds, `logo-on-dark` for the footer); replace those files to change them. Under **Site Identity**, upload the Site Icon (favicon).
 5. Create the pages and services (see the sitemap in the design plan). Under Appearance → Menus, assign a menu to **Menu chính (mega menu)**. Until you do, the built-in menu mirrors the spreadsheet.
 
 ### Alternative: deploy with cPanel Git Version Control

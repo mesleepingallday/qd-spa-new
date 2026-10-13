@@ -22,7 +22,7 @@ if ( ! $qd_service_links ) {
 <footer class="site-footer">
 	<div class="container site-footer__main" id="site-nav">
 		<div>
-			<?php get_template_part( 'template-parts/site/brand' ); ?>
+			<?php get_template_part( 'template-parts/site/brand', null, array( 'variant' => 'dark' ) ); ?>
 			<p class="site-footer__about">Phòng khám chuyên khoa Da liễu – Thẩm mỹ. Bác sĩ trực tiếp thăm khám, phác đồ riêng cho từng làn da.</p>
 			<div class="site-footer__social">
 				<a href="<?php echo esc_url( qd_clinic( 'facebook' ) ); ?>" target="_blank" rel="noopener"><?php qd_the_icon( 'facebook', array( 'size' => 18, 'label' => 'Facebook' ) ); ?></a>
