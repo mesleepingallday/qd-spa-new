@@ -152,7 +152,7 @@ add_action(
 function qd_post_topic_service( $post = null ) {
 	$post = get_post( $post );
 	$tags = $post ? get_the_tags( $post->ID ) : false;
-	foreach ( (array) $tags as $tag ) {
+	foreach ( is_array( $tags ) ? $tags : array() as $tag ) {
 		$service = get_page_by_path( $tag->slug, OBJECT, 'dich-vu' );
 		if ( $service && 'publish' === $service->post_status && 0 === (int) $service->post_parent ) {
 			return $service;

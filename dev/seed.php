@@ -140,7 +140,7 @@ foreach ( qd_service_catalog() as $slug => list( $title, $group, $children ) ) {
 
 	$i = 0;
 	foreach ( $children as $s_slug => $s_title ) {
-		$s    = $qd_service_data[ $s_slug ];
+		$s    = $qd_service_data[ $s_slug ] ?? array( 'excerpt' => '' ); // A catalogue service with no demo data still gets a page.
 		$s_id = qd_seed_post(
 			array(
 				'post_type'    => 'dich-vu',

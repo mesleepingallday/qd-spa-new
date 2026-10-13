@@ -67,7 +67,7 @@ $qd_fact_items = array_filter(
 			</div>
 			<?php if ( has_post_thumbnail() ) : ?>
 				<div class="service-hero__media">
-					<?php echo qd_thumb( null, 'qd-card', '4-3', array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+					<?php echo qd_thumb( null, 'qd-card', '4-3', array( 'loading' => 'eager', 'fetchpriority' => 'high', 'alt' => get_the_title() ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				</div>
 			<?php endif; ?>
 		</div>
