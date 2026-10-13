@@ -23,6 +23,7 @@ foreach ( array(
 	'navigation',     // Menu tree (WP menu or built-in fallback) for mega menu + drawer.
 	'template-tags',  // Breadcrumbs, post meta, section helpers.
 	'schema',         // JSON-LD structured data.
+	'seo-fixes',      // Live-site safety nets: link resolver, 301s, meta descriptions, core pages.
 ) as $qd_file ) {
 	require QD_DIR . '/inc/' . $qd_file . '.php';
 }

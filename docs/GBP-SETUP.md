@@ -132,7 +132,7 @@ H: Phòng khám mở cửa giờ nào?
 Add `?utm_source=google&utm_medium=gbp&utm_campaign=post` to every link. Post **one per week** after that.
 
 ## 10. Reviews (the biggest lever)
-1. GBP → **"Yêu cầu đánh giá" / "Ask for reviews"** → copy the short link (`g.page/r/.../review`).
+1. Your review link: **https://g.page/r/Cc96eKtXme8qEBM/review**. It is already the theme default, so the footer link works without any setup.
 2. Paste it into WordPress → Customize → Thông tin phòng khám → **Link viết đánh giá Google**. The footer will then show "Đánh giá trên Google". Also paste the listing link into **Link hồ sơ Google (Maps)**.
 3. Zalo/SMS message to send after each visit:
 ```

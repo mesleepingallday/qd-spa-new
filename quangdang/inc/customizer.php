@@ -28,7 +28,7 @@ function qd_clinic_fields() {
 		'address_short' => array( 'Địa chỉ ngắn (thanh trên cùng)', 'Tầng 5, TTTM Đức Tài – Tâm Đạt, Quỳnh Lưu', 'text' ),
 		'map_url'       => array( 'Link Google Maps (nút Chỉ đường)', 'https://www.google.com/maps/search/?api=1&query=TTTM+%C4%90%E1%BB%A9c+T%C3%A0i+T%C3%A2m+%C4%90%E1%BA%A1t+Qu%E1%BB%B3nh+L%C6%B0u+Ngh%E1%BB%87+An', 'url' ),
 		'gbp_url'       => array( 'Link hồ sơ Google (Maps)', '', 'url' ),
-		'review_url'    => array( 'Link viết đánh giá Google', '', 'url' ),
+		'review_url'    => array( 'Link viết đánh giá Google', 'https://g.page/r/Cc96eKtXme8qEBM/review', 'url' ),
 		'map_embed'     => array( 'Link nhúng bản đồ (src của iframe)', '', 'url' ),
 		'lat'           => array( 'Vĩ độ (Google Maps, vd 19.0912)', '', 'text' ),
 		'lng'           => array( 'Kinh độ (Google Maps, vd 105.6731)', '', 'text' ),
