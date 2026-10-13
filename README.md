@@ -6,6 +6,7 @@ Website for **Phòng khám Da liễu Thẩm mỹ Quang Đăng** (Qbe+ Quang Đă
 - `docs/THEME-GUIDE.md`: conventions for building screens.
 - `docs/REDESIGN.md`: status, decisions and gates of the current redesign.
 - `docs/IMAGE-PROMPTS.md`: every image the site uses, with a ready-to-paste GPT prompt and the exact file name.
+- `docs/POSTS.md`: publish blog posts through git (`quangdang/content/posts/`).
 - `docs/GBP-SETUP.md`: Google Business Profile setup, with ready-to-paste text.
 - `docs/SEO-PLAN.md`: the SEO launch plan (technical fixes, local SEO, keyword clusters, content calendar).
 

@@ -84,6 +84,7 @@ update_option( 'posts_per_page', 9 );
 foreach ( get_posts( array( 'post_type' => array( 'post', 'page' ), 'numberposts' => -1, 'post_status' => 'any' ) ) as $p ) {
 	wp_delete_post( $p->ID, true );
 }
+delete_option( 'qd_imported_posts' ); // Posts from content/posts/ were wiped too: import them again on the next request.
 
 // Categories.
 $qd_cats = array();
