@@ -345,26 +345,18 @@
 
 .device--no-photo { grid-template-columns: 1fr; }
 
-/* Facility gallery ------------------------------------------------------------ */
-.gallery { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px 20px; }
-.gallery figure { margin: 0; }
-.gallery__frame { border-radius: var(--r-card); }
-.gallery figcaption { margin-top: 10px; font-size: 0.9375rem; color: var(--muted); }
-
-@media (min-width: 640px) {
-	.gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-	.gallery__item:last-child:nth-child(odd) { grid-column: 1 / -1; }
-}
+/* Facility tour: alternating photo + text rows --------------------------------- */
+.tour { display: grid; gap: 48px; }
+.tour__row { display: grid; gap: 20px; align-items: center; }
+.tour__frame { border-radius: var(--r-feature); }
+.tour__title { font-size: 1.5rem; font-weight: 650; line-height: 1.25; margin-bottom: 12px; }
+.tour__media { min-width: 0; }
 
 @media (min-width: 1024px) {
-	.gallery { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 32px 24px; }
-	.gallery__item { grid-column: span 2; }
-	.gallery__item:nth-child(4):last-child { grid-column: span 6; }
-	.gallery__item:nth-child(4):nth-last-child(2),
-	.gallery__item:nth-child(5):last-child { grid-column: span 3; }
-	.gallery__item:last-child:nth-child(1) { grid-column: span 6; }
-	.gallery__item:nth-child(1):nth-last-child(2),
-	.gallery__item:nth-child(2):last-child { grid-column: span 3; }
+	.tour { gap: 72px; }
+	.tour__row { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 72px; }
+	.tour__row:nth-child(even) .tour__media { order: 2; }
+	.tour__media { max-width: 480px; width: 100%; justify-self: center; }
 }
 
 /* Getting there ---------------------------------------------------------------- */

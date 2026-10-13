@@ -15,6 +15,7 @@ foreach ( array(
 	'concerns',  // The 8 skin concerns as labelled links (also the way into the quiz).
 	'feature',   // One service in depth: cover, introduction, first three services with price.
 	'doctor',    // Lead doctor (real photo).
+	'space',     // Where: the clinic itself (real photos only).
 	'process',   // The first visit in 5 ordered steps.
 	'results',   // Before/after posters, curved carousel (only consented cases; hidden when none).
 	'articles',  // Latest beauty handbook posts: one feature + rows.
