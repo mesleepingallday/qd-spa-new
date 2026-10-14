@@ -136,6 +136,9 @@ add_action(
 				'_qd_promo_start' => 'string', // Y-m-d, Sự kiện – Ưu đãi only.
 				'_qd_promo_end'   => 'string',
 				'_qd_promo_label' => 'string', // Short badge text, e.g. "Giảm 30%".
+				'_qd_promo_headline' => 'string',  // Short title for the home banner.
+				'_qd_promo_points'   => 'string',  // Home banner highlights, one per line.
+				'_qd_promo_image'    => 'integer', // Attachment ID for the home banner (empty = featured image).
 				'_qd_reviewer'    => 'integer', // bac-si post ID ("Tham vấn y khoa").
 			),
 			'khoa-hoc' => array(

@@ -152,6 +152,9 @@ function qd_import_post( $slug, $dir ) {
 		'_qd_promo_label'         => $data['promo']['label'] ?? '',
 		'_qd_promo_start'         => $data['promo']['start'] ?? '',
 		'_qd_promo_end'           => $data['promo']['end'] ?? '',
+		'_qd_promo_headline'      => $data['promo']['headline'] ?? '',
+		'_qd_promo_points'        => implode( "\n", array_map( 'strval', (array) ( $data['promo']['points'] ?? array() ) ) ),
+		'_qd_promo_image'         => ! empty( $data['promo']['image'] ) ? (int) ( $images[ $data['promo']['image'] ] ?? 0 ) : 0,
 		'rank_math_title'         => $data['rank_math']['title'] ?? '',
 		'rank_math_description'   => $data['rank_math']['description'] ?? '',
 		'rank_math_focus_keyword' => $data['rank_math']['focus_keyword'] ?? '',
@@ -239,4 +242,83 @@ add_action(
 		delete_option( 'qd_import_posts_lock' );
 	},
 	100 // After the core pages (99), so the categories and the news page exist.
+);
+
+/**
+ * One-time backfill (v0.2.1): posts imported before the home banner fields existed get the three new
+ * promotion fields from their post.json, only where the field is still empty. Same init + lock pattern
+ * as the importer; runs after it.
+ */
+function qd_backfill_promo_meta() {
+	$done = (array) get_option( 'qd_imported_posts', array() );
+	foreach ( qd_import_post_dirs() as $slug => $dir ) {
+		$data  = json_decode( (string) file_get_contents( "$dir/post.json" ), true );
+		$promo = is_array( $data ) ? ( $data['promo'] ?? array() ) : array();
+		if ( ! $promo ) {
+			continue;
+		}
+		$id = isset( $done[ $slug ] ) ? (int) $done[ $slug ] : 0;
+		if ( ! $id || ! get_post( $id ) ) {
+			$found = get_posts(
+				array(
+					'post_type'      => 'post',
+					'name'           => $slug,
+					'post_status'    => 'any',
+					'posts_per_page' => 1,
+					'fields'         => 'ids',
+				)
+			);
+			$id    = $found ? (int) $found[0] : 0;
+		}
+		if ( ! $id ) {
+			continue;
+		}
+		$values = array(
+			'_qd_promo_headline' => (string) ( $promo['headline'] ?? '' ),
+			'_qd_promo_points'   => implode( "\n", array_map( 'strval', (array) ( $promo['points'] ?? array() ) ) ),
+			'_qd_promo_image'    => 0,
+		);
+		if ( ! empty( $promo['image'] ) && ! empty( $data['images'][ $promo['image'] ] ) && ! get_post_meta( $id, '_qd_promo_image', true ) ) {
+			$values['_qd_promo_image'] = qd_import_image( $slug, $dir, $promo['image'], (string) $data['images'][ $promo['image'] ] );
+		}
+		foreach ( $values as $key => $value ) {
+			if ( $value && ! get_post_meta( $id, $key, true ) ) {
+				update_post_meta( $id, $key, $value );
+			}
+		}
+	}
+}
+
+add_action(
+	'init',
+	function () {
+		if ( get_option( 'qd_promo_meta_v1' ) ) {
+			return;
+		}
+		$lock = (int) get_option( 'qd_promo_meta_v1_lock', 0 );
+		if ( $lock && time() - $lock < 5 * MINUTE_IN_SECONDS ) {
+			return;
+		}
+		delete_option( 'qd_promo_meta_v1_lock' );
+		if ( ! add_option( 'qd_promo_meta_v1_lock', time(), '', false ) ) {
+			return;
+		}
+		$admins   = get_users(
+			array(
+				'role'   => 'administrator',
+				'number' => 1,
+				'fields' => 'ID',
+			)
+		);
+		$previous = get_current_user_id();
+		if ( $admins ) {
+			wp_set_current_user( (int) $admins[0] );
+		}
+		qd_backfill_promo_meta();
+		wp_set_current_user( $previous );
+		update_option( 'qd_promo_meta_v1', 1, false );
+		delete_option( 'qd_promo_meta_v1_lock' );
+		do_action( 'litespeed_purge_all' );
+	},
+	101 // After the importer (100).
 );
