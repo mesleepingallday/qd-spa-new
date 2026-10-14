@@ -12,6 +12,7 @@ get_header();
 
 foreach ( array(
 	'hero',      // H1, the next step, the photograph.
+	'promo-feature', // The promotion ending soonest as a wide banner (hidden when none is running).
 	'concerns',  // The 8 skin concerns as labelled links (also the way into the quiz).
 	'feature',   // One service in depth: cover, introduction, first three services with price.
 	'doctor',    // Lead doctor (real photo).

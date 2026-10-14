@@ -175,6 +175,43 @@ function qd_post_reviewer( $post = null ) {
 }
 
 /**
+ * Promotions running today (category su-kien-uu-dai, end date today or later, status active),
+ * the one ending soonest first.
+ *
+ * @param int   $limit   How many.
+ * @param int[] $exclude Post IDs to skip.
+ * @return WP_Post[]
+ */
+function qd_running_promos( $limit = 3, $exclude = array() ) {
+	$posts = get_posts(
+		array(
+			'category_name'  => 'su-kien-uu-dai',
+			'posts_per_page' => 30,
+			'post__not_in'   => array_map( 'intval', (array) $exclude ),
+			'meta_key'       => '_qd_promo_end', // phpcs:ignore WordPress.DB.SlowDBQuery
+			'orderby'        => 'meta_value',
+			'order'          => 'ASC',
+			'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery
+				array(
+					'key'     => '_qd_promo_end',
+					'value'   => current_datetime()->format( 'Y-m-d' ),
+					'compare' => '>=',
+					'type'    => 'DATE',
+				),
+			),
+		)
+	);
+	$out = array();
+	foreach ( $posts as $post ) {
+		$status = qd_promo_status( $post );
+		if ( $status && 'active' === $status['state'] ) {
+			$out[] = $post;
+		}
+	}
+	return array_slice( $out, 0, max( 0, (int) $limit ) );
+}
+
+/**
  * Related articles: same topic first, then same category. Max $count.
  *
  * @param int|WP_Post|null $post  Post.
@@ -299,6 +336,35 @@ add_filter(
 );
 
 /* -------------------------------------------------------------------------
+ * Daily cache purge: "Còn N ngày" and the end of a promotion change at midnight
+ * ---------------------------------------------------------------------- */
+
+add_action(
+	'qd_daily_purge',
+	function () {
+		do_action( 'litespeed_purge_url', home_url( '/' ) );
+		$cat = get_category_by_slug( 'su-kien-uu-dai' );
+		if ( $cat ) {
+			do_action( 'litespeed_purge_url', get_category_link( $cat ) );
+		}
+	}
+);
+
+add_action(
+	'init',
+	function () {
+		if ( wp_next_scheduled( 'qd_daily_purge' ) ) {
+			return;
+		}
+		$next = current_datetime()->setTime( 0, 5 );
+		if ( $next->getTimestamp() <= time() ) {
+			$next = $next->modify( '+1 day' );
+		}
+		wp_schedule_event( $next->getTimestamp(), 'daily', 'qd_daily_purge' );
+	}
+);
+
+/* -------------------------------------------------------------------------
  * Meta boxes on posts
  * ---------------------------------------------------------------------- */
 
@@ -325,6 +391,20 @@ add_action(
 					'label' => 'Kết thúc',
 					'type'  => 'date',
 					'help'  => 'Có ngày kết thúc thì bài hiện khung ưu đãi, nút "Đặt lịch nhận ưu đãi" và tự chuyển sang "Đã kết thúc" khi hết hạn. Bỏ trống nếu không phải ưu đãi.',
+				),
+				'_qd_promo_headline' => array(
+					'label' => 'Tiêu đề ngắn cho banner trang chủ',
+					'help'  => 'Để trống thì dùng tiêu đề bài.',
+				),
+				'_qd_promo_points'   => array(
+					'label' => 'Điểm nổi bật (mỗi dòng một điểm, tối đa 3)',
+					'type'  => 'textarea',
+					'rows'  => 4,
+				),
+				'_qd_promo_image'    => array(
+					'label' => 'ID ảnh trong Media (để trống dùng ảnh đại diện)',
+					'type'  => 'number',
+					'help'  => 'Ảnh banner trang chủ, nên là ảnh dọc có người mẫu.',
 				),
 			)
 		);
