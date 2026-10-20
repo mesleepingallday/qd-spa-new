@@ -16,6 +16,7 @@ if ( ! $qd_service_links ) {
 		$qd_service_links[] = array( $qd_cat[0], home_url( "/dich-vu/$qd_slug/" ) );
 	}
 }
+$qd_service_links[] = array( 'Dịch vụ khác', home_url( '/dich-vu-khac/' ) );
 ?>
 </main>
 

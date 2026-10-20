@@ -2,7 +2,8 @@
 /**
  * Demo service content. Structure (titles, slugs, groups) comes from qd_service_catalog()
  * in the theme; this file only adds sample copy and facts.
- * ALL PRICES, SESSIONS AND DURATIONS ARE SAMPLES — replace with the clinic's real numbers.
+ * Prices, sessions and durations here are old samples: dev/seed.php then applies the clinic's real
+ * menu from quangdang/inc/data/price-menu.php, which overwrites them.
  *
  * @package QuangDang
  */

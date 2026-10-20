@@ -175,6 +175,10 @@ foreach ( qd_service_catalog() as $slug => list( $title, $group, $children ) ) {
 }
 $qd_log( 'services' );
 
+// Real prices + content from the clinic menu (same path as wp-admin › Công cụ › Cập nhật dữ liệu dịch vụ).
+$qd_import = qd_price_import_apply();
+$qd_log( sprintf( 'price menu: %d fields, Dịch vụ khác page %s', $qd_import['fields'], $qd_import['page_created'] ? 'created' : 'exists' ) );
+
 // Articles.
 foreach ( $qd_content['posts'] as list( $title, $cat, $tag, $excerpt, $body, $when ) ) {
 	$id = qd_seed_post(

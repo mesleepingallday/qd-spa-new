@@ -124,6 +124,11 @@ function qd_default_menu_tree() {
 		return qd_menu_node( $title, "/dich-vu/$slug/", '', $children );
 	};
 	$services_of = fn( $slug ) => $category( $slug )['children'];
+	// Groups on the Dịch vụ khác page (tiểu phẫu, peel, BAP…), linked by anchor.
+	$other_services = array();
+	foreach ( qd_price_menu()['other']['groups'] as $anchor => $group ) {
+		$other_services[] = qd_menu_node( $group['title'], "/dich-vu-khac/#$anchor" );
+	}
 
 	return array(
 		qd_menu_node(
@@ -156,6 +161,7 @@ function qd_default_menu_tree() {
 							array_map( $category, array( 'dieu-tri-mun', 'dieu-tri-tham', 'dieu-tri-nam', 'dieu-tri-seo', 'xoa-xam' ) )
 						),
 						qd_menu_node( 'Chăm sóc da', '/dich-vu/cham-soc-da/', '', $services_of( 'cham-soc-da' ) ),
+						qd_menu_node( 'Dịch vụ khác', '/dich-vu-khac/', '', $other_services ),
 					)
 				),
 				qd_menu_node( 'Nội khoa thẩm mỹ', '/dich-vu/noi-khoa-tham-my/', '', $services_of( 'noi-khoa-tham-my' ) ),
