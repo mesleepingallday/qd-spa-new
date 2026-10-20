@@ -17,11 +17,8 @@ Every prompt already includes the shared style: soft daylight, teal/aqua/mint/wh
 
 ### hero/
 
-**`hero/home-portrait.png`** · Ảnh hero trang chủ · 1200×1500
-
-```text
-Portrait of a Vietnamese woman in her early 30s with clear, healthy, softly glowing skin and a gentle natural smile, hair neatly tied back, wearing a soft white knit top, one hand lightly touching her cheek. Background: softly blurred bright clinic interior in mint and white tones with a hint of teal. Keep the face in the upper-right two thirds so both the 5:6 desktop crop and the 4:3 phone crop keep it; nothing is overlaid on the photo. Vertical 4:5. This is a stand-in: the site needs an approved clinic photograph. Photorealistic editorial photo, soft natural window daylight, calm clinical-luxury mood. Color palette: teal #087A82, bright aqua #19C6BE, mist white #F2F7F7, clean white. Realistic Vietnamese / East Asian skin with natural texture, no plastic retouching. Clean minimal background, shallow depth of field, 50mm lens. No text, no logos, no watermark.
-```
+**`hero/home-portrait.png`** · Ảnh hero trang chủ · 1200×1800  
+**ẢNH THẬT, không dùng AI.** ẢNH THẬT: logo Qbe+ Quang Đăng trên tường phòng khám, dọc 2:3. Khung hero cắt 4:3 (điện thoại, máy tính bảng) và 5:6 (máy tính), nên giữ logo ở giữa ảnh.
 
 ### og/
 
@@ -39,27 +36,14 @@ Wide banner background: soft mint-to-white gradient with subtle pearly light, a 
 A hand mirror lying next to a small green leaf and a tiny question mark sparkle, friendly and calm. Minimal line illustration, single 2px-equivalent stroke, teal #087A82 lines with a soft aqua #19C6BE fill accent, rounded line caps, centered with generous empty padding, TRANSPARENT background (PNG with alpha), no text, no shadows. 
 ```
 
-### results/
-
-**`results/1-truoc.png`** · Trước – Trị mụn · 800×800  
-**ẢNH THẬT, không dùng AI.** ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Cùng góc chụp, cùng ánh sáng với ảnh Sau.
-
-**`results/1-sau.png`** · Sau – Trị mụn · 800×800  
-**ẢNH THẬT, không dùng AI.** ẢNH THẬT, cùng khách hàng và góc chụp với ảnh Trước.
-
-**`results/2-truoc.png`** · Trước – Điều trị nám · 800×800  
-**ẢNH THẬT, không dùng AI.** ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Cùng góc chụp, cùng ánh sáng với ảnh Sau.
-
-**`results/2-sau.png`** · Sau – Điều trị nám · 800×800  
-**ẢNH THẬT, không dùng AI.** ẢNH THẬT, cùng khách hàng và góc chụp với ảnh Trước.
-
-**`results/3-truoc.png`** · Trước – Trị thâm nách · 800×800  
-**ẢNH THẬT, không dùng AI.** ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Cùng góc chụp, cùng ánh sáng với ảnh Sau.
-
-**`results/3-sau.png`** · Sau – Trị thâm nách · 800×800  
-**ẢNH THẬT, không dùng AI.** ẢNH THẬT, cùng khách hàng và góc chụp với ảnh Trước.
-
 ### about/
+
+**Ảnh thật phòng khám (chân dung 960×1280, `.webp`), dùng ở trang chủ và trang Cơ sở vật chất:**
+
+- Đã có: `about/phong-cham-soc-da`, `about/khu-triet-long`, `about/loi-vao`, `about/chi-tiet-khan`.
+- Đã thêm đợt này: `about/sanh-cho` (sảnh chờ), `about/le-tan` (lễ tân), `about/khu-don-tiep` (tường logo Qbe), `about/phong-dieu-tri` (nhân viên chăm sóc da), `about/phong-tu-van` (soi da). Khuôn mặt khách trong `phong-dieu-tri` và `phong-tu-van` đã được làm mờ.
+- Còn cần: `about/phong-laser` (phòng laser).
+- Chỉ cần thả file đúng tên vào `quangdang/assets/images/about/`; trang tự dùng, không sửa code.
 
 **`about/le-tan.png`** · Quầy lễ tân · 1200×900  
 **ẢNH THẬT, không dùng AI.** ẢNH THẬT chụp tại phòng khám (hoặc ảnh thiết bị từ nhà sản xuất).
@@ -342,6 +326,20 @@ Skincare trainees in teal uniforms practicing a facial on a classmate under an i
 ```text
 An instructor demonstrating a skin analysis device to two trainees in a modern clinic. Horizontal 16:9. Photorealistic editorial photo, soft natural window daylight, calm clinical-luxury mood. Color palette: teal #087A82, bright aqua #19C6BE, mist white #F2F7F7, clean white. Realistic Vietnamese / East Asian skin with natural texture, no plastic retouching. Clean minimal background, shallow depth of field, 50mm lens. No text, no logos, no watermark.
 ```
+
+### results/
+
+**`results/1.png`** · Poster kết quả 1 · 1200×1200  
+**ẢNH THẬT, không dùng AI.** POSTER trước/sau từ ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Trên web: wp-admin → Kết quả khách hàng → Ảnh poster.
+
+**`results/2.png`** · Poster kết quả 2 · 1200×1200  
+**ẢNH THẬT, không dùng AI.** POSTER trước/sau từ ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Trên web: wp-admin → Kết quả khách hàng → Ảnh poster.
+
+**`results/3.png`** · Poster kết quả 3 · 1200×1200  
+**ẢNH THẬT, không dùng AI.** POSTER trước/sau từ ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Trên web: wp-admin → Kết quả khách hàng → Ảnh poster.
+
+**`results/4.png`** · Poster kết quả 4 · 1200×1200  
+**ẢNH THẬT, không dùng AI.** POSTER trước/sau từ ẢNH THẬT của khách hàng, có đồng ý bằng văn bản. Trên web: wp-admin → Kết quả khách hàng → Ảnh poster.
 
 ### doctors/
 

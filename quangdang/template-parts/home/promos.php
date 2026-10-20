@@ -1,6 +1,6 @@
 <?php
 /**
- * Active and upcoming promotions (category su-kien-uu-dai with an end date ≥ today).
+ * Active and upcoming promotions as horizontal rows (category su-kien-uu-dai with an end date ≥ today).
  * Hidden when there is nothing running.
  *
  * @package QuangDang
@@ -41,10 +41,37 @@ if ( ! $qd_promos ) {
 			)
 		);
 		?>
-		<div class="grid grid--3">
+		<ul class="promo-list">
 			<?php foreach ( $qd_promos as $qd_promo ) : ?>
-				<?php get_template_part( 'template-parts/components/post-card', null, array( 'post' => $qd_promo ) ); ?>
+				<?php
+				$qd_status = qd_promo_status( $qd_promo );
+				$qd_label  = (string) get_post_meta( $qd_promo->ID, '_qd_promo_label', true );
+				$qd_start  = (string) get_post_meta( $qd_promo->ID, '_qd_promo_start', true );
+				$qd_end    = (string) get_post_meta( $qd_promo->ID, '_qd_promo_end', true );
+				$qd_dates  = ( $qd_start ? mysql2date( 'j/n/Y', $qd_start ) . ' – ' : 'Đến ' ) . mysql2date( 'j/n/Y', $qd_end );
+				$qd_url    = get_permalink( $qd_promo );
+				?>
+				<li>
+					<article class="promo-row">
+						<a class="promo-row__thumb" href="<?php echo esc_url( $qd_url ); ?>" tabindex="-1" aria-hidden="true">
+							<?php echo get_the_post_thumbnail( $qd_promo, 'qd-wide', array( 'loading' => 'lazy', 'alt' => '' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							<?php if ( $qd_label ) : ?>
+								<span class="badge badge--promo"><?php echo esc_html( $qd_label ); ?></span>
+							<?php endif; ?>
+						</a>
+						<div class="promo-row__body">
+							<h3 class="promo-row__title"><a href="<?php echo esc_url( $qd_url ); ?>"><?php echo esc_html( get_the_title( $qd_promo ) ); ?></a></h3>
+							<p class="promo-row__text"><?php echo esc_html( get_the_excerpt( $qd_promo ) ); ?></p>
+							<div class="promo-row__meta">
+								<span class="promo-row__date"><?php qd_the_icon( 'calendar-days', array( 'size' => 16 ) ); ?><span><?php echo esc_html( $qd_dates ); ?></span></span>
+								<?php if ( $qd_status ) : ?>
+									<span class="badge <?php echo 'active' === $qd_status['state'] ? 'badge--promo' : 'badge--neutral'; ?>"><?php qd_the_icon( 'clock', array( 'size' => 14 ) ); ?><?php echo esc_html( $qd_status['label'] ); ?></span>
+								<?php endif; ?>
+							</div>
+						</div>
+					</article>
+				</li>
 			<?php endforeach; ?>
-		</div>
+		</ul>
 	</div>
 </section>

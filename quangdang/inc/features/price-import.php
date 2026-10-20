@@ -59,6 +59,24 @@ function qd_price_menu_norm( $value ) {
 }
 
 /**
+ * Slugs a menu service may have: the live site often uses longer slugs than the demo seed
+ * (dich-vu-filler vs filler). Aliases come from the service tree plan (inc/features/service-tree.php).
+ *
+ * @param string $slug Menu key.
+ * @return string[] Live slugs first, then the key itself.
+ */
+function qd_price_menu_slugs( $slug ) {
+	foreach ( qd_service_tree_plan() as $category ) {
+		foreach ( $category[2] as $aliases ) {
+			if ( in_array( $slug, $aliases, true ) ) {
+				return $aliases;
+			}
+		}
+	}
+	return array( $slug );
+}
+
+/**
  * What applying the menu would do.
  *
  * @return array{services:array,missing:string[],page:int}
@@ -76,16 +94,14 @@ function qd_price_import_plan() {
 	);
 
 	foreach ( $menu['services'] as $slug => $data ) {
-		$found = get_posts(
-			array(
-				'post_type'      => 'dich-vu',
-				'name'           => $slug,
-				'post_status'    => 'any',
-				'posts_per_page' => 1,
-				'no_found_rows'  => true,
-			)
-		);
-		if ( ! $found ) {
+		$post = null;
+		foreach ( qd_price_menu_slugs( $slug ) as $candidate ) {
+			$post = qd_service_by_slug( $candidate );
+			if ( $post ) {
+				break;
+			}
+		}
+		if ( ! $post ) {
 			$plan['missing'][] = $slug;
 			continue;
 		}
@@ -95,7 +111,7 @@ function qd_price_import_plan() {
 			if ( ! array_key_exists( $key, $data ) ) {
 				continue;
 			}
-			$old = qd_price_menu_norm( get_post_meta( $found[0]->ID, '_qd_' . $key, true ) );
+			$old = qd_price_menu_norm( get_post_meta( $post->ID, '_qd_' . $key, true ) );
 			$new = qd_price_menu_norm( $data[ $key ] );
 			if ( 'price_from' === $key ) {
 				$old = (string) (int) $old;
@@ -113,7 +129,7 @@ function qd_price_import_plan() {
 			$changes[ $key ] = array( $action, $old, $new );
 		}
 		$plan['services'][] = array(
-			'post'    => $found[0],
+			'post'    => $post,
 			'changes' => $changes,
 		);
 	}

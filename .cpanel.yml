@@ -1,0 +1,4 @@
+---
+deployment:
+  tasks:
+    - /bin/bash dev/cpanel-deploy.sh /home/vientha8/public_html/wp-content/themes

@@ -32,6 +32,7 @@ add_filter(
 	'qd_page_styles',
 	function ( $styles ) {
 		$styles['qd-about']    = array( 'assets/css/pages/about.css', fn() => qd_is_about_area() || is_404() );
+		$styles['qd-trust']    = array( 'assets/css/pages/trust.css', fn() => is_page( 'gioi-thieu' ) || is_post_type_archive( 'khoa-hoc' ) );
 		$styles['qd-training'] = array( 'assets/css/pages/training.css', fn() => is_singular( 'khoa-hoc' ) || is_post_type_archive( 'khoa-hoc' ) );
 		return $styles;
 	}
@@ -242,6 +243,28 @@ function qd_about_photo( $key, $alt, $ratio = '4-3', $attrs = array(), $class = 
 		return '';
 	}
 	return '<span class="frame frame--' . esc_attr( $ratio ) . ' ' . esc_attr( $class ) . '">' . qd_asset_img( $key, $alt, $attrs ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput
+}
+
+/**
+ * Vertical crop (object-position) for the portrait clinic photos, so the empty ceiling is cut off.
+ * Keys without an entry are centred. Returns img attributes for qd_about_photo().
+ *
+ * @param string $key Asset key.
+ * @return array
+ */
+function qd_about_photo_attrs( $key ) {
+	$y = array(
+		'about/phong-cham-soc-da' => 75,
+		'about/khu-triet-long'    => 75,
+		'about/loi-vao'           => 70,
+		'about/chi-tiet-khan'     => 60,
+		'about/sanh-cho'          => 75,
+		'about/khu-don-tiep'      => 40,
+		'about/le-tan'            => 60,
+		'about/phong-dieu-tri'    => 65,
+		'about/phong-tu-van'      => 60,
+	);
+	return isset( $y[ $key ] ) ? array( 'style' => 'object-position:center ' . $y[ $key ] . '%' ) : array();
 }
 
 /**

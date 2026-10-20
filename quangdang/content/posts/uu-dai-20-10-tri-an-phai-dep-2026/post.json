@@ -1,0 +1,31 @@
+{
+	"title": "Ưu đãi 20/10: Giảm 50% chăm sóc da, massage body 200K",
+	"status": "publish",
+	"category": { "su-kien-uu-dai": "Sự kiện – Ưu đãi" },
+	"tags": { "cham-soc-da": "Chăm sóc da" },
+	"excerpt": "Tri ân phái đẹp 20/10 tại Quang Đăng, Quỳnh Lưu: giảm 50% gói chăm sóc da chuyên sâu nâng cơ trẻ hoá, massage body 90 phút chỉ 200K. Áp dụng 3–22/10/2026.",
+	"featured_image": "uu-dai-20-10-quang-dang.webp",
+	"images": {
+		"uu-dai-20-10-quang-dang.webp": "Tri ân phái đẹp 20/10 tại Phòng khám Da liễu Thẩm mỹ Quang Đăng, Quỳnh Lưu",
+		"giam-50-cham-soc-da-nang-co.webp": "Ưu đãi giảm 50% các gói chăm sóc da chuyên sâu nâng cơ trẻ hoá",
+		"massage-body-90-phut-200k.webp": "Ưu đãi massage body thư giãn 90 phút chỉ 200K",
+		"promo-model.webp": "Người mẫu chương trình Tri ân phái đẹp 20/10"
+	},
+	"promo": {
+		"label": "Giảm 50%",
+		"start": "2026-10-03",
+		"end": "2026-10-22",
+		"headline": "Tri ân phái đẹp, rạng rỡ ngày 20/10",
+		"points": [
+			"Giảm 50% chăm sóc da nâng cơ trẻ hoá",
+			"Massage body 90 phút chỉ 200K",
+			"Bác sĩ da liễu tư vấn, soi da miễn phí"
+		],
+		"image": "promo-model.webp"
+	},
+	"rank_math": {
+		"title": "Ưu đãi 20/10: Giảm 50% chăm sóc da, massage body 200K",
+		"description": "Tri ân phái đẹp 20/10 tại Quang Đăng, Quỳnh Lưu: giảm 50% gói chăm sóc da chuyên sâu nâng cơ trẻ hoá, massage body 90 phút chỉ 200K. Áp dụng 3–22/10/2026.",
+		"focus_keyword": "ưu đãi 20/10 Quỳnh Lưu"
+	}
+}
