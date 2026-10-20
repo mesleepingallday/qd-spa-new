@@ -116,6 +116,12 @@
 .price-table .price-note { display: block; font-weight: 400; }
 .price-table__amount { text-align: right; white-space: nowrap; }
 
+/* Dịch vụ khác: several price tables per section */
+.other-services__table-title { margin: 24px 0 12px; font-size: 1.0625rem; }
+.service-section > p + .price-table { margin-top: 16px; }
+.other-services__faq { margin-top: 24px; }
+.other-services__content { margin-top: 28px; }
+
 /* Sticky booking card (desktop) */
 .booking-card { display: none; }
 
